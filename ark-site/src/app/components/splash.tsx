@@ -85,10 +85,10 @@ export default function Splash() {
         </div>
         <div
           ref={lineRef}
-          className="h-[3px] w-32 rounded-full"
+          className="h-[4px] w-40 rounded-full shadow-md"
           style={{
             backgroundImage:
-              "radial-gradient(circle 6px at center, white 98%, transparent 100%), linear-gradient(to right, var(--accent) 0%, var(--accent) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1) 100%)",
+              "radial-gradient(circle 8px at center, white 98%, transparent 100%), linear-gradient(to right, #e63946 0%, #e63946 50%, #1d3557 50%, #1d3557 100%)",
             backgroundRepeat: "no-repeat",
           }}
         />
