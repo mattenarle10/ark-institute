@@ -7,7 +7,7 @@ export default function Home() {
       {/* Minimal Navbar */}
       <header className="border-b border-black/5">
         <div className="mx-auto max-w-6xl px-4 py-4 flex items-center gap-6">
-          <Image src="/logo.png" alt="Ark Institute" width={32} height={32} />
+          <Image src="/logo/ark-transpa.png" alt="Ark Institute" width={32} height={32} />
           <nav className="flex items-center gap-6 text-sm">
             <Link href="#" className="border-b-2 border-transparent hover:border-black/20 data-[active=true]:border-primary" data-active>
               Home
