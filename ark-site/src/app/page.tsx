@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/app/components/layout/navbar";
+import Splash from "@/app/components/splash";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
+      <Splash />
       <Navbar />
 
       {/* Hero */}
