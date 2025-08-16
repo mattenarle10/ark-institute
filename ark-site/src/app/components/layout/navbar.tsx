@@ -30,7 +30,7 @@ export default function Navbar() {
               className="font-bold uppercase tracking-wide" 
               style={{ 
                 fontFamily: "'Times New Roman', serif",
-                textShadow: "1px 1px 3px rgba(255,255,255,0.4)"
+                textShadow: "0px 0px 1px rgba(255,255,255,0.2)"
               }}
             >
               ARK INSTITUTE
@@ -47,7 +47,7 @@ export default function Navbar() {
             <Link
               href="#"
               data-active
-              className="text-sm font-light px-3 py-1 rounded-md transition-colors hover:bg-white/15 data-[active=true]:bg-white/20 block"
+              className="text-sm font-light px-3 py-1 rounded-md transition-colors hover:bg-white/10 data-[active=true]:bg-white/25 block"
             >
               Home
             </Link>
@@ -59,7 +59,7 @@ export default function Navbar() {
           >
             <Link
               href="#about"
-              className="text-sm font-light px-3 py-1 rounded-md transition-colors hover:bg-white/15 block"
+              className="text-sm font-light px-3 py-1 rounded-md transition-colors hover:bg-white/10 block"
             >
               About
             </Link>
@@ -71,7 +71,7 @@ export default function Navbar() {
           >
             <Link
               href="#courses"
-              className="text-sm font-light px-3 py-1 rounded-md transition-colors hover:bg-white/15 block"
+              className="text-sm font-light px-3 py-1 rounded-md transition-colors hover:bg-white/10 block"
             >
               Courses
             </Link>
@@ -83,7 +83,7 @@ export default function Navbar() {
           >
             <Link
               href="#contact"
-              className="text-sm font-light px-3 py-1 rounded-md transition-colors hover:bg-white/15 block"
+              className="text-sm font-light px-3 py-1 rounded-md transition-colors hover:bg-white/10 block"
             >
               Contact
             </Link>
