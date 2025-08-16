@@ -1,29 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import Navbar from "@/app/components/layout/navbar";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
-      {/* Minimal Navbar */}
-      <header className="border-b border-black/5">
-        <div className="mx-auto max-w-6xl px-4 py-4 flex items-center gap-6">
-          <Image src="/logo/ark-transpa.png" alt="Ark Institute" width={32} height={32} />
-          <nav className="flex items-center gap-6 text-sm">
-            <Link href="#" className="border-b-2 border-transparent hover:border-black/20 data-[active=true]:border-primary" data-active>
-              Home
-            </Link>
-            <Link href="#about" className="border-b-2 border-transparent hover:border-black/20">
-              About
-            </Link>
-            <Link href="#courses" className="border-b-2 border-transparent hover:border-black/20">
-              Courses
-            </Link>
-            <Link href="#contact" className="border-b-2 border-transparent hover:border-black/20">
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Hero */}
       <main className="mx-auto max-w-6xl px-4">
