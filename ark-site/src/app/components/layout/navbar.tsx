@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,9 +11,7 @@ export default function Navbar() {
   const [showNavbar, setShowNavbar] = useState(false);
   const { scrollY } = useScroll();
   
-  // Sophisticated scroll-based transformations
-  const backgroundOpacity = useTransform(scrollY, [0, 100], [0, 0.95]);
-  const logoScale = useTransform(scrollY, [0, 150], [1, 0.8]);
+  // Scroll listener used only to toggle scrolled state
   
   useEffect(() => {
     // Hide navbar initially, show after splash completes
