@@ -199,7 +199,7 @@ export default function Hero() {
               </div>
 
               {/* Node 2 */}
-              <div className="circle absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-30 transition-all duration-300 group">
+              <div className="circle absolute bottom-32 md:bottom-48 left-1/2 -translate-x-1/2 z-30 transition-all duration-300 group">
                 <div className="rounded-2xl bg-white ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 transition-all duration-300 hover:scale-105 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
