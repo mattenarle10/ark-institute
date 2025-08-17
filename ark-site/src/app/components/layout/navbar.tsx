@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -89,42 +90,43 @@ export default function Navbar() {
             transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
             className="fixed top-6 right-6 z-50"
           >
+            <div
+              className="relative"
+              onMouseEnter={() => setIsMenuOpen(true)}
+              onMouseLeave={() => setIsMenuOpen(false)}
+              onFocus={() => setIsMenuOpen(true)}
+              onBlur={() => setIsMenuOpen(false)}
+            >
             <motion.button
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
+              aria-haspopup="true"
+              aria-controls="main-menu"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="group relative w-11 h-11 flex items-center justify-center"
+              className="group relative w-10 h-10 flex items-center justify-center"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               {/* Sophisticated background with educational feel */}
-              <div className="absolute inset-0 bg-white border border-gray-200 rounded-xl shadow-sm group-hover:shadow-md transition-all duration-300"></div>
+              <div className="absolute inset-0 bg-white border border-gray-200 rounded-2xl shadow-sm group-hover:shadow-md transition-all duration-300"></div>
               
-              {/* Clean menu lines - inspired by academic layouts */}
-              <div className="relative flex flex-col gap-1.5 w-5">
-                <motion.div 
-                  className="h-0.5 bg-gray-700 rounded-full"
-                  animate={{ 
-                    rotate: isMenuOpen ? 45 : 0,
-                    y: isMenuOpen ? 6 : 0 
-                  }}
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.div 
-                  className="h-0.5 bg-gray-700 rounded-full"
-                  animate={{ 
-                    opacity: isMenuOpen ? 0 : 1,
-                    scale: isMenuOpen ? 0.8 : 1
-                  }}
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.div 
-                  className="h-0.5 bg-gray-700 rounded-full"
-                  animate={{ 
-                    rotate: isMenuOpen ? -45 : 0,
-                    y: isMenuOpen ? -6 : 0 
-                  }}
-                  transition={{ duration: 0.2 }}
-                />
-              </div>
+              {/* Menu/X icon using lucide-react */}
+              <AnimatePresence initial={false} mode="wait">
+                <motion.span
+                  key={isMenuOpen ? 'icon-x' : 'icon-menu'}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.12 }}
+                  className="relative"
+                >
+                  {isMenuOpen ? (
+                    <X className="w-5 h-5 text-gray-700" strokeWidth={2} />
+                  ) : (
+                    <Menu className="w-5 h-5 text-gray-700" strokeWidth={2} />
+                  )}
+                </motion.span>
+              </AnimatePresence>
             </motion.button>
 
             {/* Clean Simple Dropdown */}
@@ -135,7 +137,8 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute right-0 top-full mt-3 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-40"
+                  id="main-menu"
+                  className="absolute right-0 top-full mt-3 w-48 bg-white rounded-2xl shadow-md border border-gray-200 ring-1 ring-black/5 py-2 z-50"
                 >
                   {[
                     { href: "/", label: "Home", active: true },
@@ -152,11 +155,12 @@ export default function Navbar() {
                       <Link
                         href={item.href}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`block px-4 py-3 text-sm transition-colors duration-200 rounded-lg mx-2 ${
-                          item.active 
-                            ? 'text-primary bg-primary/8 font-medium' 
-                            : 'text-gray-700 hover:bg-gray-50'
-                        }`}
+                        className={`group relative block px-4 py-3 text-sm rounded-lg mx-2 font-medium transition-colors duration-200 
+                          after:content-[''] after:absolute after:left-4 after:right-4 after:bottom-2 after:h-[2px] after:rounded-full after:bg-gradient-to-r after:from-[#c80100] after:to-white after:origin-left after:transition-transform after:duration-200 after:transform 
+                          ${item.active 
+                            ? 'text-primary after:scale-x-100' 
+                            : 'text-gray-700 hover:text-primary after:scale-x-0 hover:after:scale-x-100'}
+                        `}
                       >
                         {item.label}
                       </Link>
@@ -165,6 +169,7 @@ export default function Navbar() {
                 </motion.div>
               )}
             </AnimatePresence>
+            </div>
           </motion.div>
         </div>
       </div>
