@@ -1,18 +1,14 @@
-import Image from "next/image";
-import Link from "next/link";
 import Navbar from "@/app/components/layout/navbar";
 import Footer from "@/app/components/layout/footer";
 import Splash from "@/app/components/splash";
 import Hero from "@/app/components/home/hero";
 
-
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans flex flex-col">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <Splash />
       <Navbar />
       <Hero />
-
       <Footer />
     </div>
   );

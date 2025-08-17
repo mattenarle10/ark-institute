@@ -40,11 +40,7 @@ export default function Navbar() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50"
     >
-      {/* Sophisticated background that appears on scroll */}
-      <motion.div 
-        className="absolute inset-0 bg-white/80 backdrop-blur-md border-b border-gray-100"
-        style={{ opacity: backgroundOpacity }}
-      />
+      {/* No background - completely transparent */}
       
       <div className="relative max-w-7xl mx-auto px-6">
         <div className={`flex items-center justify-center relative transition-all duration-500 ${isScrolled ? 'py-2' : 'py-6'}`}>
