@@ -40,7 +40,7 @@ export default function Navbar() {
         </motion.div>
 
         {/* Right: Links */}
-        <nav className="flex items-center gap-2" style={{ fontFamily: "'Times New Roman', serif" }}>
+        <nav className="flex items-center gap-2">
           <motion.div
             whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -50,16 +50,10 @@ export default function Navbar() {
               data-active
               className="group relative text-base font-light px-3 py-2 rounded-md"
             >
-              <span className="group-data-[active=true]:font-bold">Home</span>
-              <span
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-[2px] w-10 rounded-full opacity-0 transition-all duration-300 ease-out origin-center group-hover:opacity-100 group-data-[active=true]:opacity-100 group-hover:scale-x-110"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle 6px at center, var(--background) 98%, transparent 100%), linear-gradient(to right, var(--accent) 0%, var(--accent) 50%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0.95) 100%)",
-                  backgroundRepeat: "no-repeat",
-                }}
-              />
+              <span className="group-data-[active=true]:font-bold relative inline-block">Home
+                <span aria-hidden className="absolute -bottom-1 left-0 w-[calc(50%-2px)] h-[2px] bg-blue-500 rounded-l-full transform scale-x-0 transition-transform duration-300 ease-out origin-left group-hover:scale-x-100"></span>
+                <span aria-hidden className="absolute -bottom-1 right-0 w-[calc(50%-2px)] h-[2px] bg-red-500 rounded-r-full transform scale-x-0 transition-transform duration-300 ease-out origin-right group-hover:scale-x-100"></span>
+              </span>
             </Link>
           </motion.div>
           
@@ -71,16 +65,10 @@ export default function Navbar() {
               href="#about"
               className="group relative text-base font-light px-3 py-2 rounded-md"
             >
-              <span className="group-data-[active=true]:font-bold">About</span>
-              <span
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-[2px] w-10 rounded-full opacity-0 transition-all duration-300 ease-out origin-center group-hover:opacity-100 group-hover:scale-x-110"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle 6px at center, var(--background) 98%, transparent 100%), linear-gradient(to right, var(--accent) 0%, var(--accent) 50%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0.95) 100%)",
-                  backgroundRepeat: "no-repeat",
-                }}
-              />
+              <span className="group-data-[active=true]:font-bold relative inline-block">About
+                <span aria-hidden className="absolute -bottom-1 left-0 w-[calc(50%-2px)] h-[2px] bg-blue-500 rounded-l-full transform scale-x-0 transition-transform duration-300 ease-out origin-left group-hover:scale-x-100"></span>
+                <span aria-hidden className="absolute -bottom-1 right-0 w-[calc(50%-2px)] h-[2px] bg-red-500 rounded-r-full transform scale-x-0 transition-transform duration-300 ease-out origin-right group-hover:scale-x-100"></span>
+              </span>
             </Link>
           </motion.div>
           
@@ -92,16 +80,10 @@ export default function Navbar() {
               href="#courses"
               className="group relative text-base font-light px-3 py-2 rounded-md"
             >
-              <span className="group-data-[active=true]:font-bold">Courses</span>
-              <span
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-[2px] w-10 rounded-full opacity-0 transition-all duration-300 ease-out origin-center group-hover:opacity-100 group-hover:scale-x-110"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle 6px at center, var(--background) 98%, transparent 100%), linear-gradient(to right, var(--accent) 0%, var(--accent) 50%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0.95) 100%)",
-                  backgroundRepeat: "no-repeat",
-                }}
-              />
+              <span className="group-data-[active=true]:font-bold relative inline-block">Courses
+                <span aria-hidden className="absolute -bottom-1 left-0 w-[calc(50%-2px)] h-[2px] bg-blue-500 rounded-l-full transform scale-x-0 transition-transform duration-300 ease-out origin-left group-hover:scale-x-100"></span>
+                <span aria-hidden className="absolute -bottom-1 right-0 w-[calc(50%-2px)] h-[2px] bg-red-500 rounded-r-full transform scale-x-0 transition-transform duration-300 ease-out origin-right group-hover:scale-x-100"></span>
+              </span>
             </Link>
           </motion.div>
           
@@ -113,16 +95,10 @@ export default function Navbar() {
               href="#contact"
               className="group relative text-base font-light px-3 py-2 rounded-md"
             >
-              <span className="group-data-[active=true]:font-bold">Contact</span>
-              <span
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-[2px] w-10 rounded-full opacity-0 transition-all duration-300 ease-out origin-center group-hover:opacity-100 group-hover:scale-x-110"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle 6px at center, var(--background) 98%, transparent 100%), linear-gradient(to right, var(--accent) 0%, var(--accent) 50%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0.95) 100%)",
-                  backgroundRepeat: "no-repeat",
-                }}
-              />
+              <span className="group-data-[active=true]:font-bold relative inline-block">Contact
+                <span aria-hidden className="absolute -bottom-1 left-0 w-[calc(50%-2px)] h-[2px] bg-blue-500 rounded-l-full transform scale-x-0 transition-transform duration-300 ease-out origin-left group-hover:scale-x-100"></span>
+                <span aria-hidden className="absolute -bottom-1 right-0 w-[calc(50%-2px)] h-[2px] bg-red-500 rounded-r-full transform scale-x-0 transition-transform duration-300 ease-out origin-right group-hover:scale-x-100"></span>
+              </span>
             </Link>
           </motion.div>
         </nav>
