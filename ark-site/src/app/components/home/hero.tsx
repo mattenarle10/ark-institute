@@ -168,7 +168,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 1.8 }}
               className="text-lg sm:text-xl text-gray-600 mt-8 md:mt-10 leading-relaxed tracking-normal text-shadow-sm"
             >
-              Progressive education for tomorrow's workforce. <br />
+              Progressive education for tomorrow&apos;s workforce. <br />
               <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-700">Real skills, real opportunities.</span>
             </motion.p>
           </div>
