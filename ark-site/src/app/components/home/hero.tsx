@@ -77,6 +77,15 @@ export default function Hero() {
   
   return (
     <section ref={heroRef} className="relative h-screen w-full bg-white overflow-hidden flex items-center">
+      {/* Shadow projecting downward from the hero section - intensified */}
+      <div className="absolute -bottom-16 left-0 right-0 z-40 pointer-events-none">
+        <div className="relative h-16 overflow-visible">
+          <div className="absolute top-0 left-0 right-0 h-16 shadow-[0_15px_30px_-5px_rgba(0,0,0,0.25)]">
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+          </div>
+        </div>
+      </div>
+      
       {/* Sophisticated Geometric Texture Layer */}
       <div ref={linesRef} className="absolute inset-0 z-10">
         {/* Main architectural grid - more prominent on right, subtle on left */}

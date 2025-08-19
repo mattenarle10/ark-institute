@@ -11,6 +11,15 @@ module.exports = {
         primary: '#193a7a',
         accent: '#c80100',
       },
+      animation: {
+        'subtle-spin': 'subtle-spin 20s linear infinite',
+      },
+      keyframes: {
+        'subtle-spin': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+      },
       boxShadow: {
         'glow-primary': '0 0 15px 2px rgba(25, 58, 122, 0.4)',
         'glow-accent': '0 0 15px 2px rgba(200, 1, 0, 0.4)',
