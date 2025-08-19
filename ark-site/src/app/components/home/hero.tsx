@@ -121,7 +121,7 @@ export default function Hero() {
                     transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
                     className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-700 text-shadow-md mr-3"
                   >
-                    MASTERING
+                    Mastering
                   </motion.span>
                   <motion.span
                     initial={{ y: 120 }}
@@ -129,7 +129,7 @@ export default function Hero() {
                     transition={{ duration: 0.8, delay: 1.0, ease: "easeOut" }}
                     className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-shadow-primary"
                   >
-                    SKILLS
+                    Skills
                   </motion.span>
                 </motion.div>
               </div>
@@ -141,7 +141,7 @@ export default function Hero() {
                     transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
                     className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-700 text-shadow-md mr-3"
                   >
-                    BUILDING
+                    Building
                   </motion.span>
                   <motion.span
                     initial={{ y: 120 }}
@@ -149,7 +149,7 @@ export default function Hero() {
                     transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
                     className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-accent via-accent/90 to-accent/80 text-shadow-accent tracking-wider"
                   >
-                    CAREERS
+                    Careers
                   </motion.span>
                 </motion.div>
               </div>
