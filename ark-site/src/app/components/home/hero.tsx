@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ShieldCheck } from 'lucide-react';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -106,6 +107,15 @@ export default function Hero() {
           className="flex items-center justify-start px-6 sm:px-8 md:px-16 pt-20 md:pt-0 z-40"
         >
           <div className="max-w-lg md:max-w-xl lg:max-w-2xl -mr-8 md:-mr-16 lg:-mr-20">
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/70 backdrop-blur px-3 py-1 text-xs font-medium text-gray-700 shadow-sm mb-5"
+            >
+              <ShieldCheck className="w-4 h-4 text-[#193a7a]" />
+              <span className="tracking-wide">TESDA-accredited</span>
+            </motion.div>
             <motion.h1
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
