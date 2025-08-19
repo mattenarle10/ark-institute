@@ -178,6 +178,22 @@ export default function Navbar() {
 
 export function NavbarClassic() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const { scrollY } = useScroll();
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const updateScrollDirection = () => {
+      const currentScrollY = scrollY.get();
+      setVisible(currentScrollY < 100 || currentScrollY < lastScrollY);
+      setLastScrollY(currentScrollY);
+    };
+
+    const unsubscribe = scrollY.on("change", updateScrollDirection);
+    return () => {
+      unsubscribe();
+    };
+  }, [scrollY, lastScrollY]);
 
   const navItems = [
     { href: "/", label: "Home" },
@@ -187,7 +203,16 @@ export function NavbarClassic() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent pt-4">
+    <motion.header 
+      initial={{ opacity: 1, y: 0 }}
+      animate={{ 
+        opacity: visible ? 1 : 0,
+        y: visible ? 0 : -100,
+        pointerEvents: visible ? "auto" : "none"
+      }}
+      transition={{ duration: 0.3 }}
+      className="fixed top-0 left-0 right-0 z-50 bg-transparent pt-4"
+    >
       <div className="w-full">
         <div className="h-20 flex items-center justify-between px-6 sm:px-8 md:px-16">
           {/* Left: Logo + Wordmark */}
@@ -259,6 +284,6 @@ export function NavbarClassic() {
           </nav>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

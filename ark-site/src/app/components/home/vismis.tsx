@@ -61,18 +61,28 @@ export default function VisMis() {
           viewport={{ once: true, amount: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start"
         >
-          {/* Left: Logo + formal hairline */}
-          <motion.div variants={fadeUp} className="md:col-span-3 flex md:block items-center md:items-start">
-            <div className="flex flex-col items-center md:items-start">
-              <Image
-                src="/logo/ark-transpa.png"
-                alt="Ark Institute"
-                width={64}
-                height={64}
-                priority
-                className="h-16 w-16"
-              />
-              <div className="mt-6 h-24 w-px bg-gradient-to-b from-gray-300 via-gray-200 to-transparent hidden md:block" />
+          {/* Left: Logo + effects */}
+          <motion.div variants={fadeUp} className="md:col-span-3 flex md:flex items-center justify-center h-full">
+            <div className="relative flex flex-col items-center justify-center h-full py-4 md:py-0">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+                className="relative group"
+              >
+                <div className="absolute -inset-1 bg-gradient-to-r from-gray-200 to-gray-100 rounded-full blur-md opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                <div className="relative">
+                  <Image
+                    src="/logo/ark-transpa.png"
+                    alt="Ark Institute"
+                    width={120}
+                    height={120}
+                    priority
+                    className="h-28 w-28 md:h-32 md:w-32 object-contain filter drop-shadow-md"
+                  />
+                </div>
+              </motion.div>
+              <div className="mt-8 h-32 w-px bg-gradient-to-b from-gray-300 via-gray-200 to-transparent hidden md:block" />
             </div>
           </motion.div>
 
