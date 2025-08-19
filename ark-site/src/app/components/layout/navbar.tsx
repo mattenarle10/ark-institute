@@ -187,7 +187,7 @@ export function NavbarClassic() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white pt-4">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent pt-4">
       <div className="w-full">
         <div className="h-20 flex items-center justify-between px-6 sm:px-8 md:px-16">
           {/* Left: Logo + Wordmark */}
