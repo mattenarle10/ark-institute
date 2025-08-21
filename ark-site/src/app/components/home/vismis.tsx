@@ -104,7 +104,7 @@ export default function VisMis() {
   return (
     <section ref={sectionRef} className="relative w-full bg-white overflow-hidden">
       {/* Grainy texture overlay */}
-      <div className="absolute inset-0 z-5 opacity-30 mix-blend-overlay pointer-events-none">
+      <div className="absolute inset-0 z-0 opacity-30 mix-blend-overlay pointer-events-none">
         <div 
           className="absolute inset-0" 
           style={{
@@ -124,16 +124,16 @@ export default function VisMis() {
         <div className="geometric-line absolute top-0 left-3/5 w-[1px] h-full bg-gradient-to-t from-gray-200 via-gray-100/60 to-transparent" />
       </div>
 
-      <div className="relative z-20 mx-auto max-w-7xl px-6 sm:px-8 md:px-16 pt-20 md:pt-24 pb-16">
+      <div className="relative z-20 mx-auto max-w-7xl px-6 sm:px-8 md:px-16 py-20 md:py-24">
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center"
+          className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center"
         >
           {/* Left: Logo + effects */}
-          <motion.div variants={fadeUp} className="md:col-span-5 flex items-center justify-center h-full relative">
+          <motion.div variants={fadeUp} className="md:col-span-6 lg:col-span-5 flex items-center justify-center h-full relative">
             <div className="relative flex flex-col items-center justify-center h-full py-4 md:py-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -182,7 +182,7 @@ export default function VisMis() {
           </motion.div>
 
           {/* Right: Vision then Mission */}
-          <div className="md:col-span-7">
+          <div className="md:col-span-6 lg:col-span-7 mt-12 md:mt-0">
             <motion.div variants={fadeUp} className="max-w-2xl">
               <h2
                 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md"

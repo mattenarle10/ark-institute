@@ -89,7 +89,7 @@ export default function CTA() {
           className="grid md:grid-cols-12 gap-8 md:gap-12 items-center"
         >
           {/* Left: Text content */}
-          <motion.div variants={fadeUp} className="md:col-span-7" ref={textRef}>
+          <motion.div variants={fadeUp} className="md:col-span-6 lg:col-span-7" ref={textRef}>
             <h2 
               className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 text-shadow-md"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
@@ -122,7 +122,7 @@ export default function CTA() {
           </motion.div>
 
           {/* Right: CTA buttons with image-backed tiles */}
-          <motion.div variants={fadeUp} className="md:col-span-5" ref={buttonsRef}>
+          <motion.div variants={fadeUp} className="md:col-span-6 lg:col-span-5 mt-10 md:mt-0" ref={buttonsRef}>
             <div className="flex flex-col gap-4 md:items-stretch">
               {/* Explore Courses tile */}
               <Link href="/courses" aria-label="Explore courses" className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white/60 backdrop-blur-sm shadow-sm transition hover:shadow-md">

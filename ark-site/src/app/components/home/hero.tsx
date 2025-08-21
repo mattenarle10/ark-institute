@@ -236,10 +236,40 @@ export default function Hero() {
               </div>
 
               {/* Node 3 */}
-              {/* Node 3 removed: non-registered course (Customer Services NC II) */}
+              <div className="circle absolute bottom-24 md:bottom-32 left-8 md:left-12 z-20 transition-all duration-300 group">
+                <div className="rounded-2xl bg-white ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-all duration-300 hover:scale-105 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
+                  <div className="overflow-hidden rounded-xl w-full h-full">
+                    <Image 
+                      src="/images/tables-1.png"
+                      alt="Customer Services NC II"
+                      width={256}
+                      height={256}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                </div>
+                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -top-9 whitespace-nowrap text-xs font-medium">
+                  Customer Services NC II
+                </div>
+              </div>
 
               {/* Node 4 */}
-              {/* Node 4 removed: non-registered course (Events Management NC III) */}
+              <div className="circle absolute bottom-8 md:bottom-10 left-4 md:left-8 z-10 transition-all duration-300 group">
+                <div className="rounded-2xl bg-white ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 transition-all duration-300 hover:scale-105 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
+                  <div className="overflow-hidden rounded-xl w-full h-full">
+                    <Image 
+                      src="/images/tables-2.png"
+                      alt="Events Management NC III"
+                      width={256}
+                      height={256}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                </div>
+                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -top-9 whitespace-nowrap text-xs font-medium">
+                  Events Management NC III
+                </div>
+              </div>
 
               {/* Extra top-right nodes */}
               <div className="circle absolute top-2 right-2 z-20 transition-all duration-300 group">
