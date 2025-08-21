@@ -3,6 +3,7 @@ import Footer from "@/app/components/layout/footer";
 import Splash from "@/app/components/splash";
 import Hero from "@/app/components/home/hero";
 import VisMis from "@/app/components/home/vismis";
+import CTA from "@/app/components/home/cta";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <NavbarClassic />
       <Hero />
       <VisMis />
+      <CTA />
       <Footer />
     </div>
   );
