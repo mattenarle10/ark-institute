@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import gsap from "gsap";
+import { useSplashCompletion } from "@/app/components/splash";
 
 // Global hover state manager - ensures only one link is hovered at a time
 class HoverManager {
@@ -192,6 +193,7 @@ export default function Navbar() {
   const [visible, setVisible] = useState(true);
   const { scrollY } = useScroll();
   const [lastScrollY, setLastScrollY] = useState(0);
+  const splashCompleted = useSplashCompletion();
 
   useEffect(() => {
     const updateScrollDirection = () => {
@@ -212,6 +214,9 @@ export default function Navbar() {
     { href: "/courses", label: "Programmes" },
     { href: "/contact", label: "Contact" }
   ];
+
+  // Don't show navbar until splash is completed
+  if (!splashCompleted) return null;
 
   return (
     <motion.header 

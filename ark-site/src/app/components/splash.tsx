@@ -4,6 +4,38 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 
+// Global splash state management
+let globalSplashCompleted = false;
+const splashCompletionCallbacks: (() => void)[] = [];
+
+export const useSplashCompletion = () => {
+  const [splashCompleted, setSplashCompleted] = useState(globalSplashCompleted);
+
+  useEffect(() => {
+    if (globalSplashCompleted) {
+      setSplashCompleted(true);
+      return;
+    }
+
+    const callback = () => setSplashCompleted(true);
+    splashCompletionCallbacks.push(callback);
+
+    return () => {
+      const index = splashCompletionCallbacks.indexOf(callback);
+      if (index > -1) {
+        splashCompletionCallbacks.splice(index, 1);
+      }
+    };
+  }, []);
+
+  return splashCompleted;
+};
+
+const notifySplashCompletion = () => {
+  globalSplashCompleted = true;
+  splashCompletionCallbacks.forEach(callback => callback());
+};
+
 export default function Splash() {
   const [isVisible, setIsVisible] = useState(true);
   const splashRef = useRef<HTMLDivElement>(null);
@@ -18,6 +50,7 @@ export default function Splash() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setIsVisible(false);
       document.body.style.overflow = "";
+      notifySplashCompletion();
       return;
     }
 
@@ -25,6 +58,7 @@ export default function Splash() {
       onComplete: () => {
         setIsVisible(false);
         document.body.style.overflow = "";
+        notifySplashCompletion();
       },
     });
 
