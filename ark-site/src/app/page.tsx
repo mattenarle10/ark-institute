@@ -1,5 +1,6 @@
 import Navbar, { NavbarClassic } from "@/app/components/layout/navbar";
 import Footer from "@/app/components/layout/footer";
+import SectionDivider from "@/app/components/layout/section-divider";
 import Splash from "@/app/components/splash";
 import Hero from "@/app/components/home/hero";
 import VisMis from "@/app/components/home/vismis";
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero />
       <VisMis />
       <CTA />
+      <SectionDivider />
       <Footer />
     </div>
   );
