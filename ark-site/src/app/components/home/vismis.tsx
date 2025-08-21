@@ -185,7 +185,7 @@ export default function VisMis() {
           <div className="md:col-span-7">
             <motion.div variants={fadeUp} className="max-w-2xl">
               <h2
-                className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-700"
+                className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md"
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
                 Vision
@@ -199,7 +199,7 @@ export default function VisMis() {
 
             <motion.div variants={fadeUp} className="mt-8 max-w-2xl">
               <h2
-                className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-700"
+                className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md"
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
                 Mission

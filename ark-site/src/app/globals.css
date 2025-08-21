@@ -30,3 +30,22 @@ body {
     Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
+/* Text shadow utilities */
+.text-shadow-sm {
+  text-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.08);
+}
+
+.text-shadow-md {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.text-shadow-primary {
+  /* Ark Blue glow */
+  text-shadow: 0 4px 14px rgba(25, 58, 122, 0.35);
+}
+
+.text-shadow-accent {
+  /* Ark Red glow */
+  text-shadow: 0 4px 14px rgba(200, 1, 0, 0.35);
+}
