@@ -4,9 +4,13 @@ import Image from "next/image";
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="w-full mt-auto bg-gradient-to-br from-primary to-[#122a4e] text-white">
+    <footer className="w-full mt-auto relative text-white">
+      {/* Seamless gradient background that continues from divider */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-primary/60 to-primary" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary to-[#122a4e]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0a1929] via-transparent to-transparent" />
 
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 md:px-16 py-12">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 md:px-16 py-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
           {/* Brand */}
           <div className="md:col-span-5 lg:col-span-5">
