@@ -2,10 +2,10 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import gsap from "gsap";
 import Link from "next/link";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import gsap from "gsap";
 import { useSplashCompletion } from "@/app/components/splash";
 
 // Global hover state manager - ensures only one link is hovered at a time
@@ -220,50 +220,90 @@ export default function Navbar() {
 
   return (
     <motion.header 
-      initial={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: -30 }}
       animate={{ 
-        opacity: visible ? 1 : 0,
-        y: visible ? 0 : -100,
+        opacity: splashCompleted ? (visible ? 1 : 0) : 0,
+        y: splashCompleted ? (visible ? 0 : -100) : -30
+      }}
+      transition={{ 
+        duration: 0.6, 
+        ease: "easeOut",
+        delay: splashCompleted ? 0.2 : 0
+      }}
+      className="fixed top-0 left-0 right-0 z-50 bg-transparent pt-4"
+      style={{ 
         pointerEvents: visible ? "auto" : "none"
       }}
-      transition={{ duration: 0.3 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-transparent pt-4"
     >
       <div className="w-full">
         <div className="h-20 flex items-center justify-between px-6 sm:px-8 md:px-16">
           {/* Left: Logo + Wordmark */}
-          <Link href="/" className="flex items-center gap-4 group ml-0">
-            <Image
-              src="/logo/ark-transpa.png"
-              alt="Ark Institute"
-              width={52}
-              height={52}
-              priority
-              className="h-14 w-14"
-            />
-            <span
-              className="text-xl font-bold tracking-wide text-gray-900"
-              style={{ fontFamily: "'Montserrat', sans-serif" }}
-            >
-              <span className="uppercase">ARK</span>{" "}
-              <span className="font-medium normal-case">Institute</span>
-            </span>
-          </Link>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ 
+              duration: 0.5, 
+              ease: "easeOut",
+              delay: splashCompleted ? 0.4 : 0
+            }}
+          >
+            <Link href="/" className="flex items-center gap-4 group ml-0">
+              <Image
+                src="/logo/ark-transpa.png"
+                alt="Ark Institute"
+                width={52}
+                height={52}
+                priority
+                className="h-14 w-14"
+              />
+              <span
+                className="text-xl font-bold tracking-wide text-gray-900"
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
+              >
+                <span className="uppercase">ARK</span>{" "}
+                <span className="font-medium normal-case">Institute</span>
+              </span>
+            </Link>
+          </motion.div>
 
           {/* Right: Horizontal menu (md+) */}
-          <nav className="hidden md:flex items-center gap-2 pr-4">
-            {navItems.map((item) => (
-              <AnimatedNavLink
+          <motion.nav 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ 
+              duration: 0.4, 
+              ease: "easeOut",
+              delay: splashCompleted ? 0.6 : 0
+            }}
+            className="hidden md:flex items-center gap-2 pr-4"
+          >
+            {navItems.map((item, index) => (
+              <motion.div
                 key={item.href}
-                href={item.href}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.3, 
+                  ease: "easeOut",
+                  delay: splashCompleted ? 0.7 + (index * 0.05) : 0
+                }}
               >
-                {item.label}
-              </AnimatedNavLink>
+                <AnimatedNavLink href={item.href}>
+                  {item.label}
+                </AnimatedNavLink>
+              </motion.div>
             ))}
-          </nav>
+          </motion.nav>
 
           {/* Mobile menu toggle */}
-          <button
+          <motion.button
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ 
+              duration: 0.4, 
+              ease: "easeOut",
+              delay: splashCompleted ? 0.5 : 0
+            }}
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen((v) => !v)}
@@ -274,7 +314,7 @@ export default function Navbar() {
             ) : (
               <Menu className="w-5 h-5 text-gray-700" strokeWidth={2} />
             )}
-          </button>
+          </motion.button>
         </div>
 
         {/* Mobile dropdown */}
