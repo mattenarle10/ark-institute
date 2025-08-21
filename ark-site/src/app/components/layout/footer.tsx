@@ -5,8 +5,6 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="w-full mt-auto bg-gradient-to-br from-primary to-[#122a4e] text-white">
-      {/* Top accent line */}
-      <div className="h-px bg-gradient-to-r from-accent/60 via-white/20 to-transparent" />
 
       <div className="mx-auto max-w-7xl px-6 sm:px-8 md:px-16 py-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
