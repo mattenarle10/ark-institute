@@ -1,4 +1,4 @@
-import Navbar, { NavbarClassic } from "@/app/components/layout/navbar";
+import  Navbar  from "@/app/components/layout/navbar";
 import Footer from "@/app/components/layout/footer";
 
 import Splash from "@/app/components/splash";
@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <Splash />
-      <NavbarClassic />
+      <Navbar />
       <Hero />
       <VisMis />
       <CTA />

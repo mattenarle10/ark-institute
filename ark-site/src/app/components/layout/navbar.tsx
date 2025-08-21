@@ -1,182 +1,193 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import gsap from "gsap";
 
-export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(false);
-  const { scrollY } = useScroll();
-  
-  // Scroll listener used only to toggle scrolled state
-  
+// Global hover state manager - ensures only one link is hovered at a time
+class HoverManager {
+  private static instance: HoverManager;
+  private currentHoveredId: string | null = null;
+  private links = new Map<string, {
+    bg: HTMLDivElement;
+    text: HTMLSpanElement;
+    reset: () => void;
+  }>();
+
+  static getInstance(): HoverManager {
+    if (!HoverManager.instance) {
+      HoverManager.instance = new HoverManager();
+    }
+    return HoverManager.instance;
+  }
+
+  register(id: string, bg: HTMLDivElement, text: HTMLSpanElement, reset: () => void) {
+    this.links.set(id, { bg, text, reset });
+  }
+
+  unregister(id: string) {
+    this.links.delete(id);
+    if (this.currentHoveredId === id) {
+      this.currentHoveredId = null;
+    }
+  }
+
+  setHovered(id: string) {
+    // Reset previously hovered link
+    if (this.currentHoveredId && this.currentHoveredId !== id) {
+      const prevLink = this.links.get(this.currentHoveredId);
+      if (prevLink) {
+        prevLink.reset();
+      }
+    }
+    this.currentHoveredId = id;
+  }
+
+  clearHovered(id: string) {
+    if (this.currentHoveredId === id) {
+      this.currentHoveredId = null;
+    }
+  }
+
+  forceResetAll() {
+    this.links.forEach(link => link.reset());
+    this.currentHoveredId = null;
+  }
+}
+
+// Clean Professional Animated Link Component
+function AnimatedNavLink({ href, children, onClick }: { 
+  href: string; 
+  children: React.ReactNode; 
+  onClick?: () => void;
+}) {
+  const linkRef = useRef<HTMLAnchorElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const linkId = useRef(`link-${Math.random().toString(36).substr(2, 9)}`);
+  const hoverManager = useRef(HoverManager.getInstance());
+
   useEffect(() => {
-    // Hide navbar initially, show after splash completes
-    const timer = setTimeout(() => {
-      setShowNavbar(true);
-    }, 2000); // Match splash duration
-    
-    const unsubscribe = scrollY.on("change", (latest) => {
-      setIsScrolled(latest > 50);
-    });
-    
-    return () => {
-      clearTimeout(timer);
-      unsubscribe();
-    };
-  }, [scrollY]);
+    const link = linkRef.current;
+    const bg = bgRef.current;
+    const text = textRef.current;
 
-  if (!showNavbar) return null;
+    if (!link || !bg || !text) return;
+
+    // Set initial states
+    gsap.set(bg, { 
+      scaleX: 0, 
+      scaleY: 0,
+      borderRadius: "12px"
+    });
+
+    // Reset function for this link
+    const resetLink = () => {
+      gsap.killTweensOf([bg, text]);
+      gsap.to(bg, {
+        scaleX: 0,
+        scaleY: 0,
+        duration: 0.4,
+        ease: "power2.inOut"
+      });
+      gsap.to(text, {
+        color: "#374151",
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    };
+
+    // Register this link with the hover manager
+    hoverManager.current.register(linkId.current, bg, text, resetLink);
+
+    const handleMouseEnter = () => {
+      // Tell hover manager this link is now hovered
+      hoverManager.current.setHovered(linkId.current);
+      
+      // Kill any existing animations
+      gsap.killTweensOf([bg, text]);
+      
+      // Background morphing entrance - playful bounce
+      gsap.to(bg, {
+        scaleX: 1,
+        scaleY: 1,
+        duration: 0.5,
+        ease: "back.out(1.4)"
+      });
+
+      // Text color change
+      gsap.to(text, {
+        color: "#ffffff",
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    };
+
+    const handleMouseLeave = () => {
+      // Clear hover state in manager
+      hoverManager.current.clearHovered(linkId.current);
+      
+      // Reset this link
+      resetLink();
+    };
+
+    const handleClick = () => {
+      // Force reset all links on any click
+      hoverManager.current.forceResetAll();
+    };
+
+    link.addEventListener('mouseenter', handleMouseEnter);
+    link.addEventListener('mouseleave', handleMouseLeave);
+    link.addEventListener('click', handleClick);
+
+    return () => {
+      link.removeEventListener('mouseenter', handleMouseEnter);
+      link.removeEventListener('mouseleave', handleMouseLeave);
+      link.removeEventListener('click', handleClick);
+      
+      // Unregister from hover manager
+      hoverManager.current.unregister(linkId.current);
+      
+      // Force reset on cleanup
+      gsap.killTweensOf([bg, text]);
+      if (bg && text) {
+        gsap.set(bg, { scaleX: 0, scaleY: 0 });
+        gsap.set(text, { color: "#374151" });
+      }
+    };
+  }, []);
 
   return (
-    <motion.header 
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50"
+    <Link
+      ref={linkRef}
+      href={href}
+      onClick={onClick}
+      className="relative block px-4 py-2.5 transition-all duration-200"
     >
-      {/* No background - completely transparent */}
+      {/* Clean background */}
+      <div
+        ref={bgRef}
+        className="absolute inset-0 bg-primary rounded-xl"
+        style={{ transformOrigin: 'center' }}
+      />
       
-      <div className="relative max-w-7xl mx-auto px-6">
-        <div className={`flex items-center justify-center relative transition-all duration-500 ${isScrolled ? 'py-2' : 'py-6'}`}>
-          {/* Centered Logo & Title - Smooth disappear on scroll */}
-          <motion.div 
-            initial={{ opacity: 1, scale: 1 }}
-            animate={{ 
-              opacity: isScrolled ? 0 : 1, 
-              scale: isScrolled ? 0.95 : 1,
-              y: isScrolled ? -10 : 0
-            }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            whileHover={{ scale: isScrolled ? 0.95 : 1.05 }}
-            style={{ pointerEvents: isScrolled ? 'none' : 'auto' }}
-          >
-            <Link href="/" className="group flex flex-col items-center">
-              <div className="relative mb-2">
-                <Image
-                  src="/logo/ark-transpa.png"
-                  alt="Ark Institute"
-                  width={70}
-                  height={70}
-                  priority
-                  className="filter drop-shadow-lg"
-                />
-                <div className="absolute inset-0 bg-white/20 rounded-full blur-xl scale-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              </div>
-              
-              {/* Title below logo */}
-              <div className="text-center">
-                <div 
-                  className="text-2xl font-bold tracking-wider text-gray-900"
-                  style={{ fontFamily: "'Times New Roman', serif" }}
-                >
-                  <span className="uppercase tracking-[0.3em]">ARK</span>
-                </div>
-                <div className="text-sm font-light text-gray-600 tracking-[0.4em] uppercase mt-1">
-                  Institute
-                </div>
-              </div>
-            </Link>
-          </motion.div>
-
-          {/* Sophisticated Educational Menu */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
-            className="fixed top-6 right-6 z-50"
-          >
-            <div
-              className="relative"
-              onMouseEnter={() => setIsMenuOpen(true)}
-              onMouseLeave={() => setIsMenuOpen(false)}
-              onFocus={() => setIsMenuOpen(true)}
-              onBlur={() => setIsMenuOpen(false)}
-            >
-            <motion.button
-              aria-label="Toggle menu"
-              aria-expanded={isMenuOpen}
-              aria-haspopup="true"
-              aria-controls="main-menu"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="group relative w-10 h-10 flex items-center justify-center"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              {/* Sophisticated background with educational feel */}
-              <div className="absolute inset-0 bg-white border border-gray-200 rounded-2xl shadow-sm group-hover:shadow-md transition-all duration-300"></div>
-              
-              {/* Menu/X icon using lucide-react */}
-              <AnimatePresence initial={false} mode="wait">
-                <motion.span
-                  key={isMenuOpen ? 'icon-x' : 'icon-menu'}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.12 }}
-                  className="relative"
-                >
-                  {isMenuOpen ? (
-                    <X className="w-5 h-5 text-gray-700" strokeWidth={2} />
-                  ) : (
-                    <Menu className="w-5 h-5 text-gray-700" strokeWidth={2} />
-                  )}
-                </motion.span>
-              </AnimatePresence>
-            </motion.button>
-
-            {/* Clean Simple Dropdown */}
-            <AnimatePresence>
-              {isMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                  transition={{ duration: 0.2 }}
-                  id="main-menu"
-                  className="absolute right-0 top-full mt-3 w-48 bg-white rounded-2xl shadow-md border border-gray-200 ring-1 ring-black/5 py-2 z-50"
-                >
-                  {[
-                    { href: "/", label: "Home", active: true },
-                    { href: "/about", label: "About" },
-                    { href: "/courses", label: "Programmes" },
-                    { href: "/contact", label: "Contact" }
-                  ].map((item, index) => (
-                    <motion.div
-                      key={item.label}
-                      initial={{ opacity: 0, x: 10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                    >
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsMenuOpen(false)}
-                        className={`group relative block px-4 py-3 text-sm rounded-lg mx-2 font-medium transition-colors duration-200 
-                          after:content-[''] after:absolute after:left-4 after:right-4 after:bottom-2 after:h-[2px] after:rounded-full
-                          after:bg-gradient-to-r after:from-[#c80100] after:to-white after:origin-left after:transition-transform after:duration-200
-                          after:scale-x-0 group-hover:after:scale-x-100`
-                        }
-                      >
-                        {item.label}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </motion.header>
+      {/* Text */}
+      <span 
+        ref={textRef}
+        className="relative z-10 text-sm font-medium text-gray-600"
+      >
+        {children}
+      </span>
+    </Link>
   );
 }
 
-export function NavbarClassic() {
+
+
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const { scrollY } = useScroll();
@@ -235,18 +246,14 @@ export function NavbarClassic() {
           </Link>
 
           {/* Right: Horizontal menu (md+) */}
-          <nav className="hidden md:flex items-center gap-8 pr-4">
+          <nav className="hidden md:flex items-center gap-2 pr-4">
             {navItems.map((item) => (
-              <Link
+              <AnimatedNavLink
                 key={item.href}
                 href={item.href}
-                className="group relative px-2 py-2 text-sm font-medium text-gray-700 hover:text-[#193a7a] transition-colors
-                           after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-[2px] after:rounded-full
-                           after:bg-gradient-to-r after:from-[#c80100] after:to-white after:origin-left after:transition-transform after:duration-200
-                           after:scale-x-0 group-hover:after:scale-x-100"
               >
                 {item.label}
-              </Link>
+              </AnimatedNavLink>
             ))}
           </nav>
 
@@ -267,19 +274,15 @@ export function NavbarClassic() {
 
         {/* Mobile dropdown */}
         <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden pb-4 px-6 sm:px-8 md:px-16`}>
-          <nav className="flex flex-col gap-2 pt-2">
+          <nav className="flex flex-col gap-1 pt-2">
             {navItems.map((item) => (
-              <Link
+              <AnimatedNavLink
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="group relative px-3 py-3 rounded-lg text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors
-                           after:content-[''] after:absolute after:left-3 after:right-3 after:bottom-1 after:h-[2px] after:rounded-full
-                           after:bg-gradient-to-r after:from-[#c80100] after:to-white after:origin-left after:transition-transform after:duration-200
-                           after:scale-x-0 group-hover:after:scale-x-100"
               >
                 {item.label}
-              </Link>
+              </AnimatedNavLink>
             ))}
           </nav>
         </div>
