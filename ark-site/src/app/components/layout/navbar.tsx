@@ -8,41 +8,54 @@ import { Menu } from "lucide-react";
 import { useSplashCompletion } from "@/app/components/splash";
 import { usePathname } from "next/navigation";
 
-// Clean Professional Animated Link Component (Framer Motion only)
-function AnimatedNavLink({ href, children, onClick, isActive = false }: { 
-  href: string; 
-  children: React.ReactNode; 
+// Sleek underline-animated link (Framer Motion)
+function AnimatedNavLink({ href, children, onClick, isActive = false }: {
+  href: string;
+  children: React.ReactNode;
   onClick?: () => void;
   isActive?: boolean;
 }) {
-  const bgClass = isActive ? "bg-gray-200" : "bg-primary";
-  const hoverTextColor = isActive ? "#1F2937" : "#ffffff"; // gray-800 or white
-
   return (
-    <Link
-      href={href}
-      onClick={onClick}
-      aria-current={isActive ? "page" : undefined}
-      className="group relative block px-4 py-2.5 transition-all duration-200 rounded-xl overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+    <motion.div
+      initial="rest"
+      animate={isActive ? "active" : "rest"}
+      whileHover="hover"
+      whileFocus="hover"
+      className="relative"
     >
-      {/* Animated background */}
-      <motion.div
-        className={`absolute inset-0 ${bgClass} rounded-xl`}
-        initial={{ scaleX: 0, scaleY: 0 }}
-        whileHover={{ scaleX: 1, scaleY: 1 }}
-        transition={{ type: "spring", stiffness: 260, damping: 20 }}
-        style={{ transformOrigin: 'center' }}
-      />
-
-      {/* Text */}
-      <motion.span 
-        className={`relative z-10 text-sm font-medium ${isActive ? 'text-gray-800' : 'text-gray-600'}`}
-        whileHover={{ color: hoverTextColor }}
-        transition={{ duration: 0.18, ease: 'easeOut' }}
+      <Link
+        href={href}
+        onClick={onClick}
+        aria-current={isActive ? "page" : undefined}
+        className="group relative block px-4 py-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >
-        {children}
-      </motion.span>
-    </Link>
+        <span className={`relative z-10 text-sm font-medium ${isActive ? 'text-gray-900' : 'text-gray-700'} group-hover:text-gray-900 transition-colors duration-150`}>
+          {children}
+        </span>
+      </Link>
+
+      {/* Underline - split into two halves that meet at center */}
+      <motion.span
+        className="pointer-events-none absolute left-4 right-1/2 bottom-[6px] h-[2px] bg-accent"
+        variants={{
+          rest: { scaleX: 0, opacity: 0.15, y: 2 },
+          hover: { scaleX: 1, opacity: 0.7, y: 0 },
+          active: { scaleX: 1, opacity: 0.7, y: 0 },
+        }}
+        transition={{ type: 'tween', duration: 0.42, ease: 'easeOut' }}
+        style={{ transformOrigin: 'left' }}
+      />
+      <motion.span
+        className="pointer-events-none absolute left-1/2 right-4 bottom-[6px] h-[2px] bg-accent"
+        variants={{
+          rest: { scaleX: 0, opacity: 0.15, y: 2 },
+          hover: { scaleX: 1, opacity: 0.7, y: 0 },
+          active: { scaleX: 1, opacity: 0.7, y: 0 },
+        }}
+        transition={{ type: 'tween', duration: 0.42, ease: 'easeOut' }}
+        style={{ transformOrigin: 'right' }}
+      />
+    </motion.div>
   );
 }
 
@@ -79,7 +92,7 @@ export default function Navbar() {
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: "/courses", label: "Programmes" },
+    { href: "/courses", label: "Courses" },
     { href: "/contact", label: "Contact" }
   ];
 
