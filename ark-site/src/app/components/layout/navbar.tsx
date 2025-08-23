@@ -191,6 +191,7 @@ function AnimatedNavLink({ href, children, onClick }: {
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { scrollY } = useScroll();
   const [lastScrollY, setLastScrollY] = useState(0);
   const splashCompleted = useSplashCompletion();
@@ -198,7 +199,21 @@ export default function Navbar() {
   useEffect(() => {
     const updateScrollDirection = () => {
       const currentScrollY = scrollY.get();
-      setVisible(currentScrollY < 100 || currentScrollY < lastScrollY);
+      const wasScrolled = isScrolled;
+      const ENTER_SCROLL_PX = 24;
+      const EXIT_SCROLL_PX = 8;
+      const nowScrolled = wasScrolled ? (currentScrollY > EXIT_SCROLL_PX) : (currentScrollY >= ENTER_SCROLL_PX);
+
+      // Keep navbar always visible to avoid flicker at threshold
+      if (!visible) setVisible(true);
+
+      setIsScrolled(nowScrolled);
+
+      // Auto-close menu when transitioning from scrolled to not-scrolled
+      if (wasScrolled && !nowScrolled && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+
       setLastScrollY(currentScrollY);
     };
 
@@ -206,7 +221,7 @@ export default function Navbar() {
     return () => {
       unsubscribe();
     };
-  }, [scrollY, lastScrollY]);
+  }, [scrollY, lastScrollY, isScrolled, isMenuOpen, visible]);
 
   const navItems = [
     { href: "/", label: "Home" },
@@ -220,34 +235,17 @@ export default function Navbar() {
 
   return (
     <motion.header 
-      initial={{ opacity: 0, y: -30 }}
-      animate={{ 
-        opacity: splashCompleted ? (visible ? 1 : 0) : 0,
-        y: splashCompleted ? (visible ? 0 : -100) : -30
-      }}
-      transition={{ 
-        duration: 0.6, 
-        ease: "easeOut",
-        delay: splashCompleted ? 0.2 : 0
-      }}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: splashCompleted ? 1 : 0, y: splashCompleted ? 0 : -20 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50 bg-transparent pt-4"
-      style={{ 
-        pointerEvents: visible ? "auto" : "none"
-      }}
+      style={{ pointerEvents: "auto" }}
     >
-      <div className="w-full">
+      <div className="w-full will-change-transform">
         <div className="h-20 flex items-center justify-between px-6 sm:px-8 md:px-16">
-          {/* Left: Logo + Wordmark */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ 
-              duration: 0.5, 
-              ease: "easeOut",
-              delay: splashCompleted ? 0.4 : 0
-            }}
-          >
-            <Link href="/" className="flex items-center gap-4 group ml-0">
+          {/* Left: Logo + Wordmark - keep space to avoid flicker; hide visually when scrolled/menu open */}
+          <div className={`${(isMenuOpen || isScrolled) ? "invisible" : "visible"}`}>
+            <Link href="/" className="flex items-center gap-4 group ml-0" aria-hidden={isMenuOpen || isScrolled}>
               <Image
                 src="/logo/ark-transpa.png"
                 alt="Ark Institute"
@@ -264,50 +262,42 @@ export default function Navbar() {
                 <span className="font-medium normal-case">Institute</span>
               </span>
             </Link>
-          </motion.div>
+          </div>
 
-          {/* Right: Horizontal menu (md+) */}
-          <motion.nav 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ 
-              duration: 0.4, 
-              ease: "easeOut",
-              delay: splashCompleted ? 0.6 : 0
-            }}
+          {/* Right: Horizontal menu (md+) - always mounted to avoid flicker; hidden when scrolled/menu open */}
+          <motion.nav
+            initial={false}
+            animate={{ opacity: (!isScrolled && !isMenuOpen) ? 1 : 0 }}
+            transition={{ duration: 0.14, ease: "linear" }}
             className="hidden md:flex items-center gap-2 pr-4"
+            style={{
+              pointerEvents: (!isScrolled && !isMenuOpen) ? 'auto' : 'none',
+              visibility: (!isScrolled && !isMenuOpen) ? 'visible' : 'hidden'
+            }}
           >
-            {navItems.map((item, index) => (
-              <motion.div
-                key={item.href}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  duration: 0.3, 
-                  ease: "easeOut",
-                  delay: splashCompleted ? 0.7 + (index * 0.05) : 0
-                }}
-              >
+            {navItems.map((item) => (
+              <div key={item.href} style={{ opacity: (!isScrolled && !isMenuOpen) ? 1 : 0, transition: 'opacity 120ms linear' }}>
                 <AnimatedNavLink href={item.href}>
                   {item.label}
                 </AnimatedNavLink>
-              </motion.div>
+              </div>
             ))}
           </motion.nav>
 
-          {/* Mobile menu toggle */}
+          {/* Menu toggle - Mobile always, Desktop when scrolled */}
           <motion.button
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ 
-              duration: 0.4, 
-              ease: "easeOut",
-              delay: splashCompleted ? 0.5 : 0
+              duration: 0.3, 
+              ease: "easeOut"
             }}
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen((v) => !v)}
-            className="md:hidden inline-flex items-center justify-center w-12 h-12 rounded-xl border border-gray-200 bg-white shadow-sm mr-2"
+            className={`${
+              isScrolled ? 'inline-flex' : 'md:hidden inline-flex'
+            } ml-auto items-center justify-center w-12 h-12 rounded-xl border border-gray-200 bg-white shadow-sm mr-2`}
           >
             {isMenuOpen ? (
               <X className="w-5 h-5 text-gray-700" strokeWidth={2} />
@@ -317,20 +307,43 @@ export default function Navbar() {
           </motion.button>
         </div>
 
-        {/* Mobile dropdown */}
-        <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden pb-4 px-6 sm:px-8 md:px-16`}>
-          <nav className="flex flex-col gap-1 pt-2">
-            {navItems.map((item) => (
-              <AnimatedNavLink
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
+        {/* Dropdown menu - Mobile always, Desktop when scrolled */}
+        <AnimatePresence initial={false}>
+          {isMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: -6, scale: 0.995 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -6, scale: 0.995 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+              className={`${isScrolled ? 'block' : 'md:hidden'} pb-4 px-6 sm:px-8 md:px-16 flex justify-end`}
+            >
+              <motion.nav 
+                className="w-64 max-w-[90vw] flex flex-col gap-1 pt-2 bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200 shadow-lg p-4"
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
               >
-                {item.label}
-              </AnimatedNavLink>
-            ))}
-          </nav>
-        </div>
+                {navItems.map((item, index) => (
+                  <motion.div
+                    key={item.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.2, delay: index * 0.03, ease: "easeOut" }}
+                  >
+                    <AnimatedNavLink
+                      href={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </AnimatedNavLink>
+                  </motion.div>
+                ))}
+              </motion.nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.header>
   );
