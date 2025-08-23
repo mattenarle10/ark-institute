@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
+import MobileNav from "./mobile-nav";
 import { useSplashCompletion } from "@/app/components/splash";
 import { usePathname } from "next/navigation";
 
@@ -108,20 +109,20 @@ export default function Navbar() {
       style={{ pointerEvents: "auto" }}
     >
       <div className="w-full">
-        <div className="h-20 flex items-center px-6 sm:px-8 md:px-16">
+        <div className="h-16 md:h-20 flex items-center px-6 sm:px-8 md:px-16">
           {/* Left: Logo + Wordmark - keep space to avoid flicker; hide visually when scrolled */}
           <div className={`transition-opacity duration-200 ${isScrolled ? "opacity-0" : "opacity-100"}`}>
-            <Link href="/" className="flex items-center gap-4 group ml-0" aria-label="Ark Institute home">
+            <Link href="/" className="flex items-center gap-2 sm:gap-4 group ml-0" aria-label="Ark Institute home">
               <Image
                 src="/logo/ark-transpa.png"
                 alt="Ark Institute"
                 width={52}
                 height={52}
                 priority
-                className="h-14 w-14"
+                className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14"
               />
               <span
-                className="text-xl font-bold tracking-wide text-gray-900"
+                className="text-base sm:text-lg md:text-xl font-bold tracking-wide text-gray-900"
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
                 <span className="uppercase">ARK</span>{" "}
@@ -132,6 +133,8 @@ export default function Navbar() {
 
           {/* Right: Horizontal menu (md+) and desktop-only hamburger placeholder (no mobile logic) */}
           <div className="ml-auto flex items-center gap-2 pr-0 relative">
+            {/* Mobile menu icon and drawer */}
+            <MobileNav navItems={navItems} isScrolled={isScrolled} />
             <motion.nav
               role="navigation"
               aria-label="Primary navigation"

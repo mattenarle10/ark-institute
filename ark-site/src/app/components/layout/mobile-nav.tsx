@@ -100,12 +100,12 @@ export default function MobileNav({ navItems, isScrolled }: MobileNavProps) {
         onClick={() => setIsMenuOpen((v) => !v)}
         className={`${
           isScrolled ? 'inline-flex' : 'md:hidden inline-flex'
-        } items-center justify-center w-12 h-12 rounded-xl border border-gray-200 bg-white shadow-sm mr-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary`}
+        } items-center justify-center w-10 h-10 rounded-lg border border-gray-200 bg-white shadow-sm mr-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary`}
       >
         {isMenuOpen ? (
-          <X className="w-5 h-5 text-gray-700" strokeWidth={2} />
+          <X className="w-5 h-5 text-gray-700" strokeWidth={1.5} />
         ) : (
-          <Menu className="w-5 h-5 text-gray-700" strokeWidth={2} />
+          <Menu className="w-5 h-5 text-gray-700" strokeWidth={1.5} />
         )}
       </motion.button>
 
@@ -117,14 +117,14 @@ export default function MobileNav({ navItems, isScrolled }: MobileNavProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.995 }}
             transition={{ duration: 0.22, ease: "easeOut" }}
-            className="mt-2 pr-0"
+            className="mt-2 pr-0 w-full"
           >
             <motion.nav 
               ref={menuRef}
               id="mobile-nav"
               role="navigation"
               aria-label="Mobile navigation"
-              className="w-64 max-w-[90vw] flex flex-col gap-1 pt-2 bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200 shadow-lg p-4"
+              className="w-64 max-w-[90vw] flex flex-col justify-end gap-1 pt-2 bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200 shadow-lg p-4 h-56"
               initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
