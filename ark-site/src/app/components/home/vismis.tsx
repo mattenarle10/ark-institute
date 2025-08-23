@@ -190,7 +190,7 @@ export default function VisMis() {
               >
                 Vision
               </h2>
-              <div className="h-px w-16 bg-gradient-to-r from-primary to-primary/60 mt-3"></div>
+              <div ref={(el) => setUnderlineRef(el, 0)} className="h-px w-16 bg-gradient-to-r from-primary to-primary/60 mt-3"></div>
               <p className="mt-4 text-gray-700 text-base sm:text-lg leading-relaxed">
                 Ark Institute envisions itself to become a leading institution in technical-vocational education,
                 recognized for producing highly skilled professionals who contribute to the workforce and the community.
@@ -204,7 +204,7 @@ export default function VisMis() {
               >
                 Mission
               </h2>
-              <div className="h-px w-16 bg-gradient-to-r from-accent to-accent/60 mt-3"></div>
+              <div ref={(el) => setUnderlineRef(el, 1)} className="h-px w-16 bg-gradient-to-r from-accent to-accent/60 mt-3"></div>
               <p className="mt-4 text-gray-700 text-base sm:text-lg leading-relaxed">
                 Ark Institute aims to equip students with the right values, practical skills, and knowledge through
                 comprehensive TESDA-accredited courses, fostering career readiness and professional excellence in order
