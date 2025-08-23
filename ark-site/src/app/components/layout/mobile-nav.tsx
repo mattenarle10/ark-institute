@@ -17,7 +17,7 @@ interface MobileNavProps {
 export default function MobileNav({ navItems, onOpenChange }: MobileNavProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  const menuRef = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
@@ -36,7 +36,7 @@ export default function MobileNav({ navItems, onOpenChange }: MobileNavProps) {
     return () => {
       document.body.style.overflow = prev;
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, onOpenChange]);
 
   function closeMenu() {
     if (tlRef.current) {
@@ -129,7 +129,7 @@ export default function MobileNav({ navItems, onOpenChange }: MobileNavProps) {
             <div ref={overlayRef} className="relative h-full w-full">
               {/* Menu content - centered */}
               <div className="h-full w-full grid place-items-center px-6">
-              <div ref={menuRef as any} className="w-[86%] max-w-sm mx-auto flex flex-col items-start gap-6">
+              <div ref={menuRef} className="w-[86%] max-w-sm mx-auto flex flex-col items-start gap-6">
                 {navItems.map((item, index) => (
                   <div key={item.href} className="menu-row flex items-baseline gap-3">
                     <span className="menu-num text-[10px] font-semibold tracking-wider text-gray-600">{String(index + 1).padStart(2, '0')}</span>
