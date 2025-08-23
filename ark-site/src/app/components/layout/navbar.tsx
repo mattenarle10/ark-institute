@@ -105,13 +105,17 @@ export default function Navbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: splashCompleted ? 1 : 0, y: splashCompleted ? 0 : -20 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 bg-transparent pt-3 sm:pt-4"
+      className={`fixed top-0 left-0 right-0 z-50 pt-3 sm:pt-4 transition-colors duration-300 ${
+        isScrolled
+          ? 'bg-white/70 backdrop-blur-md'
+          : 'bg-transparent hover:bg-white/40 hover:backdrop-blur-md'
+      }`}
       style={{ pointerEvents: "auto" }}
     >
       <div className="w-full">
         <div className="h-16 md:h-20 flex items-center px-6 sm:px-8 md:px-16">
-          {/* Left: Logo + Wordmark - keep space to avoid flicker; hide visually when scrolled */}
-          <div className={`transition-opacity duration-200 ${isScrolled ? "opacity-0" : "opacity-100"}`}>
+          {/* Left: Logo + Wordmark - keep visible; shrink slightly when scrolled */}
+          <div className={`transition-all duration-200 ${isScrolled ? "opacity-100 scale-95" : "opacity-100 scale-100"}`}>
             <Link href="/" className="flex items-center gap-2 sm:gap-4 group ml-0" aria-label="Ark Institute home">
               <Image
                 src="/logo/ark-transpa.png"
