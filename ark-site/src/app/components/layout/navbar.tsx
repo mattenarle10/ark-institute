@@ -91,7 +91,7 @@ export default function Navbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: splashCompleted ? 1 : 0, y: splashCompleted ? 0 : -20 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 bg-transparent pt-6 sm:pt-8"
+      className="fixed top-0 left-0 right-0 z-50 bg-transparent pt-3 sm:pt-4"
       style={{ pointerEvents: "auto" }}
     >
       <div className="w-full">
@@ -141,7 +141,7 @@ export default function Navbar() {
 
             {/* Desktop-only hover menu (appears when scrolled) */}
             <div
-              className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 relative"
+              className="hidden md:block absolute right-0 top-0 mt-0"
               onMouseEnter={() => {
                 if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
                 setIsDesktopMenuOpen(true);
@@ -170,7 +170,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -6, scale: 0.995 }}
                     transition={{ duration: 0.18, ease: "easeOut" }}
-                    className="absolute right-0 top-full mt-2 z-50 w-64 max-w-[90vw] flex flex-col gap-1 pt-2 bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200 shadow-lg p-4"
+                    className="absolute right-0 top-full mt-4 z-50 w-64 max-w-[90vw] flex flex-col gap-1 pt-2 bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200 shadow-lg p-4"
                     style={{ transformOrigin: 'top right' }}
                     role="menu"
                     aria-label="Desktop menu"
