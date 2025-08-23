@@ -199,8 +199,8 @@ export default function Hero() {
             {/* Minimap container (no phone shell) */}
             <div ref={circlesRef} className="relative w-full h-[28rem] md:h-[34rem] lg:h-[38rem] p-3 md:p-4 lg:p-6 group/minimap">
               {/* Node 1 */}
-              <div className="circle absolute bottom-4 right-2 z-40 transition-all duration-300 group">
-                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
+              <div className="circle absolute bottom-4 right-2 z-40 transition-all duration-700 ease-in-out group">
+                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 transition-opacity duration-700 ease-in-out hover:scale-105 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
                       src="/images/housekeep-1.png"
@@ -212,14 +212,14 @@ export default function Hero() {
                     />
                   </div>
                 </div>
-                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -top-9 whitespace-nowrap text-xs font-medium">
+                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -top-9 whitespace-nowrap text-xs font-medium">
                   Housekeeping NC II
                 </div>
               </div>
 
               {/* Node 2 */}
-              <div className="circle absolute bottom-32 md:bottom-48 left-1/2 -translate-x-1/2 z-30 transition-all duration-300 group">
-                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
+              <div className="circle absolute bottom-32 md:bottom-48 left-1/2 -translate-x-1/2 z-30 transition-all duration-700 ease-in-out group">
+                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 transition-opacity duration-700 ease-in-out hover:scale-105 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
                       src="/images/bartend-1.png"
@@ -230,14 +230,14 @@ export default function Hero() {
                     />
                   </div>
                 </div>
-                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -top-9 whitespace-nowrap text-xs font-medium">
+                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -top-9 whitespace-nowrap text-xs font-medium">
                   Food and Beverage Services NC II
                 </div>
               </div>
 
               {/* Node 3 */}
-              <div className="circle absolute bottom-24 md:bottom-32 left-8 md:left-12 z-20 transition-all duration-300 group">
-                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
+              <div className="circle absolute bottom-24 md:bottom-32 left-8 md:left-12 z-20 transition-all duration-700 ease-in-out group">
+                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-opacity duration-700 ease-in-out hover:scale-105 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
                       src="/images/tables-1.png"
@@ -248,14 +248,14 @@ export default function Hero() {
                     />
                   </div>
                 </div>
-                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -top-9 whitespace-nowrap text-xs font-medium">
+                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -top-9 whitespace-nowrap text-xs font-medium">
                   Housekeeping NC II
                 </div>
               </div>
 
               {/* Node 4 */}
-              <div className="circle absolute bottom-8 md:bottom-10 left-4 md:left-8 z-10 transition-all duration-300 group">
-                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
+              <div className="circle absolute bottom-8 md:bottom-10 left-4 md:left-8 z-10 transition-all duration-700 ease-in-out group">
+                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 transition-opacity duration-700 ease-in-out hover:scale-105 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
                       src="/images/tables-2.png"
@@ -266,7 +266,7 @@ export default function Hero() {
                     />
                   </div>
                 </div>
-                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -top-9 whitespace-nowrap text-xs font-medium">
+                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -top-9 whitespace-nowrap text-xs font-medium">
                   Food and Beverage Services NC II
                 </div>
               </div>
@@ -274,8 +274,8 @@ export default function Hero() {
               {/* Extra top-right nodes */}
           
 
-              <div className="circle absolute top-10 left-6 md:left-12 z-30 transition-all duration-300 group">
-                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl group-hover/minimap:opacity-60 hover:!opacity-100">
+              <div className="circle absolute top-10 left-6 md:left-12 z-30 transition-all duration-700 ease-in-out group">
+                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-opacity duration-700 ease-in-out hover:scale-105 hover:shadow-xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
                       src="/images/beds-1.png"
@@ -286,13 +286,13 @@ export default function Hero() {
                     />
                   </div>
                 </div>
-                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -bottom-10 whitespace-nowrap text-xs font-medium">
+                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -bottom-10 whitespace-nowrap text-xs font-medium">
                   Food and Beverage Services NC II
                 </div>
               </div>
 
-              <div className="circle absolute top-20 right-10 md:right-16 z-40 transition-all duration-300 group">
-                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl group-hover/minimap:opacity-60 hover:!opacity-100">
+              <div className="circle absolute top-20 right-10 md:right-16 z-40 transition-all duration-700 ease-in-out group">
+                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 transition-opacity duration-700 ease-in-out hover:scale-105 hover:shadow-xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
                       src="/images/bedsroom-1.png"
@@ -303,13 +303,13 @@ export default function Hero() {
                     />
                   </div>
                 </div>
-                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -bottom-10 whitespace-nowrap text-xs font-medium">
+                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -bottom-10 whitespace-nowrap text-xs font-medium">
                   Housekeeping NC II
                 </div>
               </div>
 
-              <div className="circle absolute top-32 left-24 md:left-40 z-10 transition-all duration-300 group">
-                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl group-hover/minimap:opacity-60 hover:!opacity-100">
+              <div className="circle absolute top-32 left-24 md:left-40 z-10 transition-all duration-700 ease-in-out group">
+                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 transition-opacity duration-700 ease-in-out hover:scale-105 hover:shadow-xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
                       src="/images/tables-3.png"
@@ -320,13 +320,13 @@ export default function Hero() {
                     />
                   </div>
                 </div>
-                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -bottom-10 whitespace-nowrap text-xs font-medium">
+                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -bottom-10 whitespace-nowrap text-xs font-medium">
                   Food and Beverage Services NC II
                 </div>
               </div>
 
-              <div className="circle absolute top-48 right-24 md:right-32 z-20 transition-all duration-300 group">
-                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl group-hover/minimap:opacity-60 hover:!opacity-100">
+              <div className="circle absolute top-48 right-24 md:right-32 z-20 transition-all duration-700 ease-in-out group">
+                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-opacity duration-700 ease-in-out hover:scale-105 hover:shadow-xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
                       src="/images/beds-2.png"
@@ -337,13 +337,13 @@ export default function Hero() {
                     />
                   </div>
                 </div>
-                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -bottom-10 whitespace-nowrap text-xs font-medium">
+                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -bottom-10 whitespace-nowrap text-xs font-medium">
                   Housekeeping NC II
                 </div>
               </div>
 
-              <div className="circle absolute bottom-20 left-1/2 -translate-x-1/2 z-10 transition-all duration-300 group">
-                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl group-hover/minimap:opacity-60 hover:!opacity-100">
+              <div className="circle absolute bottom-20 left-1/2 -translate-x-1/2 z-10 transition-all duration-700 ease-in-out group">
+                <div className="rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 transition-opacity duration-700 ease-in-out hover:scale-105 hover:shadow-xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
                       src="/images/cr-1.png"
@@ -354,7 +354,7 @@ export default function Hero() {
                     />
                   </div>
                 </div>
-                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -bottom-10 whitespace-nowrap text-xs font-medium">
+                <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-white p-2 rounded-md shadow-md left-1/2 -translate-x-1/2 -bottom-10 whitespace-nowrap text-xs font-medium">
                   Food and Beverage Services NC II
                 </div>
               </div>
