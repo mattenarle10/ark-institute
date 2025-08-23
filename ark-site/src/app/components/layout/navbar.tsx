@@ -9,7 +9,7 @@ import MobileNav from "./mobile-nav";
 import { useSplashCompletion } from "@/app/components/splash";
 import { usePathname } from "next/navigation";
 
-// Sleek underline-animated link (Framer Motion)
+
 function AnimatedNavLink({ href, children, onClick, isActive = false }: {
   href: string;
   children: React.ReactNode;
@@ -63,6 +63,7 @@ function AnimatedNavLink({ href, children, onClick, isActive = false }: {
 export default function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const isScrolledRef = useRef(false);
   const splashCompleted = useSplashCompletion();
@@ -102,20 +103,21 @@ export default function Navbar() {
 
   return (
     <motion.header 
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: splashCompleted ? 1 : 0, y: splashCompleted ? 0 : -20 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: splashCompleted ? 1 : 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 pt-3 sm:pt-4 transition-colors duration-300 ${
-        isScrolled
-          ? 'bg-white/70 backdrop-blur-md'
-          : 'bg-transparent hover:bg-white/40 hover:backdrop-blur-md'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 pt-3 sm:pt-4 bg-transparent"
       style={{ pointerEvents: "auto" }}
     >
+      {/* Mobile-only glass background when scrolled */}
+      <div
+        className={`${isScrolled && !isMobileMenuOpen ? 'bg-white/70 backdrop-blur-md' : ''} md:hidden absolute inset-0`}
+        aria-hidden
+      />
       <div className="w-full">
         <div className="h-16 md:h-20 flex items-center px-6 sm:px-8 md:px-16">
-          {/* Left: Logo + Wordmark - keep visible; shrink slightly when scrolled */}
-          <div className={`transition-all duration-200 ${isScrolled ? "opacity-100 scale-95" : "opacity-100 scale-100"}`}>
+
+          <div className={`relative z-[60] transition-all duration-300 ${isScrolled ? "md:opacity-0 md:scale-95 opacity-100 scale-100" : "opacity-100 scale-100"}`}>
             <Link href="/" className="flex items-center gap-2 sm:gap-4 group ml-0" aria-label="Ark Institute home">
               <Image
                 src="/logo/ark-transpa.png"
@@ -135,10 +137,11 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Right: Horizontal menu (md+) and desktop-only hamburger placeholder (no mobile logic) */}
+          {/* Right: Desktop navigation */}
           <div className="ml-auto flex items-center gap-2 pr-0 relative">
-            {/* Mobile menu icon and drawer */}
-            <MobileNav navItems={navItems} isScrolled={isScrolled} />
+            {/* Mobile Navigation */}
+            <MobileNav navItems={navItems} onOpenChange={setIsMobileMenuOpen} />
+            
             <motion.nav
               role="navigation"
               aria-label="Primary navigation"
