@@ -1,11 +1,13 @@
 'use client'
-import { useEffect, useRef, Suspense } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ShieldCheck, ArrowUpRight } from 'lucide-react';
-import HeroNodes from './hero-nodes/nodes';
+import dynamic from 'next/dynamic';
+
+const HeroNodes = dynamic(() => import('./hero-nodes/nodes'), { ssr: false });
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -239,9 +241,7 @@ export default function Hero() {
           <div className="relative w-full max-w-lg md:max-w-xl lg:max-w-2xl mx-auto md:mr-8 md:mb-8">
             {/* Minimap container (no phone shell) */}
             <div ref={circlesRef} className="relative w-full h-[20rem] sm:h-[24rem] md:h-[34rem] lg:h-[38rem] p-1 md:p-4 lg:p-6 -translate-y-8 sm:-translate-y-6 md:-translate-y-8 lg:-translate-y-10 transition-transform duration-700 ease-in-out group/minimap">
-              <Suspense fallback={null}>
-                <HeroNodes />
-              </Suspense>
+              <HeroNodes />
             </div>
           </div>
         </div>
