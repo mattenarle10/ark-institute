@@ -106,7 +106,7 @@ export default function Navbar() {
       initial={{ opacity: 0 }}
       animate={{ opacity: splashCompleted ? 1 : 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 pt-3 sm:pt-4 bg-transparent"
+      className="fixed top-0 left-0 right-0 z-50 pt-4 sm:pt-3 bg-transparent"
       style={{ pointerEvents: "auto" }}
     >
       {/* Mobile-only glass background when scrolled */}
@@ -115,7 +115,7 @@ export default function Navbar() {
         aria-hidden
       />
       <div className="w-full">
-        <div className="h-16 md:h-20 flex items-center px-6 sm:px-8 md:px-16">
+        <div className="h-14 md:h-20 flex items-center px-6 sm:px-8 md:px-16">
 
           <div className={`relative z-[60] transition-all duration-300 ${isScrolled ? "md:opacity-0 md:scale-95 opacity-100 scale-100" : "opacity-100 scale-100"}`}>
             <Link href="/" className="flex items-center gap-2 sm:gap-4 group ml-0" aria-label="Ark Institute home">
@@ -125,7 +125,7 @@ export default function Navbar() {
                 width={52}
                 height={52}
                 priority
-                className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14"
+                className="h-9 w-9 sm:h-12 sm:w-12 md:h-14 md:w-14"
               />
               <span
                 className="text-base sm:text-lg md:text-xl font-bold tracking-wide text-gray-900"

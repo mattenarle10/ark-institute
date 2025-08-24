@@ -1,10 +1,11 @@
 'use client'
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, ArrowUpRight } from 'lucide-react';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -104,7 +105,7 @@ export default function Hero() {
   }, []);
   
   return (
-    <section ref={heroRef} className="relative h-screen w-full bg-white overflow-hidden flex items-center">
+    <section ref={heroRef} className="relative h-screen w-full bg-white overflow-hidden flex items-start md:items-center pt-20 md:pt-0">
       {/* Shadow projecting downward from the hero section - intensified */}
       <div className="absolute -bottom-16 left-0 right-0 z-40 pointer-events-none">
         <div className="relative h-16 overflow-visible">
@@ -127,11 +128,6 @@ export default function Hero() {
         <div className="geometric-line absolute top-0 left-3/5 w-[2px] h-full bg-gradient-to-t from-gray-300 via-gray-200/70 to-transparent"></div>
         <div className="geometric-line absolute top-0 left-4/5 w-[2px] h-full bg-gradient-to-t from-gray-300 via-gray-200/70 to-transparent"></div>
         
-
-        
-        {/* Clean background without texture elements */}
-        
-        {/* Clean background without small circles */}
       </div>
       
       {/* Main Split Layout - RESTORED */}
@@ -141,7 +137,7 @@ export default function Hero() {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="flex items-center justify-start px-6 sm:px-8 md:px-16 pt-20 md:pt-0 z-40"
+          className="flex items-center justify-start px-6 sm:px-8 md:px-16 z-40"
         >
           <div className="max-w-lg md:max-w-xl lg:max-w-2xl -mr-8 md:-mr-16 lg:-mr-20">
             <motion.div 
@@ -160,7 +156,7 @@ export default function Hero() {
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight tracking-wide"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
-              <div className="overflow-hidden mb-3">
+              <div className="overflow-hidden mb-1 sm:mb-3">
                 <motion.div className="flex items-center justify-start">
                   <motion.span
                     initial={{ y: 120 }}
@@ -202,30 +198,48 @@ export default function Hero() {
               </div>
             </motion.h1>
             
-            <motion.div 
-              initial={{ width: 0 }}
-              animate={{ width: "6rem" }}
-              transition={{ duration: 1.2, delay: 1.6, ease: "easeOut" }}
-              className="h-0.5 bg-gradient-to-r from-primary to-accent mt-8"
-            />
-            
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.8 }}
-              className="text-lg sm:text-xl text-gray-600 mt-8 md:mt-10 leading-relaxed tracking-normal text-shadow-sm"
+              className="text-lg sm:text-xl text-gray-600 mt-6 md:mt-10 leading-relaxed tracking-normal text-shadow-sm max-w-[95%] sm:max-w-[90%] md:max-w-full"
             >
-              Progressive education for tomorrow&apos;s workforce. <br />
+              Progressive education for <br />tomorrow&apos;s workforce. <br />
               <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-700">Real skills, real opportunities.</span>
             </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 2.0 }}
+              className="mt-6 md:mt-8"
+            >
+              <Link 
+                href="/courses" 
+                className="group inline-flex items-center gap-2 border-b border-gray-300 pb-1 hover:border-primary/70 transition-all duration-300 ml-1 sm:ml-1.5"
+              >
+                <span className="text-base sm:text-lg font-medium text-gray-700 group-hover:text-primary/90 transition-colors duration-300">Enroll Now</span>
+                <motion.span
+                  initial={{ y: 0 }}
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 2.4, ease: "easeInOut" }}
+                  className="inline-flex"
+                  aria-hidden
+                >
+                  <ArrowUpRight 
+                    className="w-6 h-6 text-gray-500 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 ease-out" 
+                    strokeWidth={1.5} 
+                  />
+                </motion.span>
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
         
         {/* Right Side - Minimap-style image nodes */}
-        <div className="relative h-full w-full flex items-end justify-end py-10 md:py-0">
+        <div className="relative h-full w-full flex items-end justify-end -mt-6 py-0 md:mt-0 md:py-0">
           <div className="relative w-full max-w-lg md:max-w-xl lg:max-w-2xl mx-auto md:mr-8 md:mb-8">
             {/* Minimap container (no phone shell) */}
-            <div ref={circlesRef} className="relative w-full h-[28rem] md:h-[34rem] lg:h-[38rem] p-3 md:p-4 lg:p-6 -translate-y-6 md:-translate-y-8 lg:-translate-y-10 transition-transform duration-700 ease-in-out group/minimap">
+            <div ref={circlesRef} className="relative w-full h-[20rem] sm:h-[24rem] md:h-[34rem] lg:h-[38rem] p-1 md:p-4 lg:p-6 -translate-y-8 sm:-translate-y-6 md:-translate-y-8 lg:-translate-y-10 transition-transform duration-700 ease-in-out group/minimap">
               {/* Node 1 */}
               <div className="circle absolute bottom-4 right-2 z-40 transition-all duration-700 ease-in-out group">
                 <div className="node-card rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 transition-opacity duration-700 ease-in-out origin-center scale-110 hover:scale-115 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
@@ -246,7 +260,7 @@ export default function Hero() {
               </div>
 
               {/* Node 2 */}
-              <div className="circle absolute bottom-32 md:bottom-48 left-1/2 -translate-x-1/2 z-30 transition-all duration-700 ease-in-out group">
+              <div className="circle absolute bottom-24 md:bottom-48 left-1/2 -translate-x-1/2 z-30 transition-all duration-700 ease-in-out group">
                 <div className="node-card rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 transition-opacity duration-700 ease-in-out origin-center scale-110 hover:scale-115 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
@@ -264,7 +278,7 @@ export default function Hero() {
               </div>
 
               {/* Node 3 */}
-              <div className="circle absolute bottom-24 md:bottom-32 left-8 md:left-12 z-20 transition-all duration-700 ease-in-out group">
+              <div className="circle absolute bottom-16 md:bottom-32 left-6 md:left-12 z-20 transition-all duration-700 ease-in-out group">
                 <div className="node-card rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-opacity duration-700 ease-in-out origin-center scale-110 hover:scale-115 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
@@ -282,7 +296,7 @@ export default function Hero() {
               </div>
 
               {/* Node 4 */}
-              <div className="circle absolute bottom-8 md:bottom-10 left-4 md:left-8 z-10 transition-all duration-700 ease-in-out group">
+              <div className="circle absolute bottom-6 md:bottom-10 left-3 md:left-8 z-10 transition-all duration-700 ease-in-out group">
                 <div className="node-card rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 transition-opacity duration-700 ease-in-out origin-center scale-110 hover:scale-115 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
@@ -370,7 +384,7 @@ export default function Hero() {
                 </div>
               </div>
 
-              <div className="circle absolute bottom-20 left-1/2 -translate-x-1/2 z-10 transition-all duration-700 ease-in-out group">
+              <div className="circle absolute bottom-16 left-1/2 -translate-x-1/2 z-10 transition-all duration-700 ease-in-out group">
                 <div className="node-card rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 transition-opacity duration-700 ease-in-out hover:scale-105 hover:shadow-xl group-hover/minimap:opacity-60 hover:!opacity-100">
                   <div className="overflow-hidden rounded-xl w-full h-full">
                     <Image 
