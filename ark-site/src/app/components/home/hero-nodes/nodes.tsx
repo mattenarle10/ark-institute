@@ -4,44 +4,45 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import type { PanInfo } from 'framer-motion';
 
 const MOBILE_OFFSETS: Record<string, { x: number; y: number }> = {
-    "node1": {
-        "x": -8.63232421875,
-        "y": -149.05014038085938
-      },
-      "node2": {
-        "x": 87.5048599243164,
-        "y": -206.92999267578125
-      },
-      "node3": {
-        "x": 257.37843322753906,
-        "y": 58.12115478515625
-      },
-      "node4": {
-        "x": 180.67132186889648,
-        "y": 2.33892822265625
-      },
-      "node5": {
-        "x": 74.6142349243164,
-        "y": -19.1309814453125
-      },
-      "node6": {
-        "x": -90.27774047851562,
-        "y": 54.740478515625
-      },
-      "node7": {
-        "x": 105.26137375831604,
-        "y": -130.19876098632812
-      },
-      "node8": {
-        "x": -166.4255307018757,
-        "y": -56.7996826171875
-      },
-      "node9": {
-        "x": -96.61940574645996,
-        "y": 63.39715576171875
-      }
+  "node1": {
+    "x": -8.63232421875,
+    "y": -149.05014038085938
+  },
+  "node2": {
+    "x": 87.5048599243164,
+    "y": -206.92999267578125
+  },
+  "node3": {
+    "x": 257.37843322753906,
+    "y": 58.12115478515625
+  },
+  "node4": {
+    "x": 180.67132186889648,
+    "y": 2.33892822265625
+  },
+  "node5": {
+    "x": 74.6142349243164,
+    "y": -19.1309814453125
+  },
+  "node6": {
+    "x": -90.27774047851562,
+    "y": 54.740478515625
+  },
+  "node7": {
+    "x": 105.26137375831604,
+    "y": -130.19876098632812
+  },
+  "node8": {
+    "x": -166.4255307018757,
+    "y": -56.7996826171875
+  },
+  "node9": {
+    "x": -96.61940574645996,
+    "y": 63.39715576171875
+  }
 };
 
 type NodeId = keyof typeof MOBILE_OFFSETS;
@@ -70,11 +71,11 @@ interface NodeProps {
   tooltipPlacement?: 'top' | 'bottom';
   mobilePos: { x: number; y: number };
   editMode?: boolean;
-  onDragEnd?: (info: any) => void;
+  onDragEnd?: (info: PanInfo) => void;
   priority?: boolean;
 }
 
-function Node({ id, image, alt, width, height, wrapperClass, cardSizeClass, tooltipPlacement = 'top', priority, mobilePos, editMode = false, onDragEnd }: NodeProps) {
+function Node({ image, alt, width, height, wrapperClass, cardSizeClass, tooltipPlacement = 'top', priority, mobilePos, editMode = false, onDragEnd }: NodeProps) {
   const isMobile = useIsMobile();
 
   return (
@@ -112,7 +113,7 @@ export default function HeroNodes() {
   const [draftOffsets, setDraftOffsets] = useState<Record<NodeId, { x: number; y: number }>>(() => JSON.parse(JSON.stringify(MOBILE_OFFSETS)));
 
   const getPos = (id: NodeId) => (editMode ? draftOffsets[id] : MOBILE_OFFSETS[id]);
-  const handleDragEnd = (id: NodeId) => (info: any) => {
+  const handleDragEnd = (id: NodeId) => (info: PanInfo) => {
     setDraftOffsets(prev => {
       const next = {
         ...prev,
