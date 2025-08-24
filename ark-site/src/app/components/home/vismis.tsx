@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { motion, Variants } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -13,9 +12,12 @@ if (typeof window !== 'undefined') {
 export default function VisMis() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const underlineRefs = useRef<HTMLDivElement[]>([]);
+  const contentRefs = useRef<HTMLDivElement[]>([]);
   const logoRef = useRef<HTMLDivElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
   const linesRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const noiseRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -40,65 +42,93 @@ export default function VisMis() {
     return () => ctx.revert();
   }, []);
 
-  // Subtle GSAP effects: logo parallax on scroll, divider grow-in
   useEffect(() => {
     const ctx = gsap.context(() => {
-      if (sectionRef.current && logoRef.current) {
+      contentRefs.current.forEach((el) => {
+        if (!el) return;
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 16, filter: 'blur(8px)' },
+          {
+            opacity: 1,
+            y: 0,
+            filter: 'blur(0px)',
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches;
+
+      if (logoRef.current) {
+        gsap.fromTo(
+          logoRef.current,
+          { opacity: 0, scale: isMobile ? 0.96 : 0.94, filter: 'blur(8px)' },
+          {
+            opacity: 1,
+            scale: 1,
+            filter: 'blur(0px)',
+            duration: 0.9,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: logoRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+
         gsap.to(logoRef.current, {
-          y: -30,
-          ease: 'none',
+          y: isMobile ? -3 : -6,
+          duration: isMobile ? 4.5 : 4,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+        });
+      }
+
+      if (glowRef.current) {
+        gsap.to(glowRef.current, {
+          opacity: isMobile ? 0.25 : 0.35,
+          duration: 3.5,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        });
+      }
+
+      if (noiseRef.current) {
+        gsap.to(noiseRef.current, {
+          y: isMobile ? -8 : -14,
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: 1,
+            scrub: 0.4,
           },
-        });
-      }
-
-      if (dividerRef.current) {
-        gsap.set(dividerRef.current, { scaleY: 0, transformOrigin: 'top' });
-        gsap.to(dividerRef.current, {
-          scaleY: 1,
-          duration: 0.8,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: dividerRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        });
-      }
-
-      // Geometric background line reveals (aligned with hero.tsx vibe)
-      if (linesRef.current) {
-        const lines = linesRef.current.querySelectorAll('.geometric-line');
-        gsap.set(lines, { scaleX: 0, opacity: 0 });
-        gsap.to(lines, {
-          scaleX: 1,
-          opacity: 0.35,
-          duration: 1.2,
-          stagger: 0.12,
-          ease: 'power2.inOut',
-          delay: 0.2,
         });
       }
     }, sectionRef);
     return () => ctx.revert();
   }, []);
 
-  const container: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.08 } },
-  };
-
-  const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 12 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-  };
-
   const setUnderlineRef = (el: HTMLDivElement | null, idx: number) => {
     if (el) underlineRefs.current[idx] = el;
+  };
+
+  const setContentRef = (el: HTMLDivElement | null, idx: number) => {
+    if (el) contentRefs.current[idx] = el;
   };
 
   return (
@@ -124,21 +154,14 @@ export default function VisMis() {
         <div className="geometric-line absolute top-0 left-3/5 w-[1px] h-full bg-gradient-to-t from-gray-200 via-gray-100/60 to-transparent" />
       </div>
 
-      <div className="relative z-20 mx-auto max-w-7xl px-6 sm:px-8 md:px-16 py-20 md:py-24">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-          className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center"
+      <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 md:px-16 py-14 sm:py-16 md:py-24">
+        <div
+          className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-center"
         >
           {/* Left: Logo + effects */}
-          <motion.div variants={fadeUp} className="md:col-span-6 lg:col-span-5 flex items-center justify-center h-full relative">
+          <div className="md:col-span-6 lg:col-span-5 flex items-center justify-center h-full relative">
             <div className="relative flex flex-col items-center justify-center h-full py-4 md:py-0">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
+              <div
                 className="relative group"
                 ref={logoRef}
               >
@@ -149,6 +172,7 @@ export default function VisMis() {
                     background: 'radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(239,68,68,0.06) 40%, rgba(255,255,255,0) 85%)',
                     filter: 'blur(8px)'
                   }}
+                  ref={glowRef}
                 ></div>
                 <div 
                   className="absolute -inset-20 opacity-20 mix-blend-overlay overflow-hidden"
@@ -156,6 +180,7 @@ export default function VisMis() {
                     maskImage: 'radial-gradient(circle, rgba(0,0,0,1) 20%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 85%)',
                     WebkitMaskImage: 'radial-gradient(circle, rgba(0,0,0,1) 20%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 85%)'
                   }}
+                  ref={noiseRef}
                 >
                   <div 
                     className="absolute inset-0" 
@@ -176,14 +201,17 @@ export default function VisMis() {
                     className="h-40 w-40 sm:h-44 sm:w-44 md:h-56 md:w-56 lg:h-64 lg:w-64 object-contain drop-shadow-xl"
                   />
                 </div>
-              </motion.div>
+              </div>
               {/* No vertical divider - cleaner design */}
             </div>
-          </motion.div>
+          </div>
 
           {/* Right: Vision then Mission */}
-          <div className="md:col-span-6 lg:col-span-7 mt-12 md:mt-0">
-            <motion.div variants={fadeUp} className="max-w-2xl">
+          <div className="md:col-span-6 lg:col-span-7 mt-12 md:mt-0 text-left">
+            <div
+              className="max-w-2xl rounded-2xl bg-gradient-to-br from-white/70 to-white/40 backdrop-blur-md ring-1 ring-black/5 shadow-sm md:shadow p-4 sm:p-5 md:p-6"
+              ref={(el) => setContentRef(el, 0)}
+            >
               <h2
                 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md"
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
@@ -191,13 +219,16 @@ export default function VisMis() {
                 Vision
               </h2>
               <div ref={(el) => setUnderlineRef(el, 0)} className="h-px w-16 bg-gradient-to-r from-primary to-primary/60 mt-3"></div>
-              <p className="mt-4 text-gray-700 text-base sm:text-lg leading-relaxed">
+              <p className="mt-4 text-gray-700 text-base sm:text-lg leading-relaxed text-justify">
                 Ark Institute envisions itself to become a leading institution in technical-vocational education,
                 recognized for producing highly skilled professionals who contribute to the workforce and the community.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div variants={fadeUp} className="mt-8 max-w-2xl">
+            <div
+              className="mt-8 max-w-2xl rounded-2xl bg-gradient-to-br from-white/70 to-white/40 backdrop-blur-md ring-1 ring-black/5 shadow-sm md:shadow p-4 sm:p-5 md:p-6"
+              ref={(el) => setContentRef(el, 1)}
+            >
               <h2
                 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md"
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
@@ -205,14 +236,14 @@ export default function VisMis() {
                 Mission
               </h2>
               <div ref={(el) => setUnderlineRef(el, 1)} className="h-px w-16 bg-gradient-to-r from-accent to-accent/60 mt-3"></div>
-              <p className="mt-4 text-gray-700 text-base sm:text-lg leading-relaxed">
+              <p className="mt-4 text-gray-700 text-base sm:text-lg leading-relaxed text-justify">
                 Ark Institute aims to equip students with the right values, practical skills, and knowledge through
                 comprehensive TESDA-accredited courses, fostering career readiness and professional excellence in order
                 to thrive in a dynamic world.
               </p>
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
