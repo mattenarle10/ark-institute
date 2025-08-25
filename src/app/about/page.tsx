@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/app/components/layout/navbar";
+import NavSpacer from "@/app/components/layout/nav-spacer";
 import Footer from "@/app/components/layout/footer";
 import Intro from "@/app/components/about/intro";
 import WhoWeAre from "@/app/components/about/who-we-are";
@@ -17,6 +18,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
+      <NavSpacer />
       <Intro />
       <WhoWeAre />
       <MissionVision />
