@@ -19,12 +19,12 @@ export default function WhoWeAre() {
       if (textRef.current) {
         gsap.fromTo(
           textRef.current,
-          { opacity: 0, y: 16, filter: 'blur(6px)' },
+          { opacity: 0, y: 10, filter: 'blur(4px)' },
           {
             opacity: 1,
             y: 0,
             filter: 'blur(0px)',
-            duration: 0.6,
+            duration: 0.5,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: textRef.current,
@@ -38,13 +38,13 @@ export default function WhoWeAre() {
       if (imageRef.current) {
         gsap.fromTo(
           imageRef.current,
-          { opacity: 0, y: 10, scale: 0.98, filter: 'blur(6px)' },
+          { opacity: 0, y: 8, scale: 0.99, filter: 'blur(4px)' },
           {
             opacity: 1,
             y: 0,
             scale: 1,
             filter: 'blur(0px)',
-            duration: 0.65,
+            duration: 0.5,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: imageRef.current,
@@ -67,18 +67,17 @@ export default function WhoWeAre() {
           <div className="h-px w-16 bg-gradient-to-r from-primary to-primary/60 mt-3"></div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
-          <div ref={textRef} className="md:col-span-7">
-            <p className="text-base sm:text-lg leading-relaxed text-gray-700 text-justify md:text-left">
+          <div ref={textRef} className="md:col-span-7 md:pr-6">
+            <p className="text-base sm:text-lg leading-relaxed text-gray-700 text-left max-w-prose">
               We pride ourselves on offering <span className="font-semibold text-primary">TESDA‑accredited</span> courses tailored for
-              students who aspire to excel in their chosen fields and become <span className="font-semibold text-gray-900">workforce‑ready</span>.
-              Our comprehensive training programs are meticulously designed and evaluated by seasoned instructors,
-              ensuring that each student receives <span className="font-semibold text-gray-900">extensive, hands‑on learning</span> experiences.
-              Our commitment to <span className="font-semibold text-gray-900">quality education</span> and <span className="font-semibold text-gray-900">skill development</span> equips every student with the
-              expertise, discipline, and confidence needed for a successful future.
+              students who aspire to excel in their chosen fields and become workforce‑ready. Our comprehensive training programs are
+              meticulously designed and evaluated by seasoned instructors, ensuring that each student receives extensive, hands‑on learning
+              experiences. Our commitment to quality education and skill development equips every student with the expertise, discipline,
+              and confidence needed for a successful future.
             </p>
           </div>
           <div className="md:col-span-5">
-            <div ref={imageRef} className="relative w-full overflow-hidden rounded-2xl border border-gray-200 bg-white p-2">
+            <div ref={imageRef} className="relative w-full overflow-hidden rounded-2xl bg-white p-2 ring-1 ring-black/5 shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-[1px]">
               <Image
                 src="/images/tables-1.png"
                 alt="Training at Ark Institute"

@@ -21,12 +21,12 @@ export default function MissionVision() {
         if (!el) return;
         gsap.fromTo(
           el,
-          { opacity: 0, y: 16, filter: 'blur(6px)' },
+          { opacity: 0, y: 12, filter: 'blur(4px)' },
           {
             opacity: 1,
             y: 0,
             filter: 'blur(0px)',
-            duration: 0.55,
+            duration: 0.5,
             ease: 'power2.out',
             delay: i * 0.04,
             scrollTrigger: {
@@ -53,9 +53,9 @@ export default function MissionVision() {
 
         <div className="grid gap-8 md:grid-cols-2">
           {/* Mission */}
-          <div ref={(el) => setCardRef(el, 0)} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5">
+          <div ref={(el) => setCardRef(el, 0)} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5 transition-all duration-200 hover:shadow-md hover:-translate-y-[1px]">
             <div className="mb-4 flex items-center">
-              <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+              <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 ring-1 ring-black/5">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
@@ -64,16 +64,14 @@ export default function MissionVision() {
             </div>
             <p className="text-base sm:text-lg leading-relaxed text-gray-700">
               Ark Institute aims to equip students with the right values, practical skills, and knowledge through comprehensive
-              <span className="font-semibold text-primary"> TESDA‑accredited courses</span>, fostering
-              <span className="font-semibold text-gray-900"> career readiness</span> and
-              <span className="font-semibold text-gray-900"> professional excellence</span> in order to thrive in a dynamic world.
+              <span className="font-semibold text-primary"> TESDA‑accredited courses</span>, fostering career readiness and professional excellence in order to thrive in a dynamic world.
             </p>
           </div>
 
           {/* Vision */}
-          <div ref={(el) => setCardRef(el, 1)} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5">
+          <div ref={(el) => setCardRef(el, 1)} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5 transition-all duration-200 hover:shadow-md hover:-translate-y-[1px]">
             <div className="mb-4 flex items-center">
-              <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent/10">
+              <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 ring-1 ring-black/5">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -82,9 +80,7 @@ export default function MissionVision() {
               <h3 className="font-montserrat text-xl sm:text-2xl font-bold tracking-tight text-gray-900">Our Vision</h3>
             </div>
             <p className="text-base sm:text-lg leading-relaxed text-gray-700">
-              Ark Institute envisions itself to become a leading institution in
-              <span className="font-semibold text-gray-900"> technical‑vocational education</span>, recognized for producing
-              <span className="font-semibold text-gray-900"> highly skilled professionals</span> who contribute to the workforce and the community.
+              Ark Institute envisions itself to become a leading institution in technical‑vocational education, recognized for producing highly skilled professionals who contribute to the workforce and the community.
             </p>
           </div>
         </div>
