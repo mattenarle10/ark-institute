@@ -1,43 +1,62 @@
+"use client";
+
 import React from 'react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 export default function Intro() {
   return (
-    <section className="relative overflow-hidden bg-white">
-      {/* subtle background accents */}
-      <div className="pointer-events-none absolute -top-24 right-[-10%] h-[360px] w-[360px] rounded-full bg-primary/5 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 left-[-10%] h-[300px] w-[300px] rounded-full bg-accent/5 blur-3xl" />
-
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 py-12 md:py-16">
+    <section className="relative overflow-hidden">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 py-12 sm:py-16 md:py-20">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
-          <div className="mb-5 flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            className="mb-6 flex items-center justify-center"
+          >
             <Image
               src="/logo/ark-transpa.png"
               alt="Ark Institute logo"
-              width={72}
-              height={72}
-              className="h-16 w-16 object-contain"
+              width={112}
+              height={112}
+              className="h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 object-contain"
               priority
             />
-          </div>
+          </motion.div>
 
           {/* Title */}
-          <h1 className="font-montserrat text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
+          <motion.h1
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.42, ease: 'easeOut', delay: 0.05 }}
+            className="font-montserrat text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 text-shadow-md"
+          >
             About Ark Institute
-          </h1>
+          </motion.h1>
 
           {/* Short subcopy */}
-          <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-gray-700">
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.38, ease: 'easeOut', delay: 0.12 }}
+            className="mt-3 max-w-2xl text-base sm:text-lg leading-relaxed text-gray-700"
+          >
             TESDA‑accredited training. Practical skills. Real career outcomes.
-          </p>
+          </motion.p>
 
           {/* Badge */}
-          <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary/5 px-3 py-1 text-xs font-semibold text-primary">
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.34, ease: 'easeOut', delay: 0.18 }}
+            className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/10 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary"
+          >
             <span>TESDA Accredited</span>
             <span className="opacity-60">•</span>
             <span>Hands‑on Learning</span>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

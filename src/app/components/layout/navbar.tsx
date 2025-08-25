@@ -69,6 +69,7 @@ export default function Navbar() {
   const splashCompleted = useSplashCompletion();
   const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
   const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isHome = pathname === '/';
 
   useEffect(() => {
     const ENTER_SCROLL_PX = 24;
@@ -99,12 +100,12 @@ export default function Navbar() {
   ];
 
   // Only apply splash screen logic on the home page
-  if (!splashCompleted && pathname === '/') return null;
+  if (!splashCompleted && isHome) return null;
 
   return (
     <motion.header 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: splashCompleted ? 1 : 0 }}
+      initial={{ opacity: isHome ? 0 : 1 }}
+      animate={{ opacity: isHome ? (splashCompleted ? 1 : 0) : 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50 pt-4 sm:pt-3 bg-transparent"
       style={{ pointerEvents: "auto" }}
