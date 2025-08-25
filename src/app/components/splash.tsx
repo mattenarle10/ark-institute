@@ -8,10 +8,31 @@ import gsap from "gsap";
 let globalSplashCompleted = false;
 const splashCompletionCallbacks: (() => void)[] = [];
 
+// Reset splash state when module is loaded (for dev mode hot reloading)
+if (typeof window !== 'undefined') {
+  // Only reset if we're navigating directly to the page (not on hot reload)
+  if (window.performance && window.performance.navigation.type !== 1) {
+    // Store in sessionStorage to persist during the session
+    const hasCompletedSplash = sessionStorage.getItem('splashCompleted') === 'true';
+    globalSplashCompleted = hasCompletedSplash;
+  }
+}
+
 export const useSplashCompletion = () => {
   const [splashCompleted, setSplashCompleted] = useState(globalSplashCompleted);
 
   useEffect(() => {
+    // Always check sessionStorage first
+    if (typeof window !== 'undefined') {
+      const hasCompletedSplash = sessionStorage.getItem('splashCompleted') === 'true';
+      if (hasCompletedSplash) {
+        setSplashCompleted(true);
+        globalSplashCompleted = true;
+        return;
+      }
+    }
+    
+    // Fall back to global state
     if (globalSplashCompleted) {
       setSplashCompleted(true);
       return;
@@ -33,6 +54,13 @@ export const useSplashCompletion = () => {
 
 const notifySplashCompletion = () => {
   globalSplashCompleted = true;
+  
+  // Store in sessionStorage to persist during navigation
+  if (typeof window !== 'undefined') {
+    sessionStorage.setItem('splashCompleted', 'true');
+  }
+  
+  // Notify all listeners
   splashCompletionCallbacks.forEach(callback => callback());
 };
 
