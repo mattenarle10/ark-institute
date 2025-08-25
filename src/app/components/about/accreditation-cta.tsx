@@ -1,16 +1,101 @@
-import React from 'react'
+"use client";
+
+import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function AccreditationCTA() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const accreditationRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate the accreditation card
+      gsap.fromTo(
+        accreditationRef.current,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: accreditationRef.current,
+            start: 'top 85%'
+          }
+        }
+      );
+      
+      // Animate content and logo separately with slight delay
+      gsap.fromTo(
+        contentRef.current,
+        { opacity: 0, x: -20 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: accreditationRef.current,
+            start: 'top 80%'
+          }
+        }
+      );
+      
+      gsap.fromTo(
+        logoRef.current,
+        { opacity: 0, scale: 0.9, x: 20 },
+        {
+          opacity: 1,
+          scale: 1,
+          x: 0,
+          duration: 0.6,
+          delay: 0.2,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: accreditationRef.current,
+            start: 'top 80%'
+          }
+        }
+      );
+      
+      // Animate the CTA section
+      gsap.fromTo(
+        ctaRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: ctaRef.current,
+            start: 'top 85%'
+          }
+        }
+      );
+    }, sectionRef);
+    
+    return () => ctx.revert();
+  }, []);
+  
   return (
-    <section className="bg-gradient-to-b from-gray-50 to-white py-16">
+    <section ref={sectionRef} className="bg-gradient-to-b from-gray-50 to-white py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Accreditation */}
-        <div className="mb-16 rounded-2xl bg-white p-8 shadow-sm">
+        <div ref={accreditationRef} className="mb-16 rounded-2xl bg-white p-8 shadow-sm md:shadow-md ring-1 ring-gray-100">
           <div className="grid gap-8 md:grid-cols-2 md:items-center">
-            <div>
-              <h2 className="font-montserrat text-2xl font-extrabold tracking-tight text-primary sm:text-3xl">
+            <div ref={contentRef}>
+              <h2 className="font-montserrat text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 text-shadow-md">
                 TESDA Accreditation
               </h2>
               <p className="mt-4 text-base leading-relaxed text-gray-700">
@@ -24,22 +109,22 @@ export default function AccreditationCTA() {
               <div className="mt-6">
                 <Link 
                   href="/courses" 
-                  className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90"
+                  className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm ring-1 ring-primary/20 hover:ring-primary/30 hover:shadow-md hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 transition"
                 >
                   View our accredited courses
-                  <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
               </div>
             </div>
-            <div className="flex items-center justify-center">
+            <div ref={logoRef} className="flex items-center justify-center">
               <Image
                 src="/images/tesda.svg"
                 alt="TESDA logo"
                 width={392}
                 height={490}
-                className="h-48 w-auto sm:h-32 md:h-42 lg:h-62 xl:h-72 object-contain"
+                className="h-48 w-auto sm:h-40 md:h-56 lg:h-64 xl:h-72 object-contain"
                 priority
               />
             </div>
@@ -47,7 +132,7 @@ export default function AccreditationCTA() {
         </div>
 
         {/* CTA */}
-        <div className="rounded-2xl bg-primary p-8 text-white shadow-lg">
+        <div ref={ctaRef} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-primary/90 p-8 text-white shadow-lg ring-1 ring-white/10">
           <div className="text-center">
             <h2 className="font-montserrat text-2xl font-bold sm:text-3xl">Ready to start your journey?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-base text-white/90">
@@ -56,13 +141,13 @@ export default function AccreditationCTA() {
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link 
                 href="/courses" 
-                className="inline-flex items-center rounded-md bg-white px-5 py-3 text-sm font-medium text-primary hover:bg-gray-100"
+                className="inline-flex items-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow-sm ring-1 ring-primary/10 hover:ring-primary/20 hover:shadow-md hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 transition"
               >
                 Explore Courses
               </Link>
               <Link 
                 href="/contact" 
-                className="inline-flex items-center rounded-md border border-white/30 bg-transparent px-5 py-3 text-sm font-medium text-white hover:bg-white/10"
+                className="inline-flex items-center rounded-full border border-white/30 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm shadow-sm ring-1 ring-white/10 hover:ring-white/20 hover:bg-white/20 hover:border-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 transition"
               >
                 Contact Us
               </Link>

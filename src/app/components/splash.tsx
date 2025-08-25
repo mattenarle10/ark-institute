@@ -41,8 +41,12 @@ export default function Splash() {
   const splashRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
+    // Reset visibility state
+    setIsVisible(true);
+    
     // Prevent scroll while splash is visible
     document.body.style.overflow = "hidden";
 
@@ -54,6 +58,11 @@ export default function Splash() {
       return;
     }
 
+    // Kill any existing animation
+    if (animationRef.current) {
+      animationRef.current.kill();
+    }
+
     const tl = gsap.timeline({
       onComplete: () => {
         setIsVisible(false);
@@ -61,10 +70,14 @@ export default function Splash() {
         notifySplashCompletion();
       },
     });
+    
+    // Store reference for cleanup
+    animationRef.current = tl;
 
     // Initial state
     gsap.set(logoRef.current, { opacity: 0, scale: 0.9 });
     gsap.set(lineRef.current, { scaleX: 0, opacity: 0 });
+    gsap.set(splashRef.current, { opacity: 1 }); // Ensure splash is visible
 
     // Animation sequence
     tl.to(logoRef.current, {
@@ -95,7 +108,9 @@ export default function Splash() {
 
     // Cleanup
     return () => {
-      tl.kill();
+      if (animationRef.current) {
+        animationRef.current.kill();
+      }
       document.body.style.overflow = "";
     };
   }, []);

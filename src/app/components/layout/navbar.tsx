@@ -99,16 +99,19 @@ export default function Navbar() {
     { href: "/contact", label: "Contact" }
   ];
 
-  // Only apply splash screen logic on the home page
-  if (!splashCompleted && isHome) return null;
+  // Only hide navbar during splash on home page
+  const shouldHideForSplash = !splashCompleted && isHome;
 
   return (
     <motion.header 
-      initial={{ opacity: isHome ? 0 : 1 }}
-      animate={{ opacity: isHome ? (splashCompleted ? 1 : 0) : 1 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
+      initial={false} // Don't animate on initial mount to prevent flash
+      animate={{ 
+        opacity: shouldHideForSplash ? 0 : 1,
+        y: shouldHideForSplash ? -10 : 0
+      }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50 pt-4 sm:pt-3 bg-transparent"
-      style={{ pointerEvents: "auto" }}
+      style={{ pointerEvents: shouldHideForSplash ? "none" : "auto" }}
     >
       {/* Mobile-only glass background when scrolled */}
       <div
