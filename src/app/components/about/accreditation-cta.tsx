@@ -8,7 +8,7 @@ export default function AccreditationCTA() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Accreditation */}
         <div className="mb-16 rounded-2xl bg-white p-8 shadow-sm">
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2 md:items-center">
             <div>
               <h2 className="font-montserrat text-2xl font-extrabold tracking-tight text-primary sm:text-3xl">
                 TESDA Accreditation
@@ -34,17 +34,14 @@ export default function AccreditationCTA() {
               </div>
             </div>
             <div className="flex items-center justify-center">
-              <div className="relative h-48 w-48 overflow-hidden rounded-full border-4 border-primary/10 bg-white p-2 shadow-lg">
-                <div className="absolute inset-0 flex items-center justify-center rounded-full bg-white/80">
-                  <Image 
-                    src="/logo/ark-transpa.png"
-                    alt="Ark Institute Logo" 
-                    width={160}
-                    height={160}
-                    className="object-contain"
-                  />
-                </div>
-              </div>
+              <Image
+                src="/images/tesda.svg"
+                alt="TESDA logo"
+                width={392}
+                height={490}
+                className="h-48 w-auto sm:h-32 md:h-42 lg:h-62 xl:h-72 object-contain"
+                priority
+              />
             </div>
           </div>
         </div>
