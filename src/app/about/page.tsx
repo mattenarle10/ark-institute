@@ -4,14 +4,13 @@ import NavSpacer from "@/app/components/layout/nav-spacer";
 import Footer from "@/app/components/layout/footer";
 import Intro from "@/app/components/about/intro";
 import WhoWeAre from "@/app/components/about/who-we-are";
-import MissionVision from "@/app/components/about/mission-vision";
 import CoreValues from "@/app/components/about/core-values";
 import AccreditationCTA from "@/app/components/about/accreditation-cta";
 
 export const metadata: Metadata = {
   title: "About Ark Institute",
   description:
-    "TESDA-accredited institution focused on practical, hands-on training. Learn about our mission, vision, and core values.",
+    "TESDA-accredited institution focused on practical, hands-on training. Learn who we are and our core values.",
 };
 
 export default function AboutPage() {
@@ -21,7 +20,6 @@ export default function AboutPage() {
       <NavSpacer />
       <Intro />
       <WhoWeAre />
-      <MissionVision />
       <CoreValues />
       <AccreditationCTA />
       <Footer />
