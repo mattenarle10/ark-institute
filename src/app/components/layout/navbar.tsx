@@ -98,8 +98,8 @@ export default function Navbar() {
     { href: "/contact", label: "Contact" }
   ];
 
-  // Don't show navbar until splash is completed
-  if (!splashCompleted) return null;
+  // Only apply splash screen logic on the home page
+  if (!splashCompleted && pathname === '/') return null;
 
   return (
     <motion.header 
