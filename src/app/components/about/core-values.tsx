@@ -30,9 +30,45 @@ export default function CoreValues() {
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<HTMLDivElement[]>([]);
+  const letterRefs = useRef<HTMLSpanElement[]>([]);
 
   const setCardRef = (el: HTMLDivElement | null, idx: number) => {
     if (el) cardRefs.current[idx] = el;
+  };
+
+  const setLetterRef = (el: HTMLSpanElement | null, idx: number) => {
+    if (el) letterRefs.current[idx] = el;
+  };
+
+  // Brand colors for interactive highlights
+  const PRIMARY = '#193a7a'; // tailwind primary
+  const ACCENT = '#c80100';  // tailwind accent
+  const BASE = '#111827';    // tailwind text-gray-900
+
+  const highlightLetter = (idx: number) => {
+    const el = letterRefs.current[idx];
+    if (!el) return;
+    const color = idx % 2 === 0 ? PRIMARY : ACCENT;
+    const glow = idx % 2 === 0 ? '0 2px 6px rgba(25, 58, 122, 0.35)' : '0 2px 6px rgba(200, 1, 0, 0.35)';
+    gsap.to(el, {
+      color,
+      textShadow: glow,
+      scale: 1.06,
+      duration: 0.25,
+      ease: 'power2.out'
+    });
+  };
+
+  const resetLetter = (idx: number) => {
+    const el = letterRefs.current[idx];
+    if (!el) return;
+    gsap.to(el, {
+      color: BASE,
+      textShadow: '0 2px 4px rgba(0, 0, 0, 0.15)', // matches text-shadow-md
+      scale: 1,
+      duration: 0.25,
+      ease: 'power2.out'
+    });
   };
 
   useEffect(() => {
@@ -97,7 +133,8 @@ export default function CoreValues() {
             <span
               key={letter}
               data-rise-letter
-              className={`${idx % 2 === 0 ? 'text-primary' : 'text-accent'} select-none font-montserrat font-extrabold tracking-tight text-6xl sm:text-7xl md:text-8xl`}
+              ref={(el) => setLetterRef(el, idx)}
+              className={"select-none font-montserrat font-extrabold tracking-tight text-gray-900 text-shadow-md text-6xl sm:text-7xl md:text-8xl"}
             >
               {letter}
             </span>
@@ -111,6 +148,10 @@ export default function CoreValues() {
               key={value.title}
               ref={(el) => setCardRef(el, idx)}
               className="group rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-lg"
+              onMouseEnter={() => highlightLetter(idx)}
+              onMouseLeave={() => resetLetter(idx)}
+              onFocus={() => highlightLetter(idx)}
+              onBlur={() => resetLetter(idx)}
             >
               <div className="flex items-center gap-3">
                 <div className={`${idx % 2 === 0 ? 'bg-primary' : 'bg-accent'} h-2 w-8 rounded-full`}></div>
