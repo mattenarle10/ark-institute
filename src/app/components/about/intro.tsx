@@ -7,14 +7,14 @@ import { motion } from 'framer-motion'
 export default function Intro() {
   return (
     <section className="relative overflow-hidden">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 py-12 sm:py-16 md:py-20">
-        <div className="flex flex-col items-center text-center">
+      <div className="mx-auto max-w-5xl px-6 sm:px-8 md:px-16 py-12 sm:py-16 md:py-20">
+        <div className="flex flex-col items-start text-left md:items-center md:text-center">
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="mb-6 flex items-center justify-center"
+            className="mb-6 w-full flex items-center justify-center"
           >
             <Image
               src="/logo/ark-transpa.png"
@@ -31,7 +31,7 @@ export default function Intro() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.42, ease: 'easeOut', delay: 0.05 }}
-            className="font-montserrat text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 text-shadow-md"
+            className="font-montserrat text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 text-shadow-md"
           >
             About Ark Institute
           </motion.h1>
@@ -41,7 +41,7 @@ export default function Intro() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.38, ease: 'easeOut', delay: 0.12 }}
-            className="mt-3 max-w-2xl text-base sm:text-lg leading-relaxed text-gray-700"
+            className="mt-2 max-w-2xl text-sm sm:text-base leading-relaxed text-gray-700"
           >
             TESDA‑accredited training. Practical skills. Real career outcomes.
           </motion.p>
@@ -51,7 +51,7 @@ export default function Intro() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.34, ease: 'easeOut', delay: 0.18 }}
-            className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/10 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary"
+            className="mt-5 inline-flex items-center gap-2 rounded-full border border-primary/10 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary"
           >
             <span>TESDA Accredited</span>
             <span className="opacity-60">•</span>

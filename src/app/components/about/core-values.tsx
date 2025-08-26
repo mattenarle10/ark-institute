@@ -119,22 +119,22 @@ export default function CoreValues() {
 
   return (
     <section ref={sectionRef} className="bg-white py-16">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 text-center">
+      <div className="mx-auto max-w-6xl px-6 sm:px-8 md:px-16">
+        <div className="mb-8 text-left md:text-center">
           <h2 className="font-montserrat text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900">
             Our Core Values
           </h2>
-          <div className="h-px w-20 bg-gradient-to-r from-primary to-primary/60 mt-3 mx-auto"></div>
+          <div className="h-px w-20 bg-gradient-to-r from-primary to-primary/60 mt-3 ml-0 md:mx-auto"></div>
         </div>
 
         {/* RISE hero word */}
-        <div className="mb-12 flex items-baseline justify-center gap-3 sm:gap-4 md:gap-5">
+        <div className="mb-10 flex items-baseline justify-center gap-2 sm:gap-3 md:gap-4">
           {['R', 'I', 'S', 'E'].map((letter, idx) => (
             <span
               key={letter}
               data-rise-letter
               ref={(el) => setLetterRef(el, idx)}
-              className={"select-none font-montserrat font-extrabold tracking-tight text-gray-900 text-shadow-md text-6xl sm:text-7xl md:text-8xl"}
+              className={"select-none font-montserrat font-extrabold tracking-tight text-gray-900 text-shadow-md text-5xl sm:text-6xl md:text-7xl"}
             >
               {letter}
             </span>
@@ -142,24 +142,24 @@ export default function CoreValues() {
         </div>
 
         {/* Values grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
           {values.map((value, idx) => (
             <div
               key={value.title}
               ref={(el) => setCardRef(el, idx)}
-              className="group rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-lg"
+              className="group rounded-xl border border-gray-100 bg-white p-5 md:p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-lg"
               onMouseEnter={() => highlightLetter(idx)}
               onMouseLeave={() => resetLetter(idx)}
               onFocus={() => highlightLetter(idx)}
               onBlur={() => resetLetter(idx)}
             >
               <div className="flex items-center gap-3">
-                <div className={`${idx % 2 === 0 ? 'bg-primary' : 'bg-accent'} h-2 w-8 rounded-full`}></div>
-                <h3 className="font-montserrat text-lg sm:text-xl md:text-2xl font-semibold text-gray-900">
+                <div className={`${idx % 2 === 0 ? 'bg-primary' : 'bg-accent'} h-1 w-7 rounded-full`}></div>
+                <h3 className="font-montserrat text-base sm:text-lg md:text-xl font-semibold text-gray-900">
                   {value.title}
                 </h3>
               </div>
-              <p className="mt-3 text-base sm:text-lg text-gray-700 leading-relaxed">
+              <p className="mt-2 text-sm sm:text-base text-gray-700 leading-relaxed">
                 {value.description}
               </p>
             </div>

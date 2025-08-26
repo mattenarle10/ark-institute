@@ -90,12 +90,12 @@ export default function AccreditationCTA() {
   
   return (
     <section ref={sectionRef} className="bg-gradient-to-b from-gray-50 to-white py-16">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-6 sm:px-8 md:px-16">
         {/* Accreditation */}
-        <div ref={accreditationRef} className="mb-16 rounded-2xl bg-white p-8 shadow-sm md:shadow-md ring-1 ring-gray-100">
-          <div className="grid gap-8 md:grid-cols-2 md:items-center">
+        <div ref={accreditationRef} className="mb-16 rounded-2xl bg-white p-6 md:p-8 shadow-sm md:shadow-md ring-1 ring-gray-100">
+          <div className="grid gap-6 md:gap-8 md:grid-cols-2 md:items-center">
             <div ref={contentRef}>
-              <h2 className="font-montserrat text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 text-shadow-md">
+              <h2 className="font-montserrat text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md">
                 TESDA Accreditation
               </h2>
               <p className="mt-4 text-base leading-relaxed text-gray-700">
@@ -106,7 +106,7 @@ export default function AccreditationCTA() {
                 This accreditation ensures that our programs meet the highest standards of quality and relevance to industry needs,
                 providing our students with nationally recognized qualifications that enhance their employability.
               </p>
-              <div className="mt-6">
+              <div className="mt-6 flex justify-center md:justify-start">
                 <Link 
                   href="/courses" 
                   className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm ring-1 ring-primary/20 hover:ring-primary/30 hover:shadow-md hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 transition"
@@ -124,7 +124,7 @@ export default function AccreditationCTA() {
                 alt="TESDA logo"
                 width={392}
                 height={490}
-                className="h-48 w-auto sm:h-40 md:h-56 lg:h-64 xl:h-72 object-contain"
+                className="h-28 w-auto sm:h-36 md:h-48 lg:h-56 xl:h-64 object-contain"
                 priority
               />
             </div>
@@ -132,13 +132,13 @@ export default function AccreditationCTA() {
         </div>
 
         {/* CTA */}
-        <div ref={ctaRef} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-primary/90 p-8 text-white shadow-lg ring-1 ring-white/10">
-          <div className="text-center">
+        <div ref={ctaRef} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-primary/90 p-6 md:p-8 text-white shadow-lg ring-1 ring-white/10">
+          <div className="text-left md:text-center">
             <h2 className="font-montserrat text-2xl font-bold sm:text-3xl">Ready to start your journey?</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base text-white/90">
+            <p className="mt-4 max-w-2xl text-base text-white/90 md:mx-auto">
               Join Ark Institute today and take the first step toward a successful career with our TESDA-accredited programs.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <div className="mt-8 flex flex-wrap justify-start md:justify-center gap-4">
               <Link 
                 href="/courses" 
                 className="inline-flex items-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow-sm ring-1 ring-primary/10 hover:ring-primary/20 hover:shadow-md hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 transition"
