@@ -5,26 +5,32 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import FacilityCarousel from './facility-carousel';
 
 // Facility data - would typically come from a CMS
 const facilities = [
   {
     id: 'bar-training',
-    title: 'Bar Training Facility',
+    title: 'Food & Beverage Facility',
     description: 'Professional bar setup with industry-standard equipment for hands-on bartending practice.',
-    image: '/images/bartend-1.png',
-  },
-  {
-    id: 'kitchen',
-    title: 'Culinary Kitchen',
-    description: 'Modern kitchen equipped with commercial-grade appliances for baking and food preparation training.',
-    image: '/images/bread-1.png',
+    images: [
+
+      { src: '/images/tables-1.png', alt: 'Restaurant Tables Setup' },
+      { src: '/images/tables-2.png', alt: 'Dining Area' },
+      { src: '/images/tables-3.png', alt: 'Restaurant Service Area' },
+    ],
   },
   {
     id: 'housekeeping',
-    title: 'Housekeeping Laboratory',
-    description: 'Simulated hotel rooms for practicing professional housekeeping and room management skills.',
-    image: '/images/beds-2.png',
+    title: 'Housekeeping Facility',
+    description: 'Hotel, BnB rooms for practicing professional housekeeping and room management skills.',
+    images: [
+
+      { src: '/images/beds-1.png', alt: 'Hotel Bed Setup' },
+      { src: '/images/beds-2.png', alt: 'Bedroom Arrangement' },
+      { src: '/images/bedsroom-1.png', alt: 'Hotel Room' },
+      { src: '/images/bedsroom-2.png', alt: 'Bedroom Cleaning' },
+    ],
   },
 ];
 
@@ -60,7 +66,7 @@ export default function Facilities() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
-            className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900"
+            className="text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md"
           >
             Our Training Facilities
           </motion.h2>
@@ -79,15 +85,13 @@ export default function Facilities() {
           {facilities.map((facility, index) => (
             <div key={facility.id} className={`facility-item flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-6 md:gap-10 items-center`}>
               <div className="w-full md:w-1/2 relative h-64 sm:h-72 md:h-80 rounded-lg overflow-hidden">
-                <Image
-                  src={facility.image}
-                  alt={facility.title}
-                  fill
-                  className="object-cover"
+                <FacilityCarousel 
+                  images={facility.images} 
+                  facilityId={facility.id} 
                 />
               </div>
               <div className="w-full md:w-1/2 space-y-4">
-                <h3 className="text-xl font-semibold text-gray-900">{facility.title}</h3>
+                <h3 className="text-xl font-semibold text-gray-900 text-shadow-sm">{facility.title}</h3>
                 <p className="text-gray-600">{facility.description}</p>
                 <ul className="text-sm text-gray-600 space-y-2">
                   <li className="flex items-start">
