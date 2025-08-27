@@ -53,7 +53,7 @@ export default function Footer() {
                   <path fillRule="evenodd" d="M10.076 2.004a.75.75 0 00-.152 0A7.5 7.5 0 002.5 9.5c0 2.544 1.318 4.62 2.707 6.09a20.1 20.1 0 003.862 3.082.75.75 0 00.862 0 20.1 20.1 0 003.862-3.081C16.182 14.12 17.5 12.044 17.5 9.5a7.5 7.5 0 00-7.424-7.496zM10 11.5a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
                 <span className="break-words">
-                  Victorina Drive, Victorina Heights Subdivision, Brgy. Mansilingan, Bacolod City, Negros Occidental 6100, Philippines
+                  RGE Building, Victorina Heights Subdivision, Brgy. Mansilingan, Bacolod City, Negros Occidental 6100, Philippines
                 </span>
               </li>
               <li className="flex items-center justify-start gap-2">
