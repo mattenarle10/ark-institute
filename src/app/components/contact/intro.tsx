@@ -33,7 +33,7 @@ export default function Intro() {
             transition={{ duration: 0.42, ease: 'easeOut', delay: 0.05 }}
             className="font-montserrat text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 text-shadow-md"
           >
-            Contact Us
+            Get in Touch With Us
           </motion.h1>
 
           {/* Short subcopy */}
@@ -43,7 +43,7 @@ export default function Intro() {
             transition={{ duration: 0.38, ease: 'easeOut', delay: 0.12 }}
             className="mt-2 max-w-2xl text-sm sm:text-base leading-relaxed text-gray-700"
           >
-            Inquire, Contact, and Find us on the Maps.
+            Have questions about our courses or need more information? We're here to help you start your journey in hospitality excellence. Reach out to our team today.
           </motion.p>
 
           {/* Badge */}
@@ -56,7 +56,10 @@ export default function Intro() {
             <span>TESDA Accredited</span>
             <span className="opacity-60">•</span>
             <span>Hands‑on Learning</span>
+            <span className="opacity-60">•</span>
+            <span>Quick Response</span>
           </motion.div>
+
         </div>
       </div>
     </section>
