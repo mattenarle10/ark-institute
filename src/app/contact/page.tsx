@@ -3,7 +3,9 @@ import Navbar from "@/app/components/layout/navbar";
 import NavSpacer from "@/app/components/layout/nav-spacer";
 import Footer from "@/app/components/layout/footer";
 import Intro from "@/app/components/contact/intro";
-import EmailForm from "../components/contact/email-form";
+import EmailForm from "@/app/components/contact/email-form";
+import Map from "@/app/components/contact/map"
+
 
 
 export const metadata: Metadata = {
@@ -19,7 +21,7 @@ export default function ContactPage() {
       <NavSpacer />
       <Intro/>
       <EmailForm/>
-
+      <Map/>  
       <Footer />
     </div>
   );
