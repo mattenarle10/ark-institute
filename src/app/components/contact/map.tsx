@@ -18,7 +18,7 @@ export default function Map() {
             Find us on the map
           </motion.h2>
           <p className="mt-2 text-sm sm:text-base text-gray-600">
-            We’re located RGE Building, Victorina Heights.
+            We’re located at RGE Building, Victorina Heights.
           </p>
         </div>
 

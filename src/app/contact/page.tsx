@@ -5,6 +5,7 @@ import Footer from "@/app/components/layout/footer";
 import Intro from "@/app/components/contact/intro";
 import EmailForm from "@/app/components/contact/email-form";
 import Map from "@/app/components/contact/map"
+import Socials from "@/app/components/contact/socials";
 
 
 
@@ -22,6 +23,7 @@ export default function ContactPage() {
       <Intro/>
       <EmailForm/>
       <Map/>  
+      <Socials/>
       <Footer />
     </div>
   );
