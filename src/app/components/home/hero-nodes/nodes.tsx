@@ -147,8 +147,6 @@ export default function HeroNodes() {
     return () => ro.disconnect();
   }, []);
 
-  const sx = containerSize ? containerSize.width / baseSize.width : 1;
-  const sy = containerSize ? containerSize.height / baseSize.height : 1;
 
   return (
     <div id="hero-nodes-container">

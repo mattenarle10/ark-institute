@@ -43,7 +43,7 @@ export default function Intro() {
             transition={{ duration: 0.38, ease: 'easeOut', delay: 0.12 }}
             className="mt-2 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed text-gray-700"
           >
-            Questions about our courses? We're here to help.
+            Questions about our courses? We&apos;re here to help.
           </motion.p>
 
           {/* Badge */}

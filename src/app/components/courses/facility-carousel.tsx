@@ -3,7 +3,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Slider from 'react-slick';
-import { motion } from 'framer-motion';
 import gsap from 'gsap';
 
 // Import slick carousel CSS in your layout.tsx or page.tsx
