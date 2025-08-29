@@ -62,7 +62,8 @@ export default function CoursesList() {
         {/* Registered */}
         <div className="mb-6 sm:mb-8">
           <h3 className="text-base sm:text-lg font-semibold text-gray-900">Registered</h3>
-          <div className="mt-2 h-0.5 w-16 bg-gradient-to-r from-primary/30 to-accent/30 rounded-full" />
+          <p className="mt-1 text-sm text-gray-600">These programs are accredited by TESDA.</p>
+
         </div>
         <div className="space-y-8 sm:space-y-10">
           {registeredCourses.map((course, idx) => (
@@ -111,7 +112,7 @@ export default function CoursesList() {
         {/* Coming Soon / On process */}
         <div className="mt-12 sm:mt-14">
           <h3 className="text-base sm:text-lg font-semibold text-gray-900">Coming Soon</h3>
-          <div className="mt-2 h-0.5 w-16 bg-gradient-to-r from-accent/30 to-primary/30 rounded-full" />
+
           <p className="mt-1 text-sm text-gray-600">These programs are currently on process.</p>
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {comingSoonCourses.map((course) => (

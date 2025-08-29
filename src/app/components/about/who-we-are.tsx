@@ -64,7 +64,7 @@ export default function WhoWeAre() {
       <div className="mx-auto max-w-6xl px-6 sm:px-8 md:px-16">
         <div className="mb-6 text-left md:text-center">
           <h2 className="font-montserrat text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md">Who we are</h2>
-          <div className="h-px w-16 bg-gradient-to-r from-primary to-primary/60 mt-3 ml-0 md:mx-auto"></div>
+
         </div>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center">
           <div ref={textRef} className="md:col-span-7 md:pr-6">

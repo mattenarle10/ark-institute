@@ -124,7 +124,7 @@ export default function CoreValues() {
           <h2 className="font-montserrat text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900">
             Our Core Values
           </h2>
-          <div className="h-px w-20 bg-gradient-to-r from-primary to-primary/60 mt-3 ml-0 md:mx-auto"></div>
+
         </div>
 
         {/* RISE hero word */}
