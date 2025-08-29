@@ -4,8 +4,8 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-// Course data - featured (more coming soon)
-const courses = [
+// Course data
+const registeredCourses = [
   {
     id: 'food-beverage',
     title: 'Food & Beverage NC II',
@@ -20,6 +20,14 @@ const courses = [
       'Develop professional housekeeping skills aligned to industry standards for hotels and resorts.',
     image: '/images/housekeep-1.png', // provided image
   },
+];
+
+const comingSoonCourses = [
+  { id: 'events-management', title: 'Events Management Services NC II' },
+  { id: 'tourism-promotion', title: 'Tourism Promotion Services NC II' },
+  { id: 'customer-services', title: 'Customer Services NC II' },
+  { id: 'barista', title: 'Barista NC II' },
+  { id: 'bread-pastry', title: 'Bread and Pastry Production NC II' },
 ];
 
 export default function CoursesList() {
@@ -38,7 +46,7 @@ export default function CoursesList() {
             transition={{ duration: 0.5, delay: 0.05 }}
             className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900"
           >
-            Featured Courses
+            Courses
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 8 }}
@@ -51,13 +59,20 @@ export default function CoursesList() {
           </motion.p>
         </div>
 
+        {/* Registered */}
+        <div className="mb-6 sm:mb-8">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900">Registered</h3>
+          <div className="mt-2 h-0.5 w-16 bg-gradient-to-r from-primary/30 to-accent/30 rounded-full" />
+        </div>
         <div className="space-y-8 sm:space-y-10">
-          {courses.map((course, idx) => (
+          {registeredCourses.map((course, idx) => (
             <div
               key={course.id}
-              className="course-card group overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition duration-300 hover:shadow-md"
+              className="course-card group relative overflow-hidden rounded-2xl border border-gray-100 bg-white/95 shadow-sm transition duration-200 hover:shadow-md hover:-translate-y-0.5 hover:border-primary/20 ring-1 ring-transparent hover:ring-primary/10"
               style={{ opacity: 1, transform: 'none' }}
             >
+              {/* Subtle bottom accent */}
+              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-primary/20 via-transparent to-accent/20" />
               <div className={`flex flex-col ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-stretch`} style={{ opacity: 1 }}>
                 {/* Image */}
                 <div className="relative w-full md:w-1/2 h-56 sm:h-64 md:h-[320px]">
@@ -72,12 +87,15 @@ export default function CoursesList() {
                     priority
                     unoptimized
                   />
+                  {/* Very light theme overlay */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent" />
                 </div>
 
                 {/* Content */}
                 <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 flex flex-col justify-center">
-                  <div className="flex items-center gap-2 text-[11px] sm:text-xs text-primary font-semibold">
-                    <span className="inline-flex items-center gap-1 rounded-full bg-primary/5 px-2 py-0.5 ring-1 ring-primary/10">TESDA Accredited</span>
+                  <div className="flex flex-wrap items-center gap-2 text-[11px] sm:text-xs font-semibold">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-primary/5 px-2 py-0.5 ring-1 ring-primary/10 text-primary">TESDA Accredited</span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 ring-1 ring-emerald-200 text-emerald-700">Registered</span>
                   </div>
                   <h3 className="mt-3 text-2xl sm:text-[28px] md:text-[30px] font-semibold tracking-tight text-gray-900">{course.title}</h3>
                   <p className="mt-3 text-[13.5px] sm:text-base leading-relaxed text-gray-600">{course.description}</p>
@@ -85,6 +103,31 @@ export default function CoursesList() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Divider */}
+        <div className="my-10 sm:my-12 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+
+        {/* Coming Soon / On process */}
+        <div className="mt-12 sm:mt-14">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900">Coming Soon</h3>
+          <div className="mt-2 h-0.5 w-16 bg-gradient-to-r from-accent/30 to-primary/30 rounded-full" />
+          <p className="mt-1 text-sm text-gray-600">These programs are currently on process.</p>
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+            {comingSoonCourses.map((course) => (
+              <div
+                key={course.id}
+                className="relative overflow-hidden rounded-2xl border border-gray-100 bg-white/95 p-5 sm:p-6 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-primary/20 ring-1 ring-transparent hover:ring-primary/10"
+              >
+                {/* Subtle bottom accent */}
+                <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-accent/20 via-transparent to-primary/20" />
+                <div className="relative flex items-start justify-between gap-3">
+                  <h4 className="text-[15px] sm:text-base md:text-lg font-semibold text-gray-900">{course.title}</h4>
+                  <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-accent/5 px-2 py-0.5 text-[11px] sm:text-xs font-semibold ring-1 ring-accent/20 text-accent">On process</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
 
