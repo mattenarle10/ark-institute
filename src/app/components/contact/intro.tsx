@@ -8,7 +8,7 @@ export default function Intro() {
   return (
     <section className="relative overflow-hidden">
       <div className="mx-auto max-w-5xl px-6 sm:px-8 md:px-16 py-12 sm:py-16 md:py-20">
-        <div className="flex flex-col items-start text-left md:items-center md:text-center">
+        <div className="flex flex-col items-center text-center">
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -41,9 +41,9 @@ export default function Intro() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.38, ease: 'easeOut', delay: 0.12 }}
-            className="mt-2 max-w-2xl text-sm sm:text-base leading-relaxed text-gray-700"
+            className="mt-2 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed text-gray-700"
           >
-            Have questions about our courses or need more information? We're here to help you start your journey in hospitality excellence. Reach out to our team today.
+            Questions about our courses? We're here to help.
           </motion.p>
 
           {/* Badge */}
@@ -51,11 +51,9 @@ export default function Intro() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.34, ease: 'easeOut', delay: 0.18 }}
-            className="mt-5 inline-flex items-center gap-2 rounded-full border border-primary/10 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary"
+            className="mt-5 inline-flex items-center gap-2 rounded-full border border-primary/10 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary mx-auto"
           >
             <span>TESDA Accredited</span>
-            <span className="opacity-60">•</span>
-            <span>Hands‑on Learning</span>
             <span className="opacity-60">•</span>
             <span>Quick Response</span>
           </motion.div>

@@ -8,7 +8,7 @@ export default function Intro() {
   return (
     <section className="relative overflow-hidden">
       <div className="mx-auto max-w-5xl px-6 sm:px-8 md:px-16 py-12 sm:py-16 md:py-20">
-        <div className="flex flex-col items-start text-left md:items-center md:text-center">
+        <div className="flex flex-col items-center text-center">
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -41,7 +41,7 @@ export default function Intro() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.38, ease: 'easeOut', delay: 0.12 }}
-            className="mt-2 max-w-2xl text-sm sm:text-base leading-relaxed text-gray-700"
+            className="mt-2 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed text-gray-700"
           >
             TESDA‑accredited training. Practical skills. Real career outcomes.
           </motion.p>
