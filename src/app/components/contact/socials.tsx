@@ -2,7 +2,7 @@
 
 import React, { type ReactElement } from "react";
 import type { LucideIcon } from "lucide-react";
-import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import { Facebook, Instagram, Mail, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 
 // Define socials (replace URLs with your actual profiles)
@@ -28,16 +28,16 @@ const socials: Social[] = [
   },
 
   {
-    icon: Linkedin,
-    color: "#0A66C2",
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/company/ark-institute",
+    icon: Phone,
+    color: "#10B981",
+    name: "Call us",
+    url: "tel:+639000000000",
   },
   {
-    icon: Youtube,
-    color: "#FF0000",
-    name: "YouTube",
-    url: "https://www.youtube.com/@ArkInstitute",
+    icon: Mail,
+    color: "#0EA5E9",
+    name: "Email",
+    url: "mailto:info@arkinstitutebc.com",
   },
 ];
 export default function Socials(): ReactElement {
@@ -66,7 +66,7 @@ export default function Socials(): ReactElement {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
           {socials.map((s) => (
             <a
               key={s.name}
@@ -74,16 +74,16 @@ export default function Socials(): ReactElement {
               aria-label={s.name}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative rounded-xl border border-gray-100 bg-white p-4 sm:p-5 shadow-sm transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/40"
+              className="group relative rounded-xl border border-gray-100 bg-white p-4 sm:p-5 md:p-6 shadow-sm transition duration-200 hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary/40"
             >
               <div className="flex flex-col items-center text-center gap-3">
                 <div
-                  className="flex items-center justify-center w-12 h-12 rounded-full bg-white/90 ring-1 ring-white/60"
+                  className="flex items-center justify-center w-12 h-12 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white/90 ring-1 ring-white/60"
                   style={{ boxShadow: `0 6px 18px 0 ${s.color}26` }}
                 >
                   <s.icon size={22} color={s.color} />
                 </div>
-                <span className="text-sm font-semibold text-gray-800">{s.name}</span>
+                <span className="text-sm sm:text-base font-semibold text-gray-800">{s.name}</span>
               </div>
             </a>
           ))}
