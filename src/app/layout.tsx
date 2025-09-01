@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
       "Ark Institute offers TESDA-accredited programs with a modern, professional learning experience.",
     images: [
       {
-        url: "/logo/ark-white.png",
+        url: "/images/twitter-img.png",
         width: 1200,
         height: 630,
         alt: "Ark Institute",
@@ -45,7 +46,18 @@ export const metadata: Metadata = {
     title: "Ark Institute — TESDA-accredited training",
     description:
       "Ark Institute offers TESDA-accredited programs with a modern, professional learning experience.",
-    images: ["/logo/ark-white.png"],
+    images: ["/images/twitter-img.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   icons: {
     icon: "/favicon.ico",
@@ -59,6 +71,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script id="org-jsonld" type="application/ld+json" strategy="beforeInteractive">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Ark Institute",
+            url: siteUrl,
+            logo: new URL("/logo/ark-transpa.png", siteUrl).toString(),
+            sameAs: [
+              "https://www.facebook.com/people/ARK-Institute-Inc/61572338462118/?_rdc=1&_rdr",
+              "https://www.instagram.com/arkinstitutebc/",
+            ],
+          })}
+        </Script>
+      </head>
       <body className={`${montserrat.variable} antialiased`}>
         {children}
       </body>
