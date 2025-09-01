@@ -10,9 +10,17 @@ import Socials from "@/app/components/contact/socials";
 
 
 export const metadata: Metadata = {
-  title: "Contact | Ark Institute",
+  title: "Contact",
   description:
-    "TESDA-accredited courses focused on practical, hands-on training for in-demand skills. Browse our available courses and facilities.",
+    "Get in touch with Ark Institute — find our location, send us a message, and connect via social channels.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact | Ark Institute",
+    description:
+      "Get in touch with Ark Institute — find our location, send us a message, and connect via social channels.",
+    url: "/contact",
+    type: "website",
+  },
 };
 
 export default function ContactPage() {

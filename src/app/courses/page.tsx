@@ -7,9 +7,17 @@ import CoursesList from "@/app/components/courses/courses-list";
 import Facilities from "@/app/components/courses/facilities";
 
 export const metadata: Metadata = {
-  title: "Courses | Ark Institute",
+  title: "Courses",
   description:
-    "TESDA-accredited courses focused on practical, hands-on training for in-demand skills. Browse our available courses and facilities.",
+    "Explore TESDA-accredited courses at Ark Institute. Hands-on training, expert instructors, and industry-aligned facilities.",
+  alternates: { canonical: "/courses" },
+  openGraph: {
+    title: "Courses | Ark Institute",
+    description:
+      "Explore TESDA-accredited courses at Ark Institute. Hands-on training, expert instructors, and industry-aligned facilities.",
+    url: "/courses",
+    type: "website",
+  },
 };
 
 export default function CoursesPage() {

@@ -8,9 +8,17 @@ import CoreValues from "@/app/components/about/core-values";
 import AccreditationCTA from "@/app/components/about/accreditation-cta";
 
 export const metadata: Metadata = {
-  title: "About Ark Institute",
+  title: "About",
   description:
-    "TESDA-accredited institution focused on practical, hands-on training. Learn who we are and our core values.",
+    "Learn about Ark Institute — a TESDA-accredited institution focused on practical, hands-on training and strong core values.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About Ark Institute",
+    description:
+      "Learn about Ark Institute — a TESDA-accredited institution focused on practical, hands-on training and strong core values.",
+    url: "/about",
+    type: "website",
+  },
 };
 
 export default function AboutPage() {

@@ -11,10 +11,45 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
 export const metadata: Metadata = {
-  title: "Ark Institute — TESDA-accredited training",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Ark Institute — TESDA-accredited training",
+    template: "%s | Ark Institute",
+  },
   description:
     "Ark Institute offers TESDA-accredited programs with a modern, professional learning experience.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: "Ark Institute",
+    title: "Ark Institute — TESDA-accredited training",
+    description:
+      "Ark Institute offers TESDA-accredited programs with a modern, professional learning experience.",
+    images: [
+      {
+        url: "/logo/ark-white.png",
+        width: 1200,
+        height: 630,
+        alt: "Ark Institute",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ark Institute — TESDA-accredited training",
+    description:
+      "Ark Institute offers TESDA-accredited programs with a modern, professional learning experience.",
+    images: ["/logo/ark-white.png"],
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
