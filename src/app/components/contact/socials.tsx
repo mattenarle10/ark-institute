@@ -18,13 +18,13 @@ const socials: Social[] = [
     icon: Facebook,
     color: "#1877F2",
     name: "Facebook",
-    url: "https://facebook.com/ArkInstitutePH",
+    url: "https://www.facebook.com/people/ARK-Institute-Inc/61572338462118/?_rdc=1&_rdr",
   },
   {
     icon: Instagram,
     color: "#E4405F",
     name: "Instagram",
-    url: "https://instagram.com/ArkInstitutePH",
+    url: "https://www.instagram.com/arkinstitutebc/",
   },
 
   {
