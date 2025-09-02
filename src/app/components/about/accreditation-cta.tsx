@@ -1,100 +1,20 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { useScrollReveal } from '../animations/useScrollReveal'
 
 export default function AccreditationCTA() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const accreditationRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate the accreditation card
-      gsap.fromTo(
-        accreditationRef.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: accreditationRef.current,
-            start: 'top 85%'
-          }
-        }
-      );
-      
-      // Animate content and logo separately with slight delay
-      gsap.fromTo(
-        contentRef.current,
-        { opacity: 0, x: -20 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: accreditationRef.current,
-            start: 'top 80%'
-          }
-        }
-      );
-      
-      gsap.fromTo(
-        logoRef.current,
-        { opacity: 0, scale: 0.9, x: 20 },
-        {
-          opacity: 1,
-          scale: 1,
-          x: 0,
-          duration: 0.6,
-          delay: 0.2,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: accreditationRef.current,
-            start: 'top 80%'
-          }
-        }
-      );
-      
-      // Animate the CTA section
-      gsap.fromTo(
-        ctaRef.current,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: ctaRef.current,
-            start: 'top 85%'
-          }
-        }
-      );
-    }, sectionRef);
-    
-    return () => ctx.revert();
-  }, []);
-  
+  const sectionRef = useScrollReveal<HTMLElement>({ delay: 0.05 });
+
   return (
     <section ref={sectionRef} className="bg-gradient-to-b from-gray-50 to-white py-16">
       <div className="mx-auto max-w-6xl px-6 sm:px-8 md:px-16">
         {/* Accreditation */}
-        <div ref={accreditationRef} className="mb-16 rounded-2xl bg-white p-6 md:p-8 shadow-sm md:shadow-md ring-1 ring-gray-100">
+        <div data-reveal className="mb-16 rounded-2xl bg-white p-6 md:p-8 shadow-sm md:shadow-md ring-1 ring-gray-100">
           <div className="grid gap-6 md:gap-8 md:grid-cols-2 md:items-center">
-            <div ref={contentRef}>
+            <div data-reveal>
               <h2 className="font-montserrat text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md">
                 TESDA Accreditation
               </h2>
@@ -118,7 +38,7 @@ export default function AccreditationCTA() {
                 </Link>
               </div>
             </div>
-            <div ref={logoRef} className="flex items-center justify-center">
+            <div data-reveal className="flex items-center justify-center">
               <Image
                 src="/images/tesda.svg"
                 alt="TESDA logo"
@@ -132,7 +52,7 @@ export default function AccreditationCTA() {
         </div>
 
         {/* CTA */}
-        <div ref={ctaRef} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-primary/90 p-6 md:p-8 text-white shadow-lg ring-1 ring-white/10">
+        <div data-reveal className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-primary/90 p-6 md:p-8 text-white shadow-lg ring-1 ring-white/10">
           <div className="text-left md:text-center">
             <h2 className="font-montserrat text-2xl font-bold sm:text-3xl">Ready to start your journey?</h2>
             <p className="mt-4 max-w-2xl text-base text-white/90 md:mx-auto">

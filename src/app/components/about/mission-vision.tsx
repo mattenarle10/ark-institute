@@ -1,59 +1,24 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import React from 'react'
+import { useScrollReveal } from '../animations/useScrollReveal'
 
 export default function MissionVision() {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const cardRefs = useRef<HTMLDivElement[]>([]);
-  const setCardRef = (el: HTMLDivElement | null, idx: number) => {
-    if (el) cardRefs.current[idx] = el;
-  };
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      cardRefs.current.forEach((el, i) => {
-        if (!el) return;
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 12, filter: 'blur(4px)' },
-          {
-            opacity: 1,
-            y: 0,
-            filter: 'blur(0px)',
-            duration: 0.5,
-            ease: 'power2.out',
-            delay: i * 0.04,
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+  const sectionRef = useScrollReveal<HTMLDivElement>({ delay: 0.05 });
 
   return (
     <section ref={sectionRef} className="bg-white py-16">
       <div className="mx-auto max-w-6xl px-6 sm:px-8 md:px-16">
         <div className="mb-12 text-left md:text-center">
-          <h2 className="font-montserrat text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md">
+          <h2 data-reveal className="font-montserrat text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md">
             Mission & Vision
           </h2>
-          <div className="h-px w-20 bg-gradient-to-r from-primary to-primary/60 mt-3 ml-0 md:mx-auto"></div>
+          <div data-reveal className="h-px w-20 bg-gradient-to-r from-primary to-primary/60 mt-3 ml-0 md:mx-auto"></div>
         </div>
 
         <div className="grid gap-6 md:gap-8 md:grid-cols-2">
           {/* Mission */}
-          <div ref={(el) => setCardRef(el, 0)} className="rounded-2xl bg-white p-5 md:p-6 shadow-sm ring-1 ring-black/5 transition-all duration-200 hover:shadow-md hover:-translate-y-[1px]">
+          <div data-reveal className="rounded-2xl bg-white p-5 md:p-6 shadow-sm ring-1 ring-black/5 transition-all duration-200 hover:shadow-md hover:-translate-y-[1px]">
             <div className="mb-4 flex items-center">
               <div className="mr-4 flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-primary/10 ring-1 ring-black/5">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,7 +34,7 @@ export default function MissionVision() {
           </div>
 
           {/* Vision */}
-          <div ref={(el) => setCardRef(el, 1)} className="rounded-2xl bg-white p-5 md:p-6 shadow-sm ring-1 ring-black/5 transition-all duration-200 hover:shadow-md hover:-translate-y-[1px]">
+          <div data-reveal className="rounded-2xl bg-white p-5 md:p-6 shadow-sm ring-1 ring-black/5 transition-all duration-200 hover:shadow-md hover:-translate-y-[1px]">
             <div className="mb-4 flex items-center">
               <div className="mr-4 flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-accent/10 ring-1 ring-black/5">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">

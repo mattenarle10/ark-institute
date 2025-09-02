@@ -1,12 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { useScrollReveal } from '../animations/useScrollReveal'
 
 export default function CoreValues() {
   const values = [
@@ -28,14 +24,8 @@ export default function CoreValues() {
     },
   ]
 
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const cardRefs = useRef<HTMLDivElement[]>([]);
+  const sectionRef = useScrollReveal<HTMLElement>({ delay: 0.05 });
   const letterRefs = useRef<HTMLSpanElement[]>([]);
-
-  const setCardRef = (el: HTMLDivElement | null, idx: number) => {
-    if (el) cardRefs.current[idx] = el;
-  };
-
   const setLetterRef = (el: HTMLSpanElement | null, idx: number) => {
     if (el) letterRefs.current[idx] = el;
   };
@@ -71,57 +61,11 @@ export default function CoreValues() {
     });
   };
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate the RISE hero letters (scoped to this section)
-      const q = gsap.utils.selector(sectionRef);
-      const letters = q('[data-rise-letter]') as HTMLElement[];
-      gsap.fromTo(
-        letters,
-        { opacity: 0, y: 24, filter: 'blur(3px)', scale: 0.96 },
-        {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          scale: 1,
-          duration: 0.6,
-          ease: 'power3.out',
-          stagger: 0.12,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 85%'
-          }
-        }
-      );
-
-      // Fade-up cards on scroll
-      cardRefs.current.forEach((el) => {
-        if (!el) return;
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 24 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 85%'
-            }
-          }
-        );
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section ref={sectionRef} className="bg-white py-16">
       <div className="mx-auto max-w-6xl px-6 sm:px-8 md:px-16">
         <div className="mb-8 text-left md:text-center">
-          <h2 className="font-montserrat text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900">
+          <h2 data-reveal className="font-montserrat text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900">
             Our Core Values
           </h2>
 
@@ -132,7 +76,7 @@ export default function CoreValues() {
           {['R', 'I', 'S', 'E'].map((letter, idx) => (
             <span
               key={letter}
-              data-rise-letter
+              data-reveal
               ref={(el) => setLetterRef(el, idx)}
               className={"select-none font-montserrat font-extrabold tracking-tight text-gray-900 text-shadow-md text-5xl sm:text-6xl md:text-7xl"}
             >
@@ -146,7 +90,7 @@ export default function CoreValues() {
           {values.map((value, idx) => (
             <div
               key={value.title}
-              ref={(el) => setCardRef(el, idx)}
+              data-reveal
               className="group rounded-xl border border-gray-100 bg-white p-5 md:p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-lg"
               onMouseEnter={() => highlightLetter(idx)}
               onMouseLeave={() => resetLetter(idx)}
