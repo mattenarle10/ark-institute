@@ -39,8 +39,9 @@ export default function EmailForm() {
 
       setSubmitted(true);
       form.reset();
-    } catch (err: any) {
-      setError(err?.message || "Something went wrong.");
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Something went wrong.";
+      setError(msg);
     } finally {
       setLoading(false);
     }

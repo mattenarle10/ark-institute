@@ -81,13 +81,20 @@ interface NodeProps {
 function Node({ image, alt, width, height, wrapperClass, cardSizeClass, tooltipPlacement = 'top', priority, mobilePos, editMode = false, onDragEnd }: NodeProps) {
   const isMobile = useIsMobile();
 
+  const handleDragEndInternal = (
+    _e: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo
+  ) => {
+    onDragEnd?.(info);
+  };
+
   return (
     <div className={`circle absolute ${wrapperClass} transition-all duration-700 ease-in-out group`}>
       <motion.div
         drag={isMobile && !!editMode}
         dragMomentum={false}
         style={{ x: isMobile ? mobilePos.x : 0, y: isMobile ? mobilePos.y : 0 }}
-        onDragEnd={(e, info) => onDragEnd?.(info)}
+        onDragEnd={handleDragEndInternal}
       >
         <div className={`node-card rounded-2xl bg-white hover:bg-accent/20 transition-colors duration-700 ring-2 ring-gray-200 ring-offset-2 ring-offset-white p-1.5 md:p-2 shadow-lg ${cardSizeClass} transition-opacity duration-700 ease-in-out origin-center scale-110 hover:scale-115 hover:shadow-2xl group-hover/minimap:opacity-60 hover:!opacity-100`}>
           <div className="overflow-hidden rounded-xl w-full h-full">
@@ -136,7 +143,7 @@ export default function HeroNodes() {
   };
 
   useEffect(() => {
-    const ro = new ResizeObserver((entries) => {
+    const ro = new ResizeObserver((entries: ResizeObserverEntry[]) => {
       const { width, height } = entries[0].contentRect;
       setContainerSize({ width, height });
     });

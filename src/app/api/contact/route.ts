@@ -60,7 +60,7 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ ok: true });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Contact form error:', err);
     return NextResponse.json({ error: 'Failed to send message.' }, { status: 500 });
   }
