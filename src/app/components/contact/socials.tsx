@@ -31,7 +31,7 @@ const socials: Social[] = [
     icon: Phone,
     color: "#10B981",
     name: "Call us",
-    url: "tel:+639000000000",
+    url: "tel:+639688800555",
   },
   {
     icon: Mail,

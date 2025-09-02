@@ -7,15 +7,43 @@ export default function EmailForm() {
   const ref = useScrollReveal();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
-    // TODO: Hook up to an API route or service (e.g. email, Airtable, etc.)
-    setTimeout(() => {
+    setError(null);
+    setSubmitted(false);
+
+    try {
+      const form = e.currentTarget;
+      const fd = new FormData(form);
+      const payload = {
+        name: String(fd.get("name") || ""),
+        email: String(fd.get("email") || ""),
+        phone: String(fd.get("phone") || ""),
+        subject: String(fd.get("subject") || ""),
+        message: String(fd.get("message") || ""),
+      };
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || "Failed to send message.");
+      }
+
       setSubmitted(true);
+      form.reset();
+    } catch (err: any) {
+      setError(err?.message || "Something went wrong.");
+    } finally {
       setLoading(false);
-    }, 800);
+    }
   }
 
   return (
@@ -157,6 +185,11 @@ export default function EmailForm() {
               {submitted && (
                 <span className="text-sm font-medium text-green-700">
                   Thank you! We’ll get back to you soon.
+                </span>
+              )}
+              {error && (
+                <span className="text-sm font-medium text-red-600">
+                  {error}
                 </span>
               )}
             </div>
