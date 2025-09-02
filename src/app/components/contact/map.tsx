@@ -1,23 +1,21 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { useScrollReveal } from "../animations/useScrollReveal";
 
 export default function Map() {
+  const ref = useScrollReveal();
   return (
-    <section className="py-12 sm:py-16 md:py-20">
+    <section ref={ref} className="py-12 sm:py-16 md:py-20">
       <div className="mx-auto max-w-5xl px-6 sm:px-8 md:px-16">
         <div className="mb-6 sm:mb-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
+          <h2
+            data-reveal
             className="font-montserrat text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md"
           >
             Find us on the map
-          </motion.h2>
-          <p className="mt-2 text-sm sm:text-base text-gray-600">
+          </h2>
+          <p data-reveal className="mt-2 text-sm sm:text-base text-gray-600">
             We’re located at RGE Building, Victorina Heights.
           </p>
         </div>

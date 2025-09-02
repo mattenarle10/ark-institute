@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { useScrollReveal } from "../animations/useScrollReveal";
 
 export default function EmailForm() {
+  const ref = useScrollReveal();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -18,30 +19,24 @@ export default function EmailForm() {
   }
 
   return (
-    <section className="py-12 sm:py-16 md:py-20">
+    <section ref={ref} className="py-12 sm:py-16 md:py-20">
       <div className="mx-auto max-w-5xl px-6 sm:px-8 md:px-16">
         <div className="mb-8 sm:mb-10">
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
+          <h2
+            data-reveal
             className="font-montserrat text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md"
           >
             Send us a message
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.05 }}
+          </h2>
+          <p
+            data-reveal
             className="mt-2 text-sm sm:text-base text-gray-600"
           >
             Fill out the form and our team will get back to you shortly.
-          </motion.p>
+          </p>
         </div>
 
-        <div className="rounded-2xl border border-gray-100 bg-white shadow-sm">
+        <div data-reveal className="rounded-2xl border border-gray-100 bg-white shadow-sm">
           <form onSubmit={onSubmit} className="p-6 sm:p-8 md:p-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               <div className="flex flex-col">

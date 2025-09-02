@@ -3,7 +3,7 @@
 import React, { type ReactElement } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Facebook, Instagram, Mail, Phone } from "lucide-react";
-import { motion } from "framer-motion";
+import { useScrollReveal } from "../animations/useScrollReveal";
 
 // Define socials (replace URLs with your actual profiles)
 interface Social {
@@ -40,30 +40,26 @@ const socials: Social[] = [
     url: "mailto:info@arkinstitutebc.com",
   },
 ];
+
 export default function Socials(): ReactElement {
+  const ref = useScrollReveal();
   return (
-    <section className="py-12 sm:py-16 md:py-20 relative">
+    <section ref={ref} className="py-12 sm:py-16 md:py-20 relative">
       <div className="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(closest-side,rgba(16,119,255,0.08),transparent_70%)]" />
       <div className="mx-auto max-w-5xl px-6 sm:px-8 md:px-16">
         <div className="mb-8 sm:mb-10">
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
+          <h2
+            data-reveal
             className="font-montserrat text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md"
           >
             Connect with us
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.05 }}
+          </h2>
+          <p
+            data-reveal
             className="mt-2 text-sm sm:text-base text-gray-600"
           >
             Follow us for updates, events, and student work.
-          </motion.p>
+          </p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
@@ -74,6 +70,7 @@ export default function Socials(): ReactElement {
               aria-label={s.name}
               target="_blank"
               rel="noopener noreferrer"
+              data-reveal
               className="group relative rounded-xl border border-gray-100 bg-white p-4 sm:p-5 md:p-6 shadow-sm transition duration-200 hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary/40"
             >
               <div className="flex flex-col items-center text-center gap-3">
