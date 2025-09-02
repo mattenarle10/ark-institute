@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useScrollReveal } from '../animations/useScrollReveal'
 
 export default function WhoWeAre() {
-  const sectionRef = useScrollReveal<HTMLDivElement>({ delay: 0.05 });
+  const sectionRef = useScrollReveal<HTMLElement>({ delay: 0.05 });
 
   return (
     <section ref={sectionRef} className="bg-white py-16">
