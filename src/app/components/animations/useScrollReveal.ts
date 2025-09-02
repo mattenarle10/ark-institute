@@ -12,6 +12,7 @@ export type RevealOptions = {
   ease?: string;
   start?: string; // ScrollTrigger start position
   once?: boolean; // whether to animate only once
+  delay?: number; // delay before starting the reveal when entering viewport
 };
 
 // A simple, uniform fade-up on-scroll reveal for all marked children within a container
@@ -33,6 +34,7 @@ export function useScrollReveal<T extends HTMLElement = HTMLElement>(opts: Revea
       ease = "power2.out",
       start = "top 85%",
       once = true,
+      delay = 0,
     } = opts;
 
     const items = Array.from(container.querySelectorAll<HTMLElement>(selector));
@@ -47,6 +49,7 @@ export function useScrollReveal<T extends HTMLElement = HTMLElement>(opts: Revea
       duration,
       ease,
       stagger,
+      delay,
       paused: true,
     });
 
@@ -67,7 +70,7 @@ export function useScrollReveal<T extends HTMLElement = HTMLElement>(opts: Revea
     };
     // We intentionally don't include objects/arrays directly to avoid effect re-runs on same values
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [opts.selector, opts.stagger, opts.y, opts.duration, opts.ease, opts.start, opts.once]);
+  }, [opts.selector, opts.stagger, opts.y, opts.duration, opts.ease, opts.start, opts.once, opts.delay]);
 
   return containerRef;
 }

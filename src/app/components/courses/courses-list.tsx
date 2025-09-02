@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { useScrollReveal } from '../animations/useScrollReveal';
 import Image from 'next/image';
 
 // Course data
@@ -31,44 +31,41 @@ const comingSoonCourses = [
 ];
 
 export default function CoursesList() {
-  const containerRef = useRef(null);
-
-  // No GSAP animations for now to avoid opacity issues
+  const headerRef = useScrollReveal<HTMLDivElement>({ delay: 0 });
+  const regHeaderRef = useScrollReveal<HTMLDivElement>({ delay: 0.05 });
+  const regListRef = useScrollReveal<HTMLDivElement>({ delay: 0.1 });
+  const csHeaderRef = useScrollReveal<HTMLDivElement>({ delay: 0.15 });
+  const csGridRef = useScrollReveal<HTMLDivElement>({ delay: 0.2 });
 
   return (
-    <section ref={containerRef} className="py-12 sm:py-16 md:py-20 bg-gray-50">
+    <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 md:px-16">
-        <div className="mb-8 sm:mb-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.05 }}
+        <div ref={headerRef} className="mb-8 sm:mb-12">
+          <h2
+            data-reveal
             className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900"
           >
             Courses
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+          </h2>
+          <p
+            data-reveal
             className="mt-2 text-sm sm:text-base text-gray-600 max-w-3xl"
           >
             Select TESDA-accredited programs to get you job-ready.
-          </motion.p>
+          </p>
         </div>
 
         {/* Registered */}
-        <div className="mb-6 sm:mb-8">
-          <h3 className="text-base sm:text-lg font-semibold text-gray-900">Registered</h3>
-          <p className="mt-1 text-sm text-gray-600">These programs are accredited by TESDA.</p>
+        <div ref={regHeaderRef} className="mb-6 sm:mb-8">
+          <h3 data-reveal className="text-base sm:text-lg font-semibold text-gray-900">Registered</h3>
+          <p data-reveal className="mt-1 text-sm text-gray-600">These programs are accredited by TESDA.</p>
 
         </div>
-        <div className="space-y-8 sm:space-y-10">
+        <div ref={regListRef} className="space-y-8 sm:space-y-10">
           {registeredCourses.map((course, idx) => (
             <div
               key={course.id}
+              data-reveal
               className="course-card group relative overflow-hidden rounded-2xl border border-gray-100 bg-white/95 shadow-sm transition duration-200 hover:shadow-md hover:-translate-y-0.5 hover:border-primary/20 ring-1 ring-transparent hover:ring-primary/10"
               style={{ opacity: 1, transform: 'none' }}
             >
@@ -111,13 +108,16 @@ export default function CoursesList() {
 
         {/* Coming Soon / On process */}
         <div className="mt-12 sm:mt-14">
-          <h3 className="text-base sm:text-lg font-semibold text-gray-900">Coming Soon</h3>
+          <div ref={csHeaderRef}>
+            <h3 data-reveal className="text-base sm:text-lg font-semibold text-gray-900">Coming Soon</h3>
 
-          <p className="mt-1 text-sm text-gray-600">These programs are currently on process.</p>
-          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+            <p data-reveal className="mt-1 text-sm text-gray-600">These programs are currently on process.</p>
+          </div>
+          <div ref={csGridRef} className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {comingSoonCourses.map((course) => (
               <div
                 key={course.id}
+                data-reveal
                 className="relative overflow-hidden rounded-2xl border border-gray-100 bg-white/95 p-5 sm:p-6 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-primary/20 ring-1 ring-transparent hover:ring-primary/10"
               >
                 {/* Subtle bottom accent */}

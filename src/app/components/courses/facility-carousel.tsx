@@ -5,10 +5,6 @@ import Image from 'next/image';
 import Slider from 'react-slick';
 import gsap from 'gsap';
 
-// Import slick carousel CSS in your layout.tsx or page.tsx
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
-
 interface CarouselImage {
   src: string;
   alt: string;
