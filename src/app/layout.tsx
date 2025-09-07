@@ -12,7 +12,7 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.arkinstitutebc.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://arkinstitutebc.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -48,6 +48,7 @@ export const metadata: Metadata = {
       "Ark Institute offers TESDA-accredited programs with a modern, professional learning experience.",
     images: ["/images/twitter-img.png"],
   },
+
   robots: {
     index: true,
     follow: true,
@@ -60,8 +61,18 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/logo/ark-transpa.png", type: "image/png", sizes: "192x192" },
+      { url: "/logo/ark-transpa.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: ["/favicon.ico"],
+    apple: [
+      { url: "/logo/ark-transpa.png", sizes: "180x180", type: "image/png" },
+    ],
   },
+  themeColor: "#111827",
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({
