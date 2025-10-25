@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   description:
     "Ark Institute offers TESDA-accredited programs with a modern, professional learning experience.",
   alternates: {
-    canonical: "/",
+    canonical: "https://arkinstitutebc.com",
   },
   openGraph: {
     type: "website",

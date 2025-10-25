@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   title: "Courses",
   description:
     "Explore TESDA-accredited courses at Ark Institute. Hands-on training, expert instructors, and industry-aligned facilities.",
-  alternates: { canonical: "/courses" },
+  alternates: { canonical: "https://arkinstitutebc.com/courses" },
   openGraph: {
     title: "Courses | Ark Institute",
     description:
       "Explore TESDA-accredited courses at Ark Institute. Hands-on training, expert instructors, and industry-aligned facilities.",
-    url: "/courses",
+    url: "https://arkinstitutebc.com/courses",
     type: "website",
   },
 };

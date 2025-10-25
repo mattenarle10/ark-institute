@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Get in touch with Ark Institute — find our location, send us a message, and connect via social channels.",
-  alternates: { canonical: "/contact" },
+  alternates: { canonical: "https://arkinstitutebc.com/contact" },
   openGraph: {
     title: "Contact | Ark Institute",
     description:
       "Get in touch with Ark Institute — find our location, send us a message, and connect via social channels.",
-    url: "/contact",
+    url: "https://arkinstitutebc.com/contact",
     type: "website",
   },
 };
