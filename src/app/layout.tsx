@@ -60,17 +60,11 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/logo/ark-transpa.png", type: "image/png", sizes: "192x192" },
-      { url: "/logo/ark-transpa.png", type: "image/png", sizes: "512x512" },
-    ],
-    shortcut: ["/favicon.ico"],
-    apple: [
-      { url: "/logo/ark-transpa.png", sizes: "180x180", type: "image/png" },
-    ],
-  },
+  icons: [
+    { rel: "icon", url: "/favicon.ico", sizes: "any" },
+    { rel: "icon", url: "/logo/ark-transpa.png", type: "image/png", sizes: "600x600" },
+    { rel: "apple-touch-icon", url: "/logo/ark-transpa.png", sizes: "600x600" },
+  ],
   themeColor: "#111827",
   manifest: "/manifest.webmanifest",
 };

@@ -13,8 +13,9 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#ffffff",
     theme_color: "#111827",
     icons: [
-      { src: "/logo/ark-transpa.png", sizes: "512x512", type: "image/png", purpose: "any" },
-      { src: "/logo/ark-white.png", sizes: "512x512", type: "image/png", purpose: "any" }
+      { src: "/favicon.ico", sizes: "16x16 32x32", type: "image/x-icon" },
+      { src: "/logo/ark-transpa.png", sizes: "600x600", type: "image/png", purpose: "maskable" },
+      { src: "/logo/ark-white.png", sizes: "600x600", type: "image/png", purpose: "any" }
     ],
   };
 }
