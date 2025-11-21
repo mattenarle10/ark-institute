@@ -6,13 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignoreUnknown": false,
-    "ignore": [
-      "node_modules",
-      ".next",
-      "dist",
-      "coverage"
-    ]
+    "ignoreUnknown": false
   },
   "formatter": {
     "enabled": true,
@@ -22,29 +16,28 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
       "complexity": {
-        "noExcessiveCognitiveComplexity": "off",
-        "noImportantStyles": "off"
+        "noExcessiveCognitiveComplexity": "warn",
+        "noImportantStyles": "warn"
       },
       "correctness": {
-        "noUnusedVariables": "off",
-        "useExhaustiveDependencies": "off"
+        "noUnusedVariables": "warn",
+        "useExhaustiveDependencies": "warn"
       },
       "style": {
-        "noNonNullAssertion": "off",
-        "useImportType": "error"
+        "noNonNullAssertion": "warn",
+        "useImportType": "warn"
       },
       "suspicious": {
         "noExplicitAny": "warn",
-        "noArrayIndexKey": "off"
+        "noArrayIndexKey": "warn"
       },
       "security": {
-        "noDangerouslySetInnerHtml": "off"
+        "noDangerouslySetInnerHtml": "warn"
       },
       "a11y": {
-        "noSvgWithoutTitle": "off",
-        "useButtonType": "off"
+        "noSvgWithoutTitle": "warn",
+        "useButtonType": "warn"
       }
     }
   },
