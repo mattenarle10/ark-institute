@@ -1,100 +1,102 @@
-'use client';
+"use client"
 
-import { useEffect, useRef } from 'react';
-import Image from 'next/image';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import Image from "next/image"
+import { useEffect, useRef } from "react"
 
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger)
 }
 
 export default function VisMis() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const underlineRefs = useRef<HTMLDivElement[]>([]);
-  const contentRefs = useRef<HTMLDivElement[]>([]);
-  const logoRef = useRef<HTMLDivElement>(null);
-  const linesRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
-  const noiseRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const underlineRefs = useRef<HTMLDivElement[]>([])
+  const contentRefs = useRef<HTMLDivElement[]>([])
+  const logoRef = useRef<HTMLDivElement>(null)
+  const linesRef = useRef<HTMLDivElement>(null)
+  const glowRef = useRef<HTMLDivElement>(null)
+  const noiseRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       underlineRefs.current.forEach((el) => {
-        if (!el) return;
+        if (!el) return
         gsap.fromTo(
           el,
-          { scaleX: 0, transformOrigin: 'left' },
+          { scaleX: 0, transformOrigin: "left" },
           {
             scaleX: 1,
             duration: 0.8,
-            ease: 'power2.out',
+            ease: "power2.out",
             scrollTrigger: {
               trigger: el,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
+              start: "top 85%",
+              toggleActions: "play none none none",
             },
           }
-        );
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+        )
+      })
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       contentRefs.current.forEach((el) => {
-        if (!el) return;
+        if (!el) return
         gsap.fromTo(
           el,
-          { opacity: 0, y: 16, filter: 'blur(8px)' },
+          { opacity: 0, y: 16, filter: "blur(8px)" },
           {
             opacity: 1,
             y: 0,
-            filter: 'blur(0px)',
+            filter: "blur(0px)",
             duration: 0.6,
-            ease: 'power2.out',
+            ease: "power2.out",
             scrollTrigger: {
               trigger: el,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
+              start: "top 85%",
+              toggleActions: "play none none none",
             },
           }
-        );
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+        )
+      })
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches;
+      const isMobile =
+        typeof window !== "undefined" &&
+        window.matchMedia("(max-width: 767px)").matches
 
       if (logoRef.current) {
         gsap.fromTo(
           logoRef.current,
-          { opacity: 0, scale: isMobile ? 0.96 : 0.94, filter: 'blur(8px)' },
+          { opacity: 0, scale: isMobile ? 0.96 : 0.94, filter: "blur(8px)" },
           {
             opacity: 1,
             scale: 1,
-            filter: 'blur(0px)',
+            filter: "blur(0px)",
             duration: 0.9,
-            ease: 'power2.out',
+            ease: "power2.out",
             scrollTrigger: {
               trigger: logoRef.current,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
+              start: "top 85%",
+              toggleActions: "play none none none",
             },
           }
-        );
+        )
 
         gsap.to(logoRef.current, {
           y: isMobile ? -3 : -6,
           duration: isMobile ? 4.5 : 4,
-          ease: 'sine.inOut',
+          ease: "sine.inOut",
           repeat: -1,
           yoyo: true,
-        });
+        })
       }
 
       if (glowRef.current) {
@@ -103,8 +105,8 @@ export default function VisMis() {
           duration: 3.5,
           repeat: -1,
           yoyo: true,
-          ease: 'sine.inOut',
-        });
+          ease: "sine.inOut",
+        })
       }
 
       if (noiseRef.current) {
@@ -112,38 +114,41 @@ export default function VisMis() {
           y: isMobile ? -8 : -14,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
+            start: "top bottom",
+            end: "bottom top",
             scrub: 0.4,
           },
-        });
+        })
       }
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
 
   const setUnderlineRef = (el: HTMLDivElement | null, idx: number) => {
-    if (el) underlineRefs.current[idx] = el;
-  };
+    if (el) underlineRefs.current[idx] = el
+  }
 
   const setContentRef = (el: HTMLDivElement | null, idx: number) => {
-    if (el) contentRefs.current[idx] = el;
-  };
+    if (el) contentRefs.current[idx] = el
+  }
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-white overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative w-full bg-white overflow-hidden"
+    >
       {/* Grainy texture overlay */}
       <div className="absolute inset-0 z-0 opacity-30 mix-blend-overlay pointer-events-none">
-        <div 
-          className="absolute inset-0" 
+        <div
+          className="absolute inset-0"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-            backgroundRepeat: 'repeat',
-            backgroundSize: '200px 200px'
+            backgroundRepeat: "repeat",
+            backgroundSize: "200px 200px",
           }}
         />
       </div>
-      
+
       {/* Subtle geometric background lines */}
       <div ref={linesRef} className="pointer-events-none absolute inset-0 z-10">
         <div className="geometric-line absolute top-1/4 left-0 w-full h-[1px] bg-gradient-to-l from-gray-200 via-gray-100/60 to-transparent" />
@@ -154,39 +159,37 @@ export default function VisMis() {
       </div>
 
       <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 md:px-16 py-14 sm:py-16 md:py-24">
-        <div
-          className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-center"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-center">
           {/* Left: Logo + effects */}
           <div className="md:col-span-6 lg:col-span-5 flex items-center justify-center h-full relative">
             <div className="relative flex flex-col items-center justify-center h-full py-4 md:py-0">
-              <div
-                className="relative group"
-                ref={logoRef}
-              >
+              <div className="relative group" ref={logoRef}>
                 {/* Radial logo effect with red grainy texture */}
-                <div 
+                <div
                   className="absolute -inset-16 opacity-30 transition duration-700"
                   style={{
-                    background: 'radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(239,68,68,0.06) 40%, rgba(255,255,255,0) 85%)',
-                    filter: 'blur(8px)'
+                    background:
+                      "radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(239,68,68,0.06) 40%, rgba(255,255,255,0) 85%)",
+                    filter: "blur(8px)",
                   }}
                   ref={glowRef}
                 ></div>
-                <div 
+                <div
                   className="absolute -inset-20 opacity-20 mix-blend-overlay overflow-hidden"
                   style={{
-                    maskImage: 'radial-gradient(circle, rgba(0,0,0,1) 20%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 85%)',
-                    WebkitMaskImage: 'radial-gradient(circle, rgba(0,0,0,1) 20%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 85%)'
+                    maskImage:
+                      "radial-gradient(circle, rgba(0,0,0,1) 20%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 85%)",
+                    WebkitMaskImage:
+                      "radial-gradient(circle, rgba(0,0,0,1) 20%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 85%)",
                   }}
                   ref={noiseRef}
                 >
-                  <div 
-                    className="absolute inset-0" 
+                  <div
+                    className="absolute inset-0"
                     style={{
                       backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill='%23ef4444' opacity='0.35'/%3E%3C/svg%3E")`,
-                      backgroundRepeat: 'repeat',
-                      backgroundSize: '150px 150px'
+                      backgroundRepeat: "repeat",
+                      backgroundSize: "150px 150px",
                     }}
                   />
                 </div>
@@ -217,10 +220,15 @@ export default function VisMis() {
               >
                 Vision
               </h2>
-              <div ref={(el) => setUnderlineRef(el, 0)} className="h-px w-16 bg-gradient-to-r from-primary to-primary/60 mt-3"></div>
+              <div
+                ref={(el) => setUnderlineRef(el, 0)}
+                className="h-px w-16 bg-gradient-to-r from-primary to-primary/60 mt-3"
+              ></div>
               <p className="mt-4 text-gray-700 text-base sm:text-lg leading-relaxed text-justify">
-                Ark Institute envisions itself to become a leading institution in technical-vocational education,
-                recognized for producing highly skilled professionals who contribute to the workforce and the community.
+                Ark Institute envisions itself to become a leading institution
+                in technical-vocational education, recognized for producing
+                highly skilled professionals who contribute to the workforce and
+                the community.
               </p>
             </div>
 
@@ -234,16 +242,20 @@ export default function VisMis() {
               >
                 Mission
               </h2>
-              <div ref={(el) => setUnderlineRef(el, 1)} className="h-px w-16 bg-gradient-to-r from-accent to-accent/60 mt-3"></div>
+              <div
+                ref={(el) => setUnderlineRef(el, 1)}
+                className="h-px w-16 bg-gradient-to-r from-accent to-accent/60 mt-3"
+              ></div>
               <p className="mt-4 text-gray-700 text-base sm:text-lg leading-relaxed text-justify">
-                Ark Institute aims to equip students with the right values, practical skills, and knowledge through
-                comprehensive TESDA-accredited courses, fostering career readiness and professional excellence in order
-                to thrive in a dynamic world.
+                Ark Institute aims to equip students with the right values,
+                practical skills, and knowledge through comprehensive
+                TESDA-accredited courses, fostering career readiness and
+                professional excellence in order to thrive in a dynamic world.
               </p>
             </div>
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

@@ -1,20 +1,24 @@
-"use client";
+"use client"
 
-import { useEffect, useState, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { motion, useScroll, AnimatePresence } from "framer-motion";
-import { Menu } from "lucide-react";
-import MobileNav from "./mobile-nav";
-import { useSplashCompletion } from "@/app/components/splash";
-import { usePathname } from "next/navigation";
+import { AnimatePresence, motion, useScroll } from "framer-motion"
+import { Menu } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { useEffect, useRef, useState } from "react"
+import { useSplashCompletion } from "@/app/components/splash"
+import MobileNav from "./mobile-nav"
 
-
-function AnimatedNavLink({ href, children, onClick, isActive = false }: {
-  href: string;
-  children: React.ReactNode;
-  onClick?: () => void;
-  isActive?: boolean;
+function AnimatedNavLink({
+  href,
+  children,
+  onClick,
+  isActive = false,
+}: {
+  href: string
+  children: React.ReactNode
+  onClick?: () => void
+  isActive?: boolean
 }) {
   return (
     <motion.div
@@ -30,7 +34,9 @@ function AnimatedNavLink({ href, children, onClick, isActive = false }: {
         aria-current={isActive ? "page" : undefined}
         className="group relative block px-4 py-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >
-        <span className={`relative z-10 text-sm font-medium ${isActive ? 'text-gray-900' : 'text-gray-700'} group-hover:text-gray-900 transition-colors duration-150`}>
+        <span
+          className={`relative z-10 text-sm font-medium ${isActive ? "text-gray-900" : "text-gray-700"} group-hover:text-gray-900 transition-colors duration-150`}
+        >
           {children}
         </span>
       </Link>
@@ -43,8 +49,8 @@ function AnimatedNavLink({ href, children, onClick, isActive = false }: {
           hover: { scaleX: 1, opacity: 0.7, y: 0 },
           active: { scaleX: 1, opacity: 0.7, y: 0 },
         }}
-        transition={{ type: 'tween', duration: 0.42, ease: 'easeOut' }}
-        style={{ transformOrigin: 'left' }}
+        transition={{ type: "tween", duration: 0.42, ease: "easeOut" }}
+        style={{ transformOrigin: "left" }}
       />
       <motion.span
         className="pointer-events-none absolute left-1/2 right-4 bottom-[6px] h-[2px] bg-accent"
@@ -53,61 +59,63 @@ function AnimatedNavLink({ href, children, onClick, isActive = false }: {
           hover: { scaleX: 1, opacity: 0.7, y: 0 },
           active: { scaleX: 1, opacity: 0.7, y: 0 },
         }}
-        transition={{ type: 'tween', duration: 0.42, ease: 'easeOut' }}
-        style={{ transformOrigin: 'right' }}
+        transition={{ type: "tween", duration: 0.42, ease: "easeOut" }}
+        style={{ transformOrigin: "right" }}
       />
     </motion.div>
-  );
+  )
 }
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { scrollY } = useScroll();
-  const isScrolledRef = useRef(false);
-  const splashCompleted = useSplashCompletion();
-  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
-  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const isHome = pathname === '/';
+  const pathname = usePathname()
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { scrollY } = useScroll()
+  const isScrolledRef = useRef(false)
+  const splashCompleted = useSplashCompletion()
+  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false)
+  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const isHome = pathname === "/"
 
   useEffect(() => {
-    const ENTER_SCROLL_PX = 24;
-    const EXIT_SCROLL_PX = 8;
+    const ENTER_SCROLL_PX = 24
+    const EXIT_SCROLL_PX = 8
 
     const update = () => {
-      const currentScrollY = scrollY.get();
-      const nowScrolled = isScrolledRef.current ? (currentScrollY > EXIT_SCROLL_PX) : (currentScrollY >= ENTER_SCROLL_PX);
+      const currentScrollY = scrollY.get()
+      const nowScrolled = isScrolledRef.current
+        ? currentScrollY > EXIT_SCROLL_PX
+        : currentScrollY >= ENTER_SCROLL_PX
 
       if (nowScrolled !== isScrolledRef.current) {
-        isScrolledRef.current = nowScrolled;
-        setIsScrolled(nowScrolled);
+        isScrolledRef.current = nowScrolled
+        setIsScrolled(nowScrolled)
       }
-    };
+    }
 
-    const unsubscribe = scrollY.on("change", update);
-    update();
+    const unsubscribe = scrollY.on("change", update)
+    update()
     return () => {
-      unsubscribe();
-    };
-  }, [scrollY]);
+      unsubscribe()
+    }
+  }, [scrollY])
 
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/courses", label: "Courses" },
-    { href: "/contact", label: "Contact" }
-  ];
+    { href: "/contact", label: "Contact" },
+  ]
 
   // Only hide navbar during splash on home page
-  const shouldHideForSplash = !splashCompleted && isHome;
+  const shouldHideForSplash = !splashCompleted && isHome
 
   return (
-    <motion.header 
+    <motion.header
       initial={false} // Don't animate on initial mount to prevent flash
-      animate={{ 
+      animate={{
         opacity: shouldHideForSplash ? 0 : 1,
-        y: shouldHideForSplash ? -10 : 0
+        y: shouldHideForSplash ? -10 : 0,
       }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50 pt-4 sm:pt-3 bg-transparent"
@@ -115,14 +123,19 @@ export default function Navbar() {
     >
       {/* Mobile-only glass background when scrolled */}
       <div
-        className={`${isScrolled && !isMobileMenuOpen ? 'bg-white/70 backdrop-blur-md' : ''} md:hidden absolute inset-0`}
+        className={`${isScrolled && !isMobileMenuOpen ? "bg-white/70 backdrop-blur-md" : ""} md:hidden absolute inset-0`}
         aria-hidden
       />
       <div className="w-full">
         <div className="h-14 md:h-20 flex items-center px-6 sm:px-8 md:px-16">
-
-          <div className={`relative z-[60] transition-all duration-300 ${isScrolled ? "md:opacity-0 md:scale-95 opacity-100 scale-100" : "opacity-100 scale-100"}`}>
-            <Link href="/" className="flex items-center gap-2 sm:gap-4 group ml-0" aria-label="Ark Institute home">
+          <div
+            className={`relative z-[60] transition-all duration-300 ${isScrolled ? "md:opacity-0 md:scale-95 opacity-100 scale-100" : "opacity-100 scale-100"}`}
+          >
+            <Link
+              href="/"
+              className="flex items-center gap-2 sm:gap-4 group ml-0"
+              aria-label="Ark Institute home"
+            >
               <Image
                 src="/logo/ark-transpa.png"
                 alt="Ark Institute"
@@ -145,21 +158,34 @@ export default function Navbar() {
           <div className="ml-auto flex items-center gap-2 pr-0 relative">
             {/* Mobile Navigation */}
             <MobileNav navItems={navItems} onOpenChange={setIsMobileMenuOpen} />
-            
+
             <motion.nav
               role="navigation"
               aria-label="Primary navigation"
               initial={false}
-              animate={{ opacity: (!isScrolled) ? 1 : 0 }}
+              animate={{ opacity: !isScrolled ? 1 : 0 }}
               transition={{ duration: 0.2, ease: "linear" }}
               className="hidden md:flex items-center gap-3 md:gap-4"
               style={{
-                pointerEvents: (!isScrolled) ? 'auto' : 'none'
+                pointerEvents: !isScrolled ? "auto" : "none",
               }}
             >
               {navItems.map((item) => (
-                <div key={item.href} style={{ opacity: (!isScrolled) ? 1 : 0, transition: 'opacity 120ms linear' }}>
-                  <AnimatedNavLink href={item.href} isActive={item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)}>
+                <div
+                  key={item.href}
+                  style={{
+                    opacity: !isScrolled ? 1 : 0,
+                    transition: "opacity 120ms linear",
+                  }}
+                >
+                  <AnimatedNavLink
+                    href={item.href}
+                    isActive={
+                      item.href === "/"
+                        ? pathname === "/"
+                        : pathname.startsWith(item.href)
+                    }
+                  >
                     {item.label}
                   </AnimatedNavLink>
                 </div>
@@ -168,24 +194,31 @@ export default function Navbar() {
 
             {/* Desktop-only hover menu (appears when scrolled) */}
             <div
+              role="none"
               className="hidden md:block absolute right-0 top-0 mt-0"
               onMouseEnter={() => {
-                if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-                setIsDesktopMenuOpen(true);
+                if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
+                setIsDesktopMenuOpen(true)
               }}
               onMouseLeave={() => {
-                if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-                hoverTimerRef.current = setTimeout(() => setIsDesktopMenuOpen(false), 120);
+                if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current)
+                hoverTimerRef.current = setTimeout(
+                  () => setIsDesktopMenuOpen(false),
+                  120
+                )
               }}
-              style={{ pointerEvents: isScrolled ? 'auto' : 'none' }}
+              style={{ pointerEvents: isScrolled ? "auto" : "none" }}
             >
               <motion.button
                 initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: isScrolled ? 1 : 0, scale: isScrolled ? 1 : 0.98 }}
+                animate={{
+                  opacity: isScrolled ? 1 : 0,
+                  scale: isScrolled ? 1 : 0.98,
+                }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
                 aria-label="Open menu"
                 className="inline-flex items-center justify-center w-12 h-12 rounded-xl border border-gray-200 bg-white shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                style={{ pointerEvents: isScrolled ? 'auto' : 'none' }}
+                style={{ pointerEvents: isScrolled ? "auto" : "none" }}
               >
                 <Menu className="w-5 h-5 text-gray-700" strokeWidth={2} />
               </motion.button>
@@ -198,7 +231,7 @@ export default function Navbar() {
                     exit={{ opacity: 0, y: -6, scale: 0.995 }}
                     transition={{ duration: 0.18, ease: "easeOut" }}
                     className="absolute right-0 top-full mt-4 z-50 w-64 max-w-[90vw] flex flex-col gap-1 pt-2 bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200 shadow-lg p-4"
-                    style={{ transformOrigin: 'top right' }}
+                    style={{ transformOrigin: "top right" }}
                     role="menu"
                     aria-label="Desktop menu"
                   >
@@ -208,11 +241,19 @@ export default function Navbar() {
                         initial={{ opacity: 0, x: -16 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -16 }}
-                        transition={{ duration: 0.16, delay: index * 0.03, ease: "easeOut" }}
+                        transition={{
+                          duration: 0.16,
+                          delay: index * 0.03,
+                          ease: "easeOut",
+                        }}
                       >
                         <AnimatedNavLink
                           href={item.href}
-                          isActive={item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)}
+                          isActive={
+                            item.href === "/"
+                              ? pathname === "/"
+                              : pathname.startsWith(item.href)
+                          }
                           onClick={() => setIsDesktopMenuOpen(false)}
                         >
                           {item.label}
@@ -227,5 +268,5 @@ export default function Navbar() {
         </div>
       </div>
     </motion.header>
-  );
+  )
 }

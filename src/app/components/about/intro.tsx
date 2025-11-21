@@ -1,17 +1,19 @@
-"use client";
+"use client"
 
-import React from 'react'
-import Image from 'next/image'
-import { useScrollReveal } from '../animations/useScrollReveal'
+import Image from "next/image"
+import { useScrollReveal } from "../animations/useScrollReveal"
 
 export default function Intro() {
-  const ref = useScrollReveal<HTMLElement>({ delay: 0 });
+  const ref = useScrollReveal<HTMLElement>({ delay: 0 })
   return (
     <section ref={ref} className="relative overflow-hidden">
       <div className="mx-auto max-w-5xl px-6 sm:px-8 md:px-16 py-12 sm:py-16 md:py-20">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
-          <div data-reveal className="mb-6 w-full flex items-center justify-center">
+          <div
+            data-reveal
+            className="mb-6 w-full flex items-center justify-center"
+          >
             <Image
               src="/logo/ark-transpa.png"
               alt="Ark Institute logo"

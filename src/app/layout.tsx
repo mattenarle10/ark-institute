@@ -1,18 +1,18 @@
-import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
-import Script from "next/script";
-import "./globals.css";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import type { Metadata } from "next"
+import { Montserrat } from "next/font/google"
+import Script from "next/script"
+import "./globals.css"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["400", "700"],
   display: "swap",
-});
+})
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://arkinstitutebc.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://arkinstitutebc.com"
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -62,22 +62,31 @@ export const metadata: Metadata = {
   },
   icons: [
     { rel: "icon", url: "/favicon.ico", sizes: "any" },
-    { rel: "icon", url: "/logo/ark-transpa.png", type: "image/png", sizes: "600x600" },
+    {
+      rel: "icon",
+      url: "/logo/ark-transpa.png",
+      type: "image/png",
+      sizes: "600x600",
+    },
     { rel: "apple-touch-icon", url: "/logo/ark-transpa.png", sizes: "600x600" },
   ],
   themeColor: "#111827",
   manifest: "/manifest.webmanifest",
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
       <head>
-        <Script id="org-jsonld" type="application/ld+json" strategy="beforeInteractive">
+        <Script
+          id="org-jsonld"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+        >
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
@@ -91,9 +100,7 @@ export default function RootLayout({
           })}
         </Script>
       </head>
-      <body className={`${montserrat.variable} antialiased`}>
-        {children}
-      </body>
+      <body className={`${montserrat.variable} antialiased`}>{children}</body>
     </html>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import Navbar from "@/app/components/layout/navbar";
-import NavSpacer from "@/app/components/layout/nav-spacer";
-import Footer from "@/app/components/layout/footer";
-import CourseIntro from "@/app/components/courses/intro";
-import CoursesList from "@/app/components/courses/courses-list";
-import Facilities from "@/app/components/courses/facilities";
+import type { Metadata } from "next"
+import CoursesList from "@/app/components/courses/courses-list"
+import Facilities from "@/app/components/courses/facilities"
+import CourseIntro from "@/app/components/courses/intro"
+import Footer from "@/app/components/layout/footer"
+import NavSpacer from "@/app/components/layout/nav-spacer"
+import Navbar from "@/app/components/layout/navbar"
 
 export const metadata: Metadata = {
   title: "Courses",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     url: "https://arkinstitutebc.com/courses",
     type: "website",
   },
-};
+}
 
 export default function CoursesPage() {
   return (
@@ -30,5 +30,5 @@ export default function CoursesPage() {
       <Facilities />
       <Footer />
     </div>
-  );
+  )
 }
