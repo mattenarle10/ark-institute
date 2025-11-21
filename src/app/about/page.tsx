@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
-import Navbar from "@/app/components/layout/navbar";
-import NavSpacer from "@/app/components/layout/nav-spacer";
-import Footer from "@/app/components/layout/footer";
-import Intro from "@/app/components/about/intro";
-import WhoWeAre from "@/app/components/about/who-we-are";
-import CoreValues from "@/app/components/about/core-values";
-import AccreditationCTA from "@/app/components/about/accreditation-cta";
+import type { Metadata } from "next"
+import AccreditationCTA from "@/app/components/about/accreditation-cta"
+import CoreValues from "@/app/components/about/core-values"
+import Intro from "@/app/components/about/intro"
+import WhoWeAre from "@/app/components/about/who-we-are"
+import Footer from "@/app/components/layout/footer"
+import NavSpacer from "@/app/components/layout/nav-spacer"
+import Navbar from "@/app/components/layout/navbar"
 
 export const metadata: Metadata = {
   title: "About",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     url: "https://arkinstitutebc.com/about",
     type: "website",
   },
-};
+}
 
 export default function AboutPage() {
   return (

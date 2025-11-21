@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome lint .",
-    "format": "biome format ."
+    "format": "biome format .",
+    "prepare": "husky"
   },
   "dependencies": {
     "framer-motion": "^12.23.12",
@@ -21,13 +22,14 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.3.7",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/nodemailer": "^7.0.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-slick": "^0.23.13",
-    "@biomejs/biome": "^2.3.7",
+    "husky": "^9.1.7",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

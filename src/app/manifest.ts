@@ -1,7 +1,8 @@
-import type { MetadataRoute } from "next";
+import type { MetadataRoute } from "next"
 
 export default function manifest(): MetadataRoute.Manifest {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://arkinstitutebc.com";
+  const _siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://arkinstitutebc.com"
   return {
     name: "Ark Institute",
     short_name: "Ark",
@@ -14,10 +15,18 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#111827",
     icons: [
       { src: "/favicon.ico", sizes: "16x16 32x32", type: "image/x-icon" },
-      { src: "/logo/ark-transpa.png", sizes: "600x600", type: "image/png", purpose: "maskable" },
-      { src: "/logo/ark-white.png", sizes: "600x600", type: "image/png", purpose: "any" }
+      {
+        src: "/logo/ark-transpa.png",
+        sizes: "600x600",
+        type: "image/png",
+        purpose: "maskable",
+      },
+      {
+        src: "/logo/ark-white.png",
+        sizes: "600x600",
+        type: "image/png",
+        purpose: "any",
+      },
     ],
-  };
+  }
 }
-
-

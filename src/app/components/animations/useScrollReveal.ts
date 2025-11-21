@@ -1,30 +1,32 @@
-"use client";
+"use client"
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useEffect, useRef } from "react"
 
 export type RevealOptions = {
-  selector?: string; // elements inside container to reveal
-  stagger?: number; // seconds between items
-  y?: number; // initial translateY
-  duration?: number; // seconds
-  ease?: string;
-  start?: string; // ScrollTrigger start position
-  once?: boolean; // whether to animate only once
-  delay?: number; // delay before starting the reveal when entering viewport
-};
+  selector?: string // elements inside container to reveal
+  stagger?: number // seconds between items
+  y?: number // initial translateY
+  duration?: number // seconds
+  ease?: string
+  start?: string // ScrollTrigger start position
+  once?: boolean // whether to animate only once
+  delay?: number // delay before starting the reveal when entering viewport
+}
 
 // A simple, uniform fade-up on-scroll reveal for all marked children within a container
-export function useScrollReveal<T extends HTMLElement = HTMLElement>(opts: RevealOptions = {}) {
-  const containerRef = useRef<T | null>(null);
+export function useScrollReveal<T extends HTMLElement = HTMLElement>(
+  opts: RevealOptions = {}
+) {
+  const containerRef = useRef<T | null>(null)
 
   useEffect(() => {
-    const container = containerRef.current as unknown as HTMLElement | null;
-    if (!container) return;
-    if (typeof window === "undefined") return;
+    const container = containerRef.current as unknown as HTMLElement | null
+    if (!container) return
+    if (typeof window === "undefined") return
 
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger)
 
     const {
       selector = "[data-reveal]",
@@ -35,12 +37,12 @@ export function useScrollReveal<T extends HTMLElement = HTMLElement>(opts: Revea
       start = "top 85%",
       once = true,
       delay = 0,
-    } = opts;
+    } = opts
 
-    const items = Array.from(container.querySelectorAll<HTMLElement>(selector));
+    const items = Array.from(container.querySelectorAll<HTMLElement>(selector))
 
     // Initial state
-    gsap.set(items, { opacity: 0, y });
+    gsap.set(items, { opacity: 0, y })
 
     // Single trigger per section, staggers children in DOM order
     const tween = gsap.to(items, {
@@ -51,26 +53,36 @@ export function useScrollReveal<T extends HTMLElement = HTMLElement>(opts: Revea
       stagger,
       delay,
       paused: true,
-    });
+    })
 
     const st = ScrollTrigger.create({
       trigger: container,
       start,
       onEnter: () => tween.play(),
       onLeaveBack: () => {
-        if (once) return;
-        tween.pause(0);
-        gsap.set(items, { opacity: 0, y });
+        if (once) return
+        tween.pause(0)
+        gsap.set(items, { opacity: 0, y })
       },
-    });
+    })
 
     return () => {
-      st.kill();
-      tween.kill();
-    };
+      st.kill()
+      tween.kill()
+    }
     // We intentionally don't include objects/arrays directly to avoid effect re-runs on same values
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [opts.selector, opts.stagger, opts.y, opts.duration, opts.ease, opts.start, opts.once, opts.delay]);
+  }, [
+    opts.selector,
+    opts.stagger,
+    opts.y,
+    opts.duration,
+    opts.ease,
+    opts.start,
+    opts.once,
+    opts.delay,
+    opts,
+  ])
 
-  return containerRef;
+  return containerRef
 }

@@ -1,39 +1,59 @@
-"use client";
+"use client"
 
-import React from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import { useScrollReveal } from '../animations/useScrollReveal'
+import Image from "next/image"
+import Link from "next/link"
+import { useScrollReveal } from "../animations/useScrollReveal"
 
 export default function AccreditationCTA() {
-  const sectionRef = useScrollReveal<HTMLElement>({ delay: 0.05 });
+  const sectionRef = useScrollReveal<HTMLElement>({ delay: 0.05 })
 
   return (
-    <section ref={sectionRef} className="bg-gradient-to-b from-gray-50 to-white py-16">
+    <section
+      ref={sectionRef}
+      className="bg-gradient-to-b from-gray-50 to-white py-16"
+    >
       <div className="mx-auto max-w-6xl px-6 sm:px-8 md:px-16">
         {/* Accreditation */}
-        <div data-reveal className="mb-16 rounded-2xl bg-white p-6 md:p-8 shadow-sm md:shadow-md ring-1 ring-gray-100">
+        <div
+          data-reveal
+          className="mb-16 rounded-2xl bg-white p-6 md:p-8 shadow-sm md:shadow-md ring-1 ring-gray-100"
+        >
           <div className="grid gap-6 md:gap-8 md:grid-cols-2 md:items-center">
             <div data-reveal>
               <h2 className="font-montserrat text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 text-shadow-md">
                 TESDA Accreditation
               </h2>
               <p className="mt-4 text-base leading-relaxed text-gray-700">
-                Ark Institute is proud to be accredited by the Technical Education and Skills Development Authority (TESDA), 
-                the Philippine government agency tasked with managing and supervising technical education and skills development.
+                Ark Institute is proud to be accredited by the Technical
+                Education and Skills Development Authority (TESDA), the
+                Philippine government agency tasked with managing and
+                supervising technical education and skills development.
               </p>
               <p className="mt-3 text-base leading-relaxed text-gray-700">
-                This accreditation ensures that our programs meet the highest standards of quality and relevance to industry needs,
-                providing our students with nationally recognized qualifications that enhance their employability.
+                This accreditation ensures that our programs meet the highest
+                standards of quality and relevance to industry needs, providing
+                our students with nationally recognized qualifications that
+                enhance their employability.
               </p>
               <div className="mt-6 flex justify-center md:justify-start">
-                <Link 
-                  href="/courses" 
+                <Link
+                  href="/courses"
                   className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm ring-1 ring-primary/20 hover:ring-primary/30 hover:shadow-md hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 transition"
                 >
                   View our accredited courses
-                  <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
                   </svg>
                 </Link>
               </div>
@@ -52,21 +72,27 @@ export default function AccreditationCTA() {
         </div>
 
         {/* CTA */}
-        <div data-reveal className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-primary/90 p-6 md:p-8 text-white shadow-lg ring-1 ring-white/10">
+        <div
+          data-reveal
+          className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-primary/90 p-6 md:p-8 text-white shadow-lg ring-1 ring-white/10"
+        >
           <div className="text-left md:text-center">
-            <h2 className="font-montserrat text-2xl font-bold sm:text-3xl">Ready to start your journey?</h2>
+            <h2 className="font-montserrat text-2xl font-bold sm:text-3xl">
+              Ready to start your journey?
+            </h2>
             <p className="mt-4 max-w-2xl text-base text-white/90 md:mx-auto">
-              Join Ark Institute today and take the first step toward a successful career with our TESDA-accredited programs.
+              Join Ark Institute today and take the first step toward a
+              successful career with our TESDA-accredited programs.
             </p>
             <div className="mt-8 flex flex-wrap justify-start md:justify-center gap-4">
-              <Link 
-                href="/courses" 
+              <Link
+                href="/courses"
                 className="inline-flex items-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow-sm ring-1 ring-primary/10 hover:ring-primary/20 hover:shadow-md hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 transition"
               >
                 Explore Courses
               </Link>
-              <Link 
-                href="/contact" 
+              <Link
+                href="/contact"
                 className="inline-flex items-center rounded-full border border-white/30 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm shadow-sm ring-1 ring-white/10 hover:ring-white/20 hover:bg-white/20 hover:border-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 transition"
               >
                 Contact Us

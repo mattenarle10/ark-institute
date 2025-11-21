@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import React, { type ReactElement } from "react";
-import type { LucideIcon } from "lucide-react";
-import { Facebook, Instagram, Mail, Phone } from "lucide-react";
-import { useScrollReveal } from "../animations/useScrollReveal";
+import type { LucideIcon } from "lucide-react"
+import { Facebook, Instagram, Mail, Phone } from "lucide-react"
+import type { ReactElement } from "react"
+import { useScrollReveal } from "../animations/useScrollReveal"
 
 // Define socials (replace URLs with your actual profiles)
 interface Social {
-  icon: LucideIcon;
-  color: string;
-  name: string;
-  url: string;
+  icon: LucideIcon
+  color: string
+  name: string
+  url: string
 }
 
 const socials: Social[] = [
@@ -39,10 +39,10 @@ const socials: Social[] = [
     name: "Email",
     url: "mailto:info@arkinstitutebc.com",
   },
-];
+]
 
 export default function Socials(): ReactElement {
-  const ref = useScrollReveal();
+  const ref = useScrollReveal()
   return (
     <section ref={ref} className="py-12 sm:py-16 md:py-20 relative">
       <div className="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(closest-side,rgba(16,119,255,0.08),transparent_70%)]" />
@@ -54,10 +54,7 @@ export default function Socials(): ReactElement {
           >
             Connect with us
           </h2>
-          <p
-            data-reveal
-            className="mt-2 text-sm sm:text-base text-gray-600"
-          >
+          <p data-reveal className="mt-2 text-sm sm:text-base text-gray-600">
             Follow us for updates, events, and student work.
           </p>
         </div>
@@ -80,12 +77,14 @@ export default function Socials(): ReactElement {
                 >
                   <s.icon size={22} color={s.color} />
                 </div>
-                <span className="text-sm sm:text-base font-semibold text-gray-800">{s.name}</span>
+                <span className="text-sm sm:text-base font-semibold text-gray-800">
+                  {s.name}
+                </span>
               </div>
             </a>
           ))}
         </div>
       </div>
     </section>
-  );
+  )
 }
