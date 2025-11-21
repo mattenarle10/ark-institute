@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "biome lint .",
+    "format": "biome format ."
   },
   "dependencies": {
     "framer-motion": "^12.23.12",
@@ -20,15 +21,13 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/nodemailer": "^7.0.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-slick": "^0.23.13",
-    "eslint": "^9",
-    "eslint-config-next": "15.4.6",
+    "@biomejs/biome": "^2.3.7",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
