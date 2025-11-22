@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { Streamdown } from 'streamdown';
-import { Loader2, Save, ArrowLeft } from 'lucide-react';
+import { Loader2, ArrowLeft, Image as ImageIcon } from 'lucide-react';
 
 type Post = {
   id?: string;
@@ -12,6 +12,7 @@ type Post = {
   slug: string;
   content: string;
   published: boolean;
+  coverImageUrl?: string;
 };
 
 export default function PostEditor({ initialPost }: { initialPost?: Post }) {
@@ -25,6 +26,9 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
       published: false,
     }
   );
+
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Auto-generate slug from title if not manually edited
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +44,48 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
     }
   };
 
+  const handleCoverButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleCoverImageChange = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!post.slug) {
+      alert('Please add a title first so we can generate a link.');
+      return;
+    }
+
+    setUploadingImage(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${post.slug}-${Date.now()}.${fileExt}`;
+      const filePath = `covers/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('post-attachment')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from('post-attachment').getPublicUrl(filePath);
+
+      setPost((prev) => ({ ...prev, coverImageUrl: publicUrl }));
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Unknown error occurred';
+      alert('Error uploading image: ' + message);
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
   const handleSave = async (publishStatus: boolean) => {
     setLoading(true);
     try {
@@ -51,6 +97,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
         slug: post.slug,
         content: post.content,
         published_at: publishStatus ? new Date().toISOString() : null,
+        cover_image_url: post.coverImageUrl || null,
       };
 
       let error: unknown;
@@ -131,6 +178,47 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
                 <span className="italic text-gray-400">
                   Link will be generated from the title
                 </span>
+              )}
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
+                Cover image (optional)
+              </label>
+              <div className="flex items-center gap-4">
+                <button
+                  type="button"
+                  onClick={handleCoverButtonClick}
+                  disabled={uploadingImage}
+                  className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
+                >
+                  {uploadingImage ? (
+                    <>
+                      <Loader2 className="w-3 h-3 mr-2 animate-spin" />
+                      Uploading...
+                    </>
+                  ) : (
+                    <>
+                      <ImageIcon className="w-3 h-3 mr-2" />
+                      Upload image
+                    </>
+                  )}
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleCoverImageChange}
+                  className="hidden"
+                />
+              </div>
+              {post.coverImageUrl && (
+                <div className="mt-2">
+                  <img
+                    src={post.coverImageUrl}
+                    alt="Cover preview"
+                    className="h-24 w-40 object-cover rounded border border-gray-200"
+                  />
+                </div>
               )}
             </div>
           </div>

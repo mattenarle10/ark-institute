@@ -97,57 +97,59 @@ export default function AdminPage() {
           <ul className="divide-y divide-gray-200">
             {posts.map((post) => (
               <li key={post.id} className="hover:bg-gray-50 transition-colors">
-                <div className="px-6 py-4 flex items-center justify-between">
+                <div className="px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between mb-1">
-                      <h3 className="text-lg font-medium text-primary truncate">
-                        {post.title}
-                      </h3>
-                      <span
-                        className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          post.published_at
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-yellow-100 text-yellow-800'
-                        }`}
-                      >
-                        {post.published_at ? (
-                          <>
-                            <CheckCircle2 className="w-3 h-3" />
-                            <span>Published</span>
-                          </>
-                        ) : (
-                          <>
-                            <Clock className="w-3 h-3" />
-                            <span>Draft</span>
-                          </>
-                        )}
-                      </span>
-                    </div>
-                    <div className="flex items-center text-sm text-gray-500 gap-4">
+                    <h3 className="text-lg font-medium text-primary truncate">
+                      {post.title}
+                    </h3>
+                    <div className="mt-1 flex flex-wrap items-center gap-3 text-sm text-gray-500">
                       <span className="flex items-center">
                         <Calendar className="w-4 h-4 mr-1" />
                         {new Date(post.created_at).toLocaleDateString()}
                       </span>
-                      <span className="font-mono text-xs">/{post.slug}</span>
+                      <span className="font-mono text-xs text-gray-400">
+                        /blog/{post.slug}
+                      </span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 ml-4">
-                    <Link
-                      href={`/admin/edit/${post.id}`}
-                      className="inline-flex items-center px-2.5 py-1 text-xs font-medium text-blue-700 bg-blue-50 rounded-md hover:bg-blue-100"
+                  <div className="flex items-center gap-3 sm:shrink-0">
+                    <span
+                      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                        post.published_at
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-yellow-100 text-yellow-800'
+                      }`}
                     >
-                      <Edit2 className="w-3 h-3 mr-1" />
-                      Edit
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => handleDelete(post.id)}
-                      disabled={deletingId === post.id}
-                      className="inline-flex items-center px-2.5 py-1 text-xs font-medium text-red-700 bg-red-50 rounded-md hover:bg-red-100 disabled:opacity-50"
-                    >
-                      <Trash2 className="w-3 h-3 mr-1" />
-                      {deletingId === post.id ? 'Deleting…' : 'Delete'}
-                    </button>
+                      {post.published_at ? (
+                        <>
+                          <CheckCircle2 className="w-3 h-3" />
+                          <span>Published</span>
+                        </>
+                      ) : (
+                        <>
+                          <Clock className="w-3 h-3" />
+                          <span>Draft</span>
+                        </>
+                      )}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <Link
+                        href={`/admin/edit/${post.id}`}
+                        className="inline-flex items-center px-2.5 py-1 text-xs font-medium text-blue-700 bg-blue-50 rounded-md hover:bg-blue-100"
+                      >
+                        <Edit2 className="w-3 h-3 mr-1" />
+                        Edit
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(post.id)}
+                        disabled={deletingId === post.id}
+                        className="inline-flex items-center px-2.5 py-1 text-xs font-medium text-red-700 bg-red-50 rounded-md hover:bg-red-100 disabled:opacity-50"
+                      >
+                        <Trash2 className="w-3 h-3 mr-1" />
+                        {deletingId === post.id ? 'Deleting…' : 'Delete'}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </li>

@@ -11,6 +11,7 @@ type Post = {
   slug: string;
   content: string;
   published: boolean;
+  coverImageUrl?: string;
 };
 
 export default function EditPostPage() {
@@ -42,6 +43,7 @@ export default function EditPostPage() {
         slug: data.slug,
         content: data.content,
         published: !!data.published_at,
+        coverImageUrl: data.cover_image_url || undefined,
       });
       setLoading(false);
     }
