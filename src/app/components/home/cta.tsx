@@ -42,7 +42,9 @@ export default function CTA() {
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => { trigger.kill() })
+      ScrollTrigger.getAll().forEach((trigger) => {
+        trigger.kill()
+      })
     }
   }, [])
 

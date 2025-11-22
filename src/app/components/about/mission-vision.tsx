@@ -35,6 +35,7 @@ export default function MissionVision() {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  aria-label="Lightning bolt icon"
                 >
                   <path
                     strokeLinecap="round"
@@ -73,6 +74,7 @@ export default function MissionVision() {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  aria-label="Eye icon"
                 >
                   <path
                     strokeLinecap="round"

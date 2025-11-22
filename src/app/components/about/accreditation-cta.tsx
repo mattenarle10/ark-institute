@@ -47,6 +47,7 @@ export default function AccreditationCTA() {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
+                    aria-label="Arrow right"
                   >
                     <path
                       strokeLinecap="round"

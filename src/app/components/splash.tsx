@@ -63,7 +63,9 @@ const notifySplashCompletion = () => {
   }
 
   // Notify all listeners
-  splashCompletionCallbacks.forEach((callback) => { callback() })
+  splashCompletionCallbacks.forEach((callback) => {
+    callback()
+  })
 }
 
 export default function Splash() {

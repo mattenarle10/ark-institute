@@ -202,6 +202,7 @@ export default function FacilityCarousel({
           strokeLinecap="round"
           strokeLinejoin="round"
           className="text-white"
+          aria-label="Previous arrow"
         >
           <path d="m15 18-6-6 6-6" />
         </svg>
@@ -233,6 +234,7 @@ export default function FacilityCarousel({
           strokeLinecap="round"
           strokeLinejoin="round"
           className="text-white"
+          aria-label="Next arrow"
         >
           <path d="m9 18 6-6-6-6" />
         </svg>
