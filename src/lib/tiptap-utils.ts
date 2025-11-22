@@ -401,9 +401,8 @@ type ProtocolOptions = {
 
 type ProtocolConfig = Array<ProtocolOptions | string>
 
-// biome-ignore lint/suspicious/noControlCharactersInRegex: Required for URI validation
-const ATTR_WHITESPACE =
-  /[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205F\u3000]/g
+// biome-ignore lint/suspicious/noControlCharactersInRegex: Unicode whitespace characters required for URI validation
+const ATTR_WHITESPACE = /[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205F\u3000]/g
 
 export function isAllowedUri(
   uri: string | undefined,
