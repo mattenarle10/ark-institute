@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
-import { Streamdown } from 'streamdown';
+import RichTextEditor from './rich-text-editor';
 import { Loader2, ArrowLeft, Image as ImageIcon } from 'lucide-react';
 
 type Post = {
@@ -29,7 +29,6 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
 
   const [uploadingImage, setUploadingImage] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   // Auto-generate slug from title if not manually edited
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -129,49 +128,6 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
     }
   };
 
-  const applyFormatting = (type: 'bold' | 'italic' | 'bullet' | 'emoji') => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
-
-    const { selectionStart, selectionEnd, value } = textarea;
-    const selected = value.slice(selectionStart, selectionEnd);
-    let updated = value;
-
-    if (type === 'emoji') {
-      const emoji = '😊 ';
-      updated =
-        value.slice(0, selectionEnd) + emoji + value.slice(selectionEnd);
-    } else if (type === 'bold') {
-      const wrap = '**';
-      const text = selected || 'bold text';
-      updated =
-        value.slice(0, selectionStart) +
-        wrap +
-        text +
-        wrap +
-        value.slice(selectionEnd);
-    } else if (type === 'italic') {
-      const wrap = '_';
-      const text = selected || 'italic text';
-      updated =
-        value.slice(0, selectionStart) +
-        wrap +
-        text +
-        wrap +
-        value.slice(selectionEnd);
-    } else if (type === 'bullet') {
-      const text = selected || 'list item';
-      const prefix = value && !value.endsWith('\n') ? '\n- ' : '- ';
-      updated =
-        value.slice(0, selectionStart) +
-        prefix +
-        text +
-        value.slice(selectionEnd);
-    }
-
-    setPost((prev) => ({ ...prev, content: updated }));
-  };
-
   return (
     <div className="space-y-6">
       {/* Header Actions */}
@@ -202,8 +158,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[calc(100vh-200px)]">
-        {/* Editor Column */}
+      <div className="grid grid-cols-1 gap-8 h-[calc(100vh-200px)]">
         <div className="flex flex-col gap-4 h-full">
           <div className="space-y-4">
             <input
@@ -269,60 +224,13 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
                 </div>
               )}
             </div>
-            <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500">
-              <span className="mr-1 text-[11px] uppercase tracking-wide text-gray-400">
-                Formatting
-              </span>
-              <button
-                type="button"
-                onClick={() => applyFormatting('bold')}
-                className="px-2 py-1 border border-gray-300 rounded bg-white hover:bg-gray-50 font-semibold"
-              >
-                B
-              </button>
-              <button
-                type="button"
-                onClick={() => applyFormatting('italic')}
-                className="px-2 py-1 border border-gray-300 rounded bg-white hover:bg-gray-50 italic"
-              >
-                I
-              </button>
-              <button
-                type="button"
-                onClick={() => applyFormatting('bullet')}
-                className="px-2 py-1 border border-gray-300 rounded bg-white hover:bg-gray-50"
-              >
-                • List
-              </button>
-              <button
-                type="button"
-                onClick={() => applyFormatting('emoji')}
-                className="px-2 py-1 border border-gray-300 rounded bg-white hover:bg-gray-50"
-              >
-                😊
-              </button>
-            </div>
           </div>
-          <textarea
-            ref={textareaRef}
+          <RichTextEditor
             value={post.content}
-            onChange={(e) =>
-              setPost((prev) => ({ ...prev, content: e.target.value }))
+            onChange={(html) =>
+              setPost((prev) => ({ ...prev, content: html }))
             }
-            placeholder="Write your post in Markdown..."
-            className="flex-1 w-full p-4 font-mono text-sm bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
           />
-        </div>
-
-        {/* Preview Column */}
-        <div className="h-full overflow-y-auto border border-gray-200 rounded-lg p-8 prose prose-lg max-w-none">
-          {post.content ? (
-            <Streamdown>{post.content}</Streamdown>
-          ) : (
-            <div className="text-gray-400 italic text-center mt-20">
-              Preview will appear here...
-            </div>
-          )}
         </div>
       </div>
     </div>
