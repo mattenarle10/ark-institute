@@ -29,7 +29,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
   // Auto-generate slug from title if not manually edited
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value;
-    if (!initialPost && !post.slug) {
+    if (!initialPost) {
       const slug = title
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
@@ -51,7 +51,6 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
         slug: post.slug,
         content: post.content,
         published_at: publishStatus ? new Date().toISOString() : null,
-        author_id: user.id,
       };
 
       let error: unknown;
@@ -123,16 +122,16 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
               onChange={handleTitleChange}
               className="w-full text-3xl font-bold placeholder-gray-300 border-none focus:ring-0 p-0"
             />
-            <div className="flex items-center text-sm text-gray-500">
-              <span className="mr-2">Slug:</span>
-              <input
-                type="text"
-                value={post.slug}
-                onChange={(e) =>
-                  setPost((prev) => ({ ...prev, slug: e.target.value }))
-                }
-                className="font-mono bg-gray-50 border border-gray-200 rounded px-2 py-1 text-xs w-full focus:outline-none focus:border-primary"
-              />
+            <div className="text-sm text-gray-500">
+              {post.slug ? (
+                <span>
+                  Link: <span className="font-mono text-xs text-gray-600">/blog/{post.slug}</span>
+                </span>
+              ) : (
+                <span className="italic text-gray-400">
+                  Link will be generated from the title
+                </span>
+              )}
             </div>
           </div>
           <textarea
