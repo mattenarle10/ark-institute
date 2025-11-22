@@ -29,27 +29,27 @@ export default function LoginScreen() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-white to-accent/5 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-white px-4">
       <div className="max-w-md w-full">
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
           {/* Header with Logo */}
-          <div className="bg-gradient-to-r from-primary to-accent p-8 text-center">
+          <div className="p-8 text-center border-b border-gray-100">
             <div className="flex justify-center mb-4">
-              <div className="bg-white rounded-full p-3 shadow-lg">
+              <div className="relative">
                 <Image
                   src="/logo/ark-transpa.png"
                   alt="Ark Institute Logo"
-                  width={60}
-                  height={60}
+                  width={80}
+                  height={80}
                   className="object-contain"
                 />
               </div>
             </div>
-            <h1 className="text-2xl font-bold text-white font-montserrat">
+            <h1 className="text-2xl font-bold text-gray-900 font-montserrat">
               Ark Institute
             </h1>
-            <p className="text-white/90 text-sm mt-1">Admin Portal</p>
+            <p className="text-gray-500 text-sm mt-1">Admin Portal</p>
           </div>
 
           {/* Form */}
@@ -137,7 +137,7 @@ export default function LoginScreen() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <>
@@ -171,9 +171,9 @@ export default function LoginScreen() {
           </form>
 
           {/* Footer */}
-          <div className="px-8 pb-8 pt-4 border-t border-gray-100">
-            <p className="text-center text-xs text-gray-500">
-              Secure admin access • Ark Institute BC
+          <div className="px-8 pb-6 pt-4 border-t border-gray-100">
+            <p className="text-center text-xs text-gray-400">
+              Secure admin access
             </p>
           </div>
         </div>
