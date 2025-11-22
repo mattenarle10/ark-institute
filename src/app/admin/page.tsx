@@ -71,8 +71,12 @@ export default function AdminPage() {
     <div>
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Blog Posts</h1>
-          <p className="text-gray-500 mt-1">Manage your articles and updates</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+            Blog Posts
+          </h1>
+          <p className="text-sm sm:text-base text-gray-500 mt-1">
+            Manage your articles and updates
+          </p>
         </div>
         <Link
           href="/admin/create"
@@ -108,7 +112,7 @@ export default function AdminPage() {
               <li key={post.id} className="hover:bg-gray-50 transition-colors">
                 <div className="px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-medium text-primary truncate">
+                    <h3 className="text-base sm:text-lg font-medium text-primary truncate">
                       {post.title}
                     </h3>
                     <div className="mt-1 flex flex-wrap items-center gap-3 text-sm text-gray-500">

@@ -29,6 +29,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
 
   const [uploadingImage, setUploadingImage] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   // Auto-generate slug from title if not manually edited
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,6 +129,49 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
     }
   };
 
+  const applyFormatting = (type: 'bold' | 'italic' | 'bullet' | 'emoji') => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    const { selectionStart, selectionEnd, value } = textarea;
+    const selected = value.slice(selectionStart, selectionEnd);
+    let updated = value;
+
+    if (type === 'emoji') {
+      const emoji = '😊 ';
+      updated =
+        value.slice(0, selectionEnd) + emoji + value.slice(selectionEnd);
+    } else if (type === 'bold') {
+      const wrap = '**';
+      const text = selected || 'bold text';
+      updated =
+        value.slice(0, selectionStart) +
+        wrap +
+        text +
+        wrap +
+        value.slice(selectionEnd);
+    } else if (type === 'italic') {
+      const wrap = '_';
+      const text = selected || 'italic text';
+      updated =
+        value.slice(0, selectionStart) +
+        wrap +
+        text +
+        wrap +
+        value.slice(selectionEnd);
+    } else if (type === 'bullet') {
+      const text = selected || 'list item';
+      const prefix = value && !value.endsWith('\n') ? '\n- ' : '- ';
+      updated =
+        value.slice(0, selectionStart) +
+        prefix +
+        text +
+        value.slice(selectionEnd);
+    }
+
+    setPost((prev) => ({ ...prev, content: updated }));
+  };
+
   return (
     <div className="space-y-6">
       {/* Header Actions */}
@@ -167,7 +211,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
               placeholder="Post Title"
               value={post.title}
               onChange={handleTitleChange}
-              className="w-full text-3xl font-bold placeholder-gray-300 border-none focus:ring-0 p-0"
+              className="w-full text-2xl sm:text-3xl font-bold placeholder-gray-300 border-none focus:ring-0 p-0"
             />
             <div className="text-sm text-gray-500">
               {post.slug ? (
@@ -225,8 +269,42 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
                 </div>
               )}
             </div>
+            <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500">
+              <span className="mr-1 text-[11px] uppercase tracking-wide text-gray-400">
+                Formatting
+              </span>
+              <button
+                type="button"
+                onClick={() => applyFormatting('bold')}
+                className="px-2 py-1 border border-gray-300 rounded bg-white hover:bg-gray-50 font-semibold"
+              >
+                B
+              </button>
+              <button
+                type="button"
+                onClick={() => applyFormatting('italic')}
+                className="px-2 py-1 border border-gray-300 rounded bg-white hover:bg-gray-50 italic"
+              >
+                I
+              </button>
+              <button
+                type="button"
+                onClick={() => applyFormatting('bullet')}
+                className="px-2 py-1 border border-gray-300 rounded bg-white hover:bg-gray-50"
+              >
+                • List
+              </button>
+              <button
+                type="button"
+                onClick={() => applyFormatting('emoji')}
+                className="px-2 py-1 border border-gray-300 rounded bg-white hover:bg-gray-50"
+              >
+                😊
+              </button>
+            </div>
           </div>
           <textarea
+            ref={textareaRef}
             value={post.content}
             onChange={(e) =>
               setPost((prev) => ({ ...prev, content: e.target.value }))
