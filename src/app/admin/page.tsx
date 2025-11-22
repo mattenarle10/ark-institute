@@ -3,7 +3,15 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
-import { Plus, FileText, Calendar, Edit2, Trash2 } from 'lucide-react';
+import {
+  Plus,
+  FileText,
+  Calendar,
+  Edit2,
+  Trash2,
+  CheckCircle2,
+  Clock,
+} from 'lucide-react';
 
 type Post = {
   id: string;
@@ -96,13 +104,23 @@ export default function AdminPage() {
                         {post.title}
                       </h3>
                       <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                        className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium ${
                           post.published_at
                             ? 'bg-green-100 text-green-800'
                             : 'bg-yellow-100 text-yellow-800'
                         }`}
                       >
-                        {post.published_at ? '✅ Published' : '📝 Draft'}
+                        {post.published_at ? (
+                          <>
+                            <CheckCircle2 className="w-3 h-3" />
+                            <span>Published</span>
+                          </>
+                        ) : (
+                          <>
+                            <Clock className="w-3 h-3" />
+                            <span>Draft</span>
+                          </>
+                        )}
                       </span>
                     </div>
                     <div className="flex items-center text-sm text-gray-500 gap-4">
