@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
-import { Plus, FileText, Calendar } from 'lucide-react';
+import { Plus, FileText, Calendar, Edit2, Trash2 } from 'lucide-react';
 
 type Post = {
   id: string;
@@ -16,6 +16,7 @@ type Post = {
 export default function AdminPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchPosts();
@@ -29,6 +30,24 @@ export default function AdminPage() {
 
     if (data) setPosts(data);
     setLoading(false);
+  }
+
+  async function handleDelete(id: string) {
+    const confirmed = window.confirm(
+      'Delete this post? This action cannot be undone.'
+    );
+    if (!confirmed) return;
+
+    setDeletingId(id);
+    const { error } = await supabase.from('posts').delete().eq('id', id);
+
+    if (error) {
+      alert('Error deleting post: ' + error.message);
+    } else {
+      setPosts((prev) => prev.filter((post) => post.id !== id));
+    }
+
+    setDeletingId(null);
   }
 
   return (
@@ -83,7 +102,7 @@ export default function AdminPage() {
                             : 'bg-yellow-100 text-yellow-800'
                         }`}
                       >
-                        {post.published_at ? 'Published' : 'Draft'}
+                        {post.published_at ? '✅ Published' : '📝 Draft'}
                       </span>
                     </div>
                     <div className="flex items-center text-sm text-gray-500 gap-4">
@@ -93,6 +112,24 @@ export default function AdminPage() {
                       </span>
                       <span className="font-mono text-xs">/{post.slug}</span>
                     </div>
+                  </div>
+                  <div className="flex items-center gap-2 ml-4">
+                    <Link
+                      href={`/admin/edit/${post.id}`}
+                      className="inline-flex items-center px-2.5 py-1 text-xs font-medium text-blue-700 bg-blue-50 rounded-md hover:bg-blue-100"
+                    >
+                      <Edit2 className="w-3 h-3 mr-1" />
+                      Edit
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(post.id)}
+                      disabled={deletingId === post.id}
+                      className="inline-flex items-center px-2.5 py-1 text-xs font-medium text-red-700 bg-red-50 rounded-md hover:bg-red-100 disabled:opacity-50"
+                    >
+                      <Trash2 className="w-3 h-3 mr-1" />
+                      {deletingId === post.id ? 'Deleting…' : 'Delete'}
+                    </button>
                   </div>
                 </div>
               </li>
