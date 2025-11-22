@@ -25,6 +25,7 @@ export default function AdminPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<Post | null>(null);
 
   useEffect(() => {
     fetchPosts();
@@ -40,12 +41,19 @@ export default function AdminPage() {
     setLoading(false);
   }
 
-  async function handleDelete(id: string) {
-    const confirmed = window.confirm(
-      'Delete this post? This action cannot be undone.'
-    );
-    if (!confirmed) return;
+  function openDeleteModal(post: Post) {
+    setDeleteTarget(post);
+  }
 
+  function closeDeleteModal() {
+    if (deletingId) return;
+    setDeleteTarget(null);
+  }
+
+  async function confirmDelete() {
+    if (!deleteTarget) return;
+
+    const id = deleteTarget.id;
     setDeletingId(id);
     const { error } = await supabase.from('posts').delete().eq('id', id);
 
@@ -56,6 +64,7 @@ export default function AdminPage() {
     }
 
     setDeletingId(null);
+    setDeleteTarget(null);
   }
 
   return (
@@ -142,12 +151,11 @@ export default function AdminPage() {
                       </Link>
                       <button
                         type="button"
-                        onClick={() => handleDelete(post.id)}
-                        disabled={deletingId === post.id}
-                        className="inline-flex items-center px-2.5 py-1 text-xs font-medium text-red-700 bg-red-50 rounded-md hover:bg-red-100 disabled:opacity-50"
+                        onClick={() => openDeleteModal(post)}
+                        className="inline-flex items-center px-2.5 py-1 text-xs font-medium text-red-700 bg-red-50 rounded-md hover:bg-red-100"
                       >
                         <Trash2 className="w-3 h-3 mr-1" />
-                        {deletingId === post.id ? 'Deleting…' : 'Delete'}
+                        Delete
                       </button>
                     </div>
                   </div>
@@ -155,6 +163,38 @@ export default function AdminPage() {
               </li>
             ))}
           </ul>
+        </div>
+      )}
+      {deleteTarget && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+            <h2 className="text-lg font-semibold text-gray-900 mb-2">
+              Delete post
+            </h2>
+            <p className="text-sm text-gray-600 mb-4">
+              Are you sure you want to delete
+              <span className="font-medium text-gray-900"> "{deleteTarget.title}"</span>
+              ? This action cannot be undone.
+            </p>
+            <div className="flex justify-end gap-3">
+              <button
+                type="button"
+                onClick={closeDeleteModal}
+                disabled={!!deletingId}
+                className="px-3 py-1.5 text-xs font-medium rounded-md border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50"
+              >
+                Cancel
+              </button>
+            <button
+                type="button"
+                onClick={confirmDelete}
+                disabled={!!deletingId}
+                className="inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-md border border-red-200 text-red-700 bg-red-50 hover:bg-red-100 disabled:opacity-50"
+              >
+                {deletingId ? 'Deleting…' : 'Delete post'}
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
