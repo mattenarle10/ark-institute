@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { Session } from '@supabase/supabase-js';
 import LoginScreen from './login-screen';
 import { useRouter } from 'next/navigation';
+import { LogOut } from 'lucide-react';
 
 export default function AdminLayout({
   children,
@@ -55,17 +57,29 @@ export default function AdminLayout({
     <div className="min-h-screen bg-gray-50 font-montserrat">
       <nav className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <div className="flex items-center gap-2">
-            {/* Simple placeholder logo if needed, or just text */}
-            <span className="font-bold text-xl text-primary">ARK Admin</span>
-          </div>
+          <Link href="/admin" className="flex items-center gap-3">
+            <img
+              src="/logo/ark-transpa.png"
+              alt="Ark Institute logo"
+              className="h-8 w-auto"
+            />
+            <div className="flex flex-col leading-tight">
+              <span className="text-xs uppercase tracking-wide text-gray-400">
+                Admin
+              </span>
+              <span className="font-bold text-lg text-primary">
+                Ark Institute
+              </span>
+            </div>
+          </Link>
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-500">{session.user.email}</span>
-            <button 
+            <button
               onClick={handleSignOut}
-              className="text-sm font-medium text-accent hover:text-red-800 transition-colors"
+              className="inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-md border border-red-200 text-red-700 bg-red-50 hover:bg-red-100 hover:border-red-300 transition-colors"
             >
-              Sign Out
+              <LogOut className="w-3 h-3 mr-1" />
+              Sign out
             </button>
           </div>
         </div>
