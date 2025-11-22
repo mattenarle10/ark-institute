@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
-import RichTextEditor from './rich-text-editor';
+import BlogRichEditor from './blog-rich-editor';
 import { Loader2, ArrowLeft, Image as ImageIcon } from 'lucide-react';
 
 type Post = {
@@ -158,8 +158,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-8 h-[calc(100vh-200px)]">
-        <div className="flex flex-col gap-4 h-full">
+      <div className="flex flex-col gap-4 max-w-5xl mx-auto">
           <div className="space-y-4">
             <input
               type="text"
@@ -225,13 +224,14 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
               )}
             </div>
           </div>
-          <RichTextEditor
-            value={post.content}
-            onChange={(html) =>
-              setPost((prev) => ({ ...prev, content: html }))
-            }
-          />
-        </div>
+          <div className="h-[500px]">
+            <BlogRichEditor
+              value={post.content}
+              onChange={(html) =>
+                setPost((prev) => ({ ...prev, content: html }))
+              }
+            />
+          </div>
       </div>
     </div>
   );
