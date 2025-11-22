@@ -129,9 +129,9 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
   };
 
   return (
-    <div className="space-y-6 px-4 sm:px-0">
-      {/* Header Actions */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+    <div className="space-y-6 px-4 sm:px-0 pb-24 sm:pb-0">
+      {/* Header - Back button only */}
+      <div className="flex items-center justify-between">
         <button
           onClick={() => router.back()}
           className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
@@ -139,18 +139,40 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back
         </button>
-        <div className="flex gap-2 sm:gap-3 w-full sm:w-auto">
+        {/* Desktop action buttons */}
+        <div className="hidden sm:flex gap-3">
           <button
             onClick={() => handleSave(false)}
             disabled={loading}
-            className="flex-1 sm:flex-none px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
+            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
           >
             Save Draft
           </button>
           <button
             onClick={() => handleSave(true)}
             disabled={loading}
-            className="flex-1 sm:flex-none flex items-center justify-center px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/90 disabled:opacity-50"
+            className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/90 disabled:opacity-50"
+          >
+            {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+            {initialPost ? 'Update' : 'Publish'}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile sticky action bar at bottom */}
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 p-4 shadow-lg">
+        <div className="flex gap-3">
+          <button
+            onClick={() => handleSave(false)}
+            disabled={loading}
+            className="flex-1 px-4 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
+          >
+            Save Draft
+          </button>
+          <button
+            onClick={() => handleSave(true)}
+            disabled={loading}
+            className="flex-1 flex items-center justify-center px-4 py-3 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/90 disabled:opacity-50"
           >
             {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
             {initialPost ? 'Update' : 'Publish'}
