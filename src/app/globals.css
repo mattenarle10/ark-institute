@@ -1,13 +1,13 @@
 @import "tailwindcss";
 @source "../../node_modules/streamdown/dist/index.js";
-@import '../styles/_variables.scss';
-@import '../styles/_keyframe-animations.scss';
+@import "../styles/_variables.scss";
+@import "../styles/_keyframe-animations.scss";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
   --primary: #193a7a; /* Ark Blue */
-  --accent: #c80100;  /* Ark Red */
+  --accent: #c80100; /* Ark Red */
 }
 
 @theme inline {
@@ -29,9 +29,20 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
-    Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family:
+    var(--font-montserrat),
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
 }
 
 /* Text shadow utilities */

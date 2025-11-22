@@ -1,29 +1,29 @@
-'use client';
+"use client"
 
-import { useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { useState } from "react"
+import { supabase } from "@/lib/supabase"
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
-    });
+    })
 
     if (error) {
-      setError(error.message);
+      setError(error.message)
     }
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -67,11 +67,11 @@ export default function LoginScreen() {
               disabled={loading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
             >
-              {loading ? 'Signing in...' : 'Sign in'}
+              {loading ? "Signing in..." : "Sign in"}
             </button>
           </div>
         </form>
       </div>
     </div>
-  );
+  )
 }

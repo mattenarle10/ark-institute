@@ -70,7 +70,10 @@ export default function EmailForm() {
           <form onSubmit={onSubmit} className="p-6 sm:p-8 md:p-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               <div className="flex flex-col">
-                <label htmlFor="contact-name" className="text-sm font-semibold text-gray-800 mb-1.5">
+                <label
+                  htmlFor="contact-name"
+                  className="text-sm font-semibold text-gray-800 mb-1.5"
+                >
                   Full name
                 </label>
                 <div className="relative">
@@ -104,7 +107,10 @@ export default function EmailForm() {
               </div>
 
               <div className="flex flex-col">
-                <label htmlFor="contact-email" className="text-sm font-semibold text-gray-800 mb-1.5">
+                <label
+                  htmlFor="contact-email"
+                  className="text-sm font-semibold text-gray-800 mb-1.5"
+                >
                   Email
                 </label>
                 <div className="relative">
@@ -133,7 +139,10 @@ export default function EmailForm() {
               </div>
 
               <div className="flex flex-col">
-                <label htmlFor="contact-phone" className="text-sm font-semibold text-gray-800 mb-1.5">
+                <label
+                  htmlFor="contact-phone"
+                  className="text-sm font-semibold text-gray-800 mb-1.5"
+                >
                   Phone (optional)
                 </label>
                 <div className="relative">
@@ -161,7 +170,10 @@ export default function EmailForm() {
               </div>
 
               <div className="flex flex-col">
-                <label htmlFor="contact-subject" className="text-sm font-semibold text-gray-800 mb-1.5">
+                <label
+                  htmlFor="contact-subject"
+                  className="text-sm font-semibold text-gray-800 mb-1.5"
+                >
                   Subject
                 </label>
                 <div className="relative">
@@ -191,7 +203,10 @@ export default function EmailForm() {
             </div>
 
             <div className="mt-4 sm:mt-5">
-              <label htmlFor="contact-message" className="text-sm font-semibold text-gray-800 mb-1.5 block">
+              <label
+                htmlFor="contact-message"
+                className="text-sm font-semibold text-gray-800 mb-1.5 block"
+              >
                 Message
               </label>
               <textarea

@@ -50,7 +50,9 @@ export default function Hero() {
     })
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => { trigger.kill() })
+      ScrollTrigger.getAll().forEach((trigger) => {
+        trigger.kill()
+      })
     }
   }, [])
 
@@ -149,7 +151,10 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/70 backdrop-blur px-3 py-1 text-xs font-medium text-gray-700 shadow-sm mb-5"
             >
-              <ShieldCheck aria-hidden="true" className="w-4 h-4 text-[#193a7a]" />
+              <ShieldCheck
+                aria-hidden="true"
+                className="w-4 h-4 text-[#193a7a]"
+              />
               <span className="tracking-wide">TESDA-accredited</span>
             </motion.div>
             <motion.h1

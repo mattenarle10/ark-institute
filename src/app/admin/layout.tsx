@@ -1,56 +1,57 @@
-'use client';
+"use client"
 
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { supabase } from '@/lib/supabase';
-import { Session } from '@supabase/supabase-js';
-import LoginScreen from './login-screen';
-import { useRouter } from 'next/navigation';
-import { LogOut } from 'lucide-react';
+import type React from "react"
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import { supabase } from "@/lib/supabase"
+import type { Session } from "@supabase/supabase-js"
+import LoginScreen from "./login-screen"
+import { useRouter } from "next/navigation"
+import { LogOut } from "lucide-react"
 
 export default function AdminLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
+  const [session, setSession] = useState<Session | null>(null)
+  const [loading, setLoading] = useState(true)
+  const router = useRouter()
 
   useEffect(() => {
     // Check active session
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setLoading(false);
-    });
+      setSession(session)
+      setLoading(false)
+    })
 
     // Listen for changes
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
+      setSession(session)
       if (session) {
-        router.refresh();
+        router.refresh()
       }
-    });
+    })
 
-    return () => subscription.unsubscribe();
-  }, [router]);
+    return () => subscription.unsubscribe()
+  }, [router])
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
-  };
+    await supabase.auth.signOut()
+  }
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="animate-subtle-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
-    );
+    )
   }
 
   if (!session) {
-    return <LoginScreen />;
+    return <LoginScreen />
   }
 
   return (
@@ -86,9 +87,7 @@ export default function AdminLayout({
           </div>
         </div>
       </nav>
-      <main className="max-w-7xl mx-auto p-6">
-        {children}
-      </main>
+      <main className="max-w-7xl mx-auto p-6">{children}</main>
     </div>
-  );
+  )
 }

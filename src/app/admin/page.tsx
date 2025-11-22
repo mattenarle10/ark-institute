@@ -1,8 +1,8 @@
-'use client';
+"use client"
 
-import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
-import Link from 'next/link';
+import { useEffect, useState, useCallback } from "react"
+import { supabase } from "@/lib/supabase"
+import Link from "next/link"
 import {
   Plus,
   FileText,
@@ -11,60 +11,60 @@ import {
   Trash2,
   CheckCircle2,
   Clock,
-} from 'lucide-react';
+} from "lucide-react"
 
 type Post = {
-  id: string;
-  title: string;
-  created_at: string;
-  published_at: string | null;
-  slug: string;
-};
+  id: string
+  title: string
+  created_at: string
+  published_at: string | null
+  slug: string
+}
 
 export default function AdminPage() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [deletingId, setDeletingId] = useState<string | null>(null);
-  const [deleteTarget, setDeleteTarget] = useState<Post | null>(null);
+  const [posts, setPosts] = useState<Post[]>([])
+  const [loading, setLoading] = useState(true)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [deleteTarget, setDeleteTarget] = useState<Post | null>(null)
+
+  const fetchPosts = useCallback(async () => {
+    const { data } = await supabase
+      .from("posts")
+      .select("*")
+      .order("created_at", { ascending: false })
+
+    if (data) setPosts(data)
+    setLoading(false)
+  }, [])
 
   useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  async function fetchPosts() {
-    const { data, error } = await supabase
-      .from('posts')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (data) setPosts(data);
-    setLoading(false);
-  }
+    fetchPosts()
+  }, [fetchPosts])
 
   function openDeleteModal(post: Post) {
-    setDeleteTarget(post);
+    setDeleteTarget(post)
   }
 
   function closeDeleteModal() {
-    if (deletingId) return;
-    setDeleteTarget(null);
+    if (deletingId) return
+    setDeleteTarget(null)
   }
 
   async function confirmDelete() {
-    if (!deleteTarget) return;
+    if (!deleteTarget) return
 
-    const id = deleteTarget.id;
-    setDeletingId(id);
-    const { error } = await supabase.from('posts').delete().eq('id', id);
+    const id = deleteTarget.id
+    setDeletingId(id)
+    const { error } = await supabase.from("posts").delete().eq("id", id)
 
     if (error) {
-      alert('Error deleting post: ' + error.message);
+      alert(`Error deleting post: ${error.message}`)
     } else {
-      setPosts((prev) => prev.filter((post) => post.id !== id));
+      setPosts((prev) => prev.filter((post) => post.id !== id))
     }
 
-    setDeletingId(null);
-    setDeleteTarget(null);
+    setDeletingId(null)
+    setDeleteTarget(null)
   }
 
   return (
@@ -129,8 +129,8 @@ export default function AdminPage() {
                     <span
                       className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium ${
                         post.published_at
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-yellow-100 text-yellow-800'
+                          ? "bg-green-100 text-green-800"
+                          : "bg-yellow-100 text-yellow-800"
                       }`}
                     >
                       {post.published_at ? (
@@ -177,7 +177,10 @@ export default function AdminPage() {
             </h2>
             <p className="text-sm text-gray-600 mb-4">
               Are you sure you want to delete
-              <span className="font-medium text-gray-900"> "{deleteTarget.title}"</span>
+              <span className="font-medium text-gray-900">
+                {" "}
+                "{deleteTarget.title}"
+              </span>
               ? This action cannot be undone.
             </p>
             <div className="flex justify-end gap-3">
@@ -189,13 +192,13 @@ export default function AdminPage() {
               >
                 Cancel
               </button>
-            <button
+              <button
                 type="button"
                 onClick={confirmDelete}
                 disabled={!!deletingId}
                 className="inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-md border border-red-200 text-red-700 bg-red-50 hover:bg-red-100 disabled:opacity-50"
               >
-                {deletingId ? 'Deleting…' : 'Delete post'}
+                {deletingId ? "Deleting…" : "Delete post"}
               </button>
             </div>
           </div>
@@ -211,5 +214,5 @@ export default function AdminPage() {
         <Plus className="w-6 h-6" />
       </Link>
     </div>
-  );
+  )
 }
