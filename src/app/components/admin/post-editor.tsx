@@ -54,7 +54,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
         author_id: user.id,
       };
 
-      let error;
+      let error: unknown;
       if (initialPost?.id) {
         // Update
         const { error: updateError } = await supabase
@@ -74,8 +74,9 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
 
       router.push('/admin');
       router.refresh();
-    } catch (err: any) {
-      alert('Error saving post: ' + err.message);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Unknown error occurred';
+      alert('Error saving post: ' + message);
     } finally {
       setLoading(false);
     }
