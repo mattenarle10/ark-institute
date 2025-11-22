@@ -134,7 +134,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
       <div className="flex items-center justify-between">
         <button
           onClick={() => router.back()}
-          className="flex items-center text-gray-500 hover:text-gray-900"
+          className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back
