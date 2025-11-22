@@ -80,7 +80,7 @@ export default function AdminPage() {
         </div>
         <Link
           href="/admin/create"
-          className="flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
+          className="hidden sm:flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
         >
           <Plus className="w-4 h-4 mr-2" />
           New Post
@@ -201,6 +201,15 @@ export default function AdminPage() {
           </div>
         </div>
       )}
+
+      {/* Floating New Post button for mobile */}
+      <Link
+        href="/admin/create"
+        className="sm:hidden fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-primary text-white rounded-full shadow-lg hover:bg-primary/90 transition-all hover:scale-110"
+        aria-label="New Post"
+      >
+        <Plus className="w-6 h-6" />
+      </Link>
     </div>
   );
 }

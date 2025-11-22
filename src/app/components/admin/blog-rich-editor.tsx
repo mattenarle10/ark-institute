@@ -7,9 +7,7 @@ import { Link } from '@tiptap/extension-link';
 import { Underline } from '@tiptap/extension-underline';
 
 // Tiptap UI Components (simplified)
-import { Spacer } from '@/components/tiptap-ui-primitive/spacer';
 import {
-  Toolbar,
   ToolbarGroup,
   ToolbarSeparator,
 } from '@/components/tiptap-ui-primitive/toolbar';
@@ -80,43 +78,50 @@ export default function BlogRichEditor({ value, onChange }: BlogRichEditorProps)
   return (
     <div className="flex flex-col h-full border border-gray-200 rounded-lg overflow-hidden bg-white">
       <EditorContext.Provider value={{ editor }}>
-        <Toolbar ref={toolbarRef} className="border-b border-gray-200 bg-gray-50">
-          <Spacer />
+        <div ref={toolbarRef} className="border-b border-gray-200 bg-gray-50 p-2">
+          <div className="flex flex-wrap gap-1 items-center">
+            {/* First row on mobile, inline on desktop */}
+            <div className="flex items-center gap-1">
+              <ToolbarGroup>
+                <UndoRedoButton action="undo" />
+                <UndoRedoButton action="redo" />
+              </ToolbarGroup>
 
-          <ToolbarGroup>
-            <UndoRedoButton action="undo" />
-            <UndoRedoButton action="redo" />
-          </ToolbarGroup>
+              <ToolbarSeparator />
 
-          <ToolbarSeparator />
+              <ToolbarGroup>
+                <HeadingDropdownMenu levels={[2, 3]} portal={false} />
+                <ListDropdownMenu
+                  types={['bulletList', 'orderedList']}
+                  portal={false}
+                />
+              </ToolbarGroup>
+            </div>
 
-          <ToolbarGroup>
-            <HeadingDropdownMenu levels={[2, 3]} portal={false} />
-            <ListDropdownMenu
-              types={['bulletList', 'orderedList']}
-              portal={false}
-            />
-            <BlockquoteButton />
-            <CodeBlockButton />
-          </ToolbarGroup>
+            {/* Second row on mobile, inline on desktop */}
+            <div className="flex items-center gap-1 flex-wrap">
+              <ToolbarGroup>
+                <BlockquoteButton />
+                <CodeBlockButton />
+              </ToolbarGroup>
 
-          <ToolbarSeparator />
+              <ToolbarSeparator />
 
-          <ToolbarGroup>
-            <MarkButton type="bold" />
-            <MarkButton type="italic" />
-            <MarkButton type="strike" />
-            <MarkButton type="code" />
-            <MarkButton type="underline" />
-            <LinkPopover />
-          </ToolbarGroup>
-
-          <Spacer />
-        </Toolbar>
+              <ToolbarGroup>
+                <MarkButton type="bold" />
+                <MarkButton type="italic" />
+                <MarkButton type="strike" />
+                <MarkButton type="code" />
+                <MarkButton type="underline" />
+                <LinkPopover />
+              </ToolbarGroup>
+            </div>
+          </div>
+        </div>
 
         <EditorContent
           editor={editor}
-          className="flex-1 overflow-y-auto p-4 prose prose-sm max-w-none focus:outline-none"
+          className="flex-1 overflow-y-auto p-3 sm:p-4 prose prose-sm max-w-none focus:outline-none text-sm sm:text-base"
         />
       </EditorContext.Provider>
     </div>

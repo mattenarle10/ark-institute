@@ -129,9 +129,9 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 px-4 sm:px-0">
       {/* Header Actions */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <button
           onClick={() => router.back()}
           className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
@@ -139,18 +139,18 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back
         </button>
-        <div className="flex gap-3">
+        <div className="flex gap-2 sm:gap-3 w-full sm:w-auto">
           <button
             onClick={() => handleSave(false)}
             disabled={loading}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
+            className="flex-1 sm:flex-none px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
           >
             Save Draft
           </button>
           <button
             onClick={() => handleSave(true)}
             disabled={loading}
-            className="flex items-center px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/90 disabled:opacity-50"
+            className="flex-1 sm:flex-none flex items-center justify-center px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/90 disabled:opacity-50"
           >
             {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
             {initialPost ? 'Update' : 'Publish'}
@@ -158,7 +158,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 max-w-5xl mx-auto">
+      <div className="flex flex-col gap-4 w-full max-w-5xl mx-auto">
           <div className="space-y-4">
             <input
               type="text"
@@ -224,7 +224,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
               )}
             </div>
           </div>
-          <div className="h-[500px]">
+          <div className="h-[400px] sm:h-[500px] w-full overflow-hidden">
             <BlogRichEditor
               value={post.content}
               onChange={(html) =>
