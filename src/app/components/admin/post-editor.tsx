@@ -133,6 +133,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
       {/* Header - Back button only */}
       <div className="flex items-center justify-between">
         <button
+          type="button"
           onClick={() => router.back()}
           className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
         >
@@ -142,6 +143,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
         {/* Desktop action buttons */}
         <div className="hidden sm:flex gap-3">
           <button
+            type="button"
             onClick={() => handleSave(false)}
             disabled={loading}
             className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
@@ -149,6 +151,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
             Save Draft
           </button>
           <button
+            type="button"
             onClick={() => handleSave(true)}
             disabled={loading}
             className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/90 disabled:opacity-50"
@@ -163,6 +166,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
       <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 p-4 shadow-lg">
         <div className="flex gap-3">
           <button
+            type="button"
             onClick={() => handleSave(false)}
             disabled={loading}
             className="flex-1 px-4 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50"
@@ -170,6 +174,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
             Save Draft
           </button>
           <button
+            type="button"
             onClick={() => handleSave(true)}
             disabled={loading}
             className="flex-1 flex items-center justify-center px-4 py-3 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/90 disabled:opacity-50"
