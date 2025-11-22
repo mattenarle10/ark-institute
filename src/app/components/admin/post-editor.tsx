@@ -181,7 +181,10 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
               )}
             </div>
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="cover-image-input"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Cover image (optional)
               </label>
               <div className="flex items-center gap-4">
@@ -204,6 +207,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
                   )}
                 </button>
                 <input
+                  id="cover-image-input"
                   ref={fileInputRef}
                   type="file"
                   accept="image/*"

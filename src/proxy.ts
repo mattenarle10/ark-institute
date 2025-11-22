@@ -17,12 +17,19 @@ export default async function proxy(req: NextRequest) {
     pathname: url.pathname,
   });
 
-  // Check if the request is for the admin subdomain
-  // This handles "admin.localhost:3000", "admin.localhost", "admin.arkinstitute.com", etc.
   const isAdminSubdomain =
     hostname === 'admin.localhost' || hostname.startsWith('admin.');
 
   if (isAdminSubdomain) {
+    // Allow static assets to pass through without rewrite
+    // e.g. /logo/ark-transpa.png should be served from /public
+    const isStaticAsset =
+      !url.pathname.startsWith('/admin') && url.pathname.includes('.');
+
+    if (isStaticAsset) {
+      return NextResponse.next();
+    }
+
     // Rewrite to the /admin directory without double-prefixing
     // e.g. admin.arkinstitute.com/dashboard -> /admin/dashboard
     const pathname = url.pathname.startsWith('/admin')
