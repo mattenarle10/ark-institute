@@ -151,6 +151,7 @@ export default function FacilityCarousel({
       >
         {images.map((_, idx) => (
           <button
+            type="button"
             key={`${facilityId}-dot-${idx}`}
             onClick={() => {
               sliderRef.current?.slickGoTo(idx)
@@ -176,6 +177,7 @@ export default function FacilityCarousel({
 
       {/* Custom navigation arrows */}
       <button
+        type="button"
         ref={prevBtnRef}
         onClick={() => {
           sliderRef.current?.slickPrev()
@@ -204,10 +206,12 @@ export default function FacilityCarousel({
           className="text-white"
           aria-label="Previous arrow"
         >
+          <title>Previous arrow</title>
           <path d="m15 18-6-6 6-6" />
         </svg>
       </button>
       <button
+        type="button"
         ref={nextBtnRef}
         onClick={() => {
           sliderRef.current?.slickNext()
@@ -236,6 +240,7 @@ export default function FacilityCarousel({
           className="text-white"
           aria-label="Next arrow"
         >
+          <title>Next arrow</title>
           <path d="m9 18 6-6-6-6" />
         </svg>
       </button>

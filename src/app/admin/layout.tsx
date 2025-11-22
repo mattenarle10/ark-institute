@@ -78,6 +78,7 @@ export default function AdminLayout({
               {session.user.email}
             </span>
             <button
+              type="button"
               onClick={handleSignOut}
               className="inline-flex items-center px-2.5 py-1 text-[11px] sm:text-xs font-medium rounded-md border border-red-200 text-red-700 bg-red-50 hover:bg-red-100 hover:border-red-300 transition-colors"
             >

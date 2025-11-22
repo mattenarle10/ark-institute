@@ -98,6 +98,7 @@ export default function EmailForm() {
                       className="mr-1"
                       aria-label="User icon"
                     >
+                      <title>User icon</title>
                       <path
                         fill="currentColor"
                         d="M12 12a5 5 0 1 0-5-5a5 5 0 0 0 5 5m0 2c-4.42 0-8 2.239-8 5v1h16v-1c0-2.761-3.58-5-8-5"
@@ -135,6 +136,7 @@ export default function EmailForm() {
                       viewBox="0 0 24 24"
                       aria-label="Mail icon"
                     >
+                      <title>Mail icon</title>
                       <path
                         fill="currentColor"
                         d="m12 13l-8-5V6l8 5l8-5v2zM4 18q-.825 0-1.412-.587T2 16V8l10 6l10-6v8q0 .825-.587 1.413T20 18z"
@@ -171,6 +173,7 @@ export default function EmailForm() {
                       viewBox="0 0 24 24"
                       aria-label="Phone icon"
                     >
+                      <title>Phone icon</title>
                       <path
                         fill="currentColor"
                         d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.4 22 2 13.6 2 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01z"
@@ -208,6 +211,7 @@ export default function EmailForm() {
                       viewBox="0 0 24 24"
                       aria-label="Tag icon"
                     >
+                      <title>Tag icon</title>
                       <path
                         fill="currentColor"
                         d="m10.59 13.41l-7-7A2 2 0 0 1 4 2h6.59a2 2 0 0 1 1.41.59l7 7a2 2 0 0 1 0 2.82l-4.59 4.59a2 2 0 0 1-2.82 0zM7.5 6A1.5 1.5 0 1 0 9 7.5A1.5 1.5 0 0 0 7.5 6"
@@ -250,6 +254,7 @@ export default function EmailForm() {
                   className="opacity-90"
                   aria-label="Send icon"
                 >
+                  <title>Send icon</title>
                   <path
                     fill="currentColor"
                     d="m3.4 20.4l18.3-7.8a1 1 0 0 0 0-1.8L3.4 3A1 1 0 0 0 2 4v5a1 1 0 0 0 1 1h9l-8 4v.01L3 14.5v5.5a1 1 0 0 0 1.4.9"

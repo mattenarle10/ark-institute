@@ -49,6 +49,7 @@ export default function AccreditationCTA() {
                     stroke="currentColor"
                     aria-label="Arrow right"
                   >
+                    <title>Arrow right</title>
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"

@@ -37,6 +37,7 @@ export default function MissionVision() {
                   stroke="currentColor"
                   aria-label="Lightning bolt icon"
                 >
+                  <title>Lightning bolt icon</title>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -76,6 +77,7 @@ export default function MissionVision() {
                   stroke="currentColor"
                   aria-label="Eye icon"
                 >
+                  <title>Eye icon</title>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

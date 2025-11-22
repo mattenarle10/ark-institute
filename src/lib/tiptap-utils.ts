@@ -262,10 +262,10 @@ export function findNodePosition(props: {
   }
 
   // If we have a valid position, use findNodeAtPosition
-  if (hasValidPos) {
-    const nodeAtPos = findNodeAtPosition(editor, nodePos!)
+  if (hasValidPos && nodePos !== null) {
+    const nodeAtPos = findNodeAtPosition(editor, nodePos)
     if (nodeAtPos) {
-      return { pos: nodePos!, node: nodeAtPos }
+      return { pos: nodePos, node: nodeAtPos }
     }
   }
 
@@ -401,8 +401,8 @@ type ProtocolOptions = {
 
 type ProtocolConfig = Array<ProtocolOptions | string>
 
+// biome-ignore lint/suspicious/noControlCharactersInRegex: Required for URI validation
 const ATTR_WHITESPACE =
-  // eslint-disable-next-line no-control-regex
   /[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205F\u3000]/g
 
 export function isAllowedUri(
