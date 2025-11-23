@@ -89,20 +89,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           )}
 
-          <p className="text-xs sm:text-sm text-gray-500 mb-2">
+          <p className="text-xs sm:text-sm text-gray-500 mb-1.5">
             {formatDate(post.published_at ?? post.created_at)}
           </p>
           <h1
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 tracking-tight text-gray-900"
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight text-gray-900"
             style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
             {post.title}
           </h1>
 
-          <div
-            className="prose prose-lg max-w-none text-gray-800"
-            dangerouslySetInnerHTML={{ __html: post.content ?? "" }}
-          />
+          <div className="mt-4 rounded-2xl border border-gray-100 bg-white/80 px-5 py-4 sm:px-6 sm:py-5 shadow-sm">
+            <div
+              className="prose prose-lg max-w-none text-gray-800"
+              dangerouslySetInnerHTML={{ __html: post.content ?? "" }}
+            />
+          </div>
         </article>
       </main>
       <Footer />
