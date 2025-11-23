@@ -6,7 +6,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
-import { useSplashCompletion } from "@/app/components/splash"
 import MobileNav from "./mobile-nav"
 
 function AnimatedNavLink({
@@ -72,10 +71,8 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { scrollY } = useScroll()
   const isScrolledRef = useRef(false)
-  const splashCompleted = useSplashCompletion()
   const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false)
   const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const isHome = pathname === "/"
 
   useEffect(() => {
     const ENTER_SCROLL_PX = 24
@@ -108,8 +105,8 @@ export default function Navbar() {
     { href: "/contact", label: "Contact" },
   ]
 
-  // Only hide navbar during splash on home page
-  const shouldHideForSplash = !splashCompleted && isHome
+  // Don't hide navbar - splash is no longer used on homepage
+  const shouldHideForSplash = false
 
   return (
     <motion.header
