@@ -88,6 +88,10 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
     }
   }
 
+  const handleRemoveCoverImage = () => {
+    setPost((prev) => ({ ...prev, coverImageUrl: undefined }))
+  }
+
   const handleSave = async (publishStatus: boolean) => {
     setLoading(true)
     try {
@@ -247,14 +251,23 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
               />
             </div>
             {post.coverImageUrl && (
-              <div className="mt-2 h-24 w-40 relative">
-                <Image
-                  src={post.coverImageUrl}
-                  alt="Cover preview"
-                  fill
-                  sizes="160px"
-                  className="object-cover rounded border border-gray-200"
-                />
+              <div className="mt-2 flex items-center gap-4">
+                <div className="h-20 w-32 sm:h-24 sm:w-40 relative">
+                  <Image
+                    src={post.coverImageUrl}
+                    alt="Cover preview"
+                    fill
+                    sizes="160px"
+                    className="object-cover rounded border border-gray-200"
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={handleRemoveCoverImage}
+                  className="text-xs font-medium text-red-600 hover:text-red-700"
+                >
+                  Remove image
+                </button>
               </div>
             )}
           </div>

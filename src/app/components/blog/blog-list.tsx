@@ -72,7 +72,7 @@ export default function BlogList({ posts }: BlogListProps) {
             </div>
 
             {post.cover_image_url && (
-              <div className="relative w-full sm:w-44 h-40 sm:h-32 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
+              <div className="relative w-full sm:w-44 h-32 sm:h-28 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
                 <Image
                   src={post.cover_image_url}
                   alt={post.title}
