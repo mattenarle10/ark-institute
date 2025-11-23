@@ -1,58 +1,36 @@
-import Link from "next/link"
 import { getAllPublishedPosts } from "@/lib/posts"
-
-const formatDate = (iso: string | null) => {
-  if (!iso) return ""
-  return new Date(iso).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  })
-}
-
-const getExcerpt = (content: string | null, length = 160) => {
-  const text = (content ?? "").trim()
-  if (text.length <= length) return text
-  return `${text.slice(0, length).trimEnd()}…`
-}
+import BlogList from "@/app/components/blog/blog-list"
+import Footer from "@/app/components/layout/footer"
+import NavSpacer from "@/app/components/layout/nav-spacer"
+import Navbar from "@/app/components/layout/navbar"
 
 export default async function BlogPage() {
   const posts = await getAllPublishedPosts()
 
-  if (!posts.length) {
-    return (
-      <div className="container mx-auto px-4 py-24">
-        <h1 className="text-4xl font-bold mb-6">Latest Updates</h1>
-        <p className="text-gray-500">No posts published yet.</p>
-      </div>
-    )
-  }
-
   return (
-    <div className="container mx-auto px-4 py-24">
-      <h1 className="text-4xl font-bold mb-12">Latest Updates</h1>
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => (
-          <Link
-            key={post.id}
-            href={`/blog/${post.slug}`}
-            className="group border border-gray-200 rounded-xl bg-white p-6 shadow-sm transition hover:shadow-md hover:border-gray-300"
+    <div className="min-h-screen bg-white overflow-x-hidden">
+      <Navbar />
+      <NavSpacer />
+      <main className="container mx-auto px-4 py-16 sm:py-20 md:py-24">
+        <div className="max-w-5xl mx-auto">
+          <h2
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 mb-3"
+            style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
-            <p className="text-sm text-gray-500 mb-2">
-              {formatDate(post.published_at ?? post.created_at)}
-            </p>
-            <h2 className="text-xl font-semibold mb-3 group-hover:text-primary">
-              {post.title}
-            </h2>
-            <p className="text-sm text-gray-600 line-clamp-3">
-              {getExcerpt(post.content)}
-            </p>
-            <span className="mt-4 inline-flex text-sm font-medium text-primary group-hover:underline">
-              Read more
-            </span>
-          </Link>
-        ))}
-      </div>
+            Latest Updates
+          </h2>
+          <p className="text-gray-600 text-sm sm:text-base mb-8 md:mb-10 max-w-2xl">
+            Stories, announcements, and insights from ARK Institute.
+          </p>
+
+          {posts.length === 0 ? (
+            <p className="text-gray-500">No posts published yet.</p>
+          ) : (
+            <BlogList posts={posts} />
+          )}
+        </div>
+      </main>
+      <Footer />
     </div>
   )
 }
