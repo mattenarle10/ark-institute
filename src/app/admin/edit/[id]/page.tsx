@@ -22,6 +22,10 @@ export default function EditPostPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    document.title = "Admin | Ark Institute"
+  }, [])
+
+  useEffect(() => {
     if (!id) return
 
     async function fetchPost() {
