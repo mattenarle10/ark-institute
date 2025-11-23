@@ -27,6 +27,10 @@ export default function AdminPage() {
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [deleteTarget, setDeleteTarget] = useState<Post | null>(null)
 
+  useEffect(() => {
+    document.title = "Admin | Ark Institute"
+  }, [])
+
   const fetchPosts = useCallback(async () => {
     const { data } = await supabase
       .from("posts")

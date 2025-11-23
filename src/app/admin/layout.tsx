@@ -39,6 +39,10 @@ export default function AdminLayout({
     return () => subscription.unsubscribe()
   }, [router])
 
+  useEffect(() => {
+    document.title = "Admin | Ark Institute"
+  }, [])
+
   const handleSignOut = async () => {
     await supabase.auth.signOut()
   }

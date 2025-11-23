@@ -1,8 +1,23 @@
+import type { Metadata } from "next"
 import { getAllPublishedPosts } from "@/lib/posts"
 import BlogList from "@/app/components/blog/blog-list"
 import Footer from "@/app/components/layout/footer"
 import NavSpacer from "@/app/components/layout/nav-spacer"
 import Navbar from "@/app/components/layout/navbar"
+
+export const metadata: Metadata = {
+  title: "Blog | Ark Institute",
+  description:
+    "Read the latest stories, updates, and announcements from Ark Institute.",
+  alternates: { canonical: "https://arkinstitutebc.com/blog" },
+  openGraph: {
+    title: "Blog | Ark Institute",
+    description:
+      "Read the latest stories, updates, and announcements from Ark Institute.",
+    url: "https://arkinstitutebc.com/blog",
+    type: "website",
+  },
+}
 
 export default async function BlogPage() {
   const posts = await getAllPublishedPosts()

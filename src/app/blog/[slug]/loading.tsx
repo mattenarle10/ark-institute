@@ -7,10 +7,18 @@ export default function Loading() {
     <div className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
       <NavSpacer />
-      <main className="container mx-auto px-4 py-16 sm:py-20 md:py-24 flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3 text-gray-500">
-          <div className="h-8 w-8 rounded-full border-2 border-primary border-b-transparent animate-spin" />
-          <p className="text-sm">Loading article…</p>
+      <main className="container mx-auto px-4 py-16 sm:py-20 md:py-24">
+        <div className="max-w-3xl mx-auto animate-pulse space-y-6">
+          <div className="h-6 w-32 rounded-full bg-gray-200" />
+          <div className="h-60 sm:h-72 md:h-80 w-full rounded-xl bg-gray-200" />
+          <div className="h-3 w-24 rounded-md bg-gray-200" />
+          <div className="h-7 w-3/4 rounded-md bg-gray-200" />
+          <div className="space-y-3 mt-2">
+            <div className="h-3 w-full rounded-md bg-gray-200" />
+            <div className="h-3 w-11/12 rounded-md bg-gray-200" />
+            <div className="h-3 w-10/12 rounded-md bg-gray-200" />
+            <div className="h-3 w-9/12 rounded-md bg-gray-200" />
+          </div>
         </div>
       </main>
       <Footer />

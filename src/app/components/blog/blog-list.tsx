@@ -19,7 +19,10 @@ const formatDate = (iso: string | null) => {
 }
 
 const getExcerpt = (content: string | null, length = 160) => {
-  const text = (content ?? "").trim()
+  if (!content) return ""
+  // Remove HTML tags and collapse whitespace for a clean text snippet
+  const withoutHtml = content.replace(/<[^>]+>/g, " ")
+  const text = withoutHtml.replace(/\s+/g, " ").trim()
   if (text.length <= length) return text
   return `${text.slice(0, length).trimEnd()}…`
 }
