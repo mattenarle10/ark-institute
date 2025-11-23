@@ -117,11 +117,12 @@ export default function BlogSection({ posts }: BlogSectionProps) {
                       <div className="absolute inset-0 animate-pulse bg-gray-200" />
                     )}
                     <Image
+                      key={post.cover_image_url}
                       src={post.cover_image_url}
                       alt={post.title}
                       fill
                       sizes="(min-width: 768px) 11rem, 100vw"
-                      className="object-cover"
+                      className="object-contain p-2"
                       onLoad={() => handleImageLoad(post.id)}
                     />
                   </div>

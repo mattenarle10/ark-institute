@@ -77,11 +77,12 @@ export default function BlogList({ posts }: BlogListProps) {
             {post.cover_image_url && (
               <div className="relative w-full sm:w-44 h-32 sm:h-28 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
                 <Image
+                  key={post.cover_image_url}
                   src={post.cover_image_url}
                   alt={post.title}
                   fill
                   sizes="(min-width: 768px) 11rem, 100vw"
-                  className="object-cover"
+                  className="object-contain p-2"
                 />
               </div>
             )}

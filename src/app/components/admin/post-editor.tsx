@@ -78,7 +78,9 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
         data: { publicUrl },
       } = supabase.storage.from("post-attachment").getPublicUrl(filePath)
 
-      setPost((prev) => ({ ...prev, coverImageUrl: publicUrl }))
+      // Add cache-busting parameter to force image refresh
+      const urlWithCacheBust = `${publicUrl}?t=${Date.now()}`
+      setPost((prev) => ({ ...prev, coverImageUrl: urlWithCacheBust }))
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Unknown error occurred"
@@ -254,6 +256,7 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
               <div className="mt-2 flex items-center gap-4">
                 <div className="h-20 w-32 sm:h-24 sm:w-40 relative">
                   <Image
+                    key={post.coverImageUrl}
                     src={post.coverImageUrl}
                     alt="Cover preview"
                     fill

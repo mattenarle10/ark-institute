@@ -89,6 +89,7 @@ export default function BlogPost({ post }: BlogPostProps) {
         {post.cover_image_url && (
           <div className="relative mt-2 mb-10 h-64 sm:h-80 md:h-96 w-full overflow-hidden rounded-2xl bg-gray-100 shadow-sm">
             <Image
+              key={post.cover_image_url}
               src={post.cover_image_url}
               alt={post.title}
               fill
