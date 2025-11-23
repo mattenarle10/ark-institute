@@ -1,22 +1,11 @@
 create table public.posts (
-  id uuid primary key default gen_random_uuid(),
+  id uuid not null default gen_random_uuid (),
   title text not null,
-  slug text not null unique,
+  slug text not null,
   content text not null,
-  published_at timestamptz,
-  created_at timestamptz not null default now()
-);
-
-alter table public.posts enable row level security;
-
--- Any authenticated user (your admin) can manage posts
-create policy "Authenticated can manage posts"
-  on public.posts
-  for all
-  using (auth.role() = 'authenticated');
-
--- Public can read only published posts
-create policy "Public read published posts"
-  on public.posts
-  for select
-  using (published_at is not null);
+  published_at timestamp with time zone null,
+  created_at timestamp with time zone not null default now(),
+  cover_image_url text null,
+  constraint posts_pkey primary key (id),
+  constraint posts_slug_key unique (slug)
+) TABLESPACE pg_default;
