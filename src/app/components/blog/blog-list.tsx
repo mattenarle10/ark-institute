@@ -39,17 +39,17 @@ export default function BlogList({ posts }: BlogListProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.18 }}
           transition={{ duration: 0.24, ease: "easeOut", delay: index * 0.03 }}
-          className="group relative overflow-hidden rounded-2xl border border-gray-200/80 bg-white/90 backdrop-blur-sm shadow-sm hover:shadow-md md:hover:-translate-y-0.5 transition-shadow transition-transform"
+          className="group relative overflow-hidden rounded-2xl border border-gray-200/80 bg-white/90 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300"
         >
           <Link
             href={`/blog/${post.slug}`}
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 p-5 sm:p-6"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 p-4 sm:p-5"
           >
             <div className="flex-1 min-w-0">
               <p className="text-xs sm:text-sm text-gray-500 mb-1.5">
                 {formatDate(post.published_at ?? post.created_at)}
               </p>
-              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 group-hover:text-primary line-clamp-2">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 group-hover:text-primary line-clamp-2 transition-colors">
                 {post.title}
               </h2>
               <p className="mt-2 text-sm text-gray-600 line-clamp-3">
@@ -75,14 +75,14 @@ export default function BlogList({ posts }: BlogListProps) {
             </div>
 
             {post.cover_image_url && (
-              <div className="relative w-full sm:w-44 h-32 sm:h-28 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
+              <div className="relative w-full sm:w-52 h-36 sm:h-32 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0 sm:self-center">
                 <Image
                   key={post.cover_image_url}
                   src={post.cover_image_url}
                   alt={post.title}
                   fill
-                  sizes="(min-width: 768px) 11rem, 100vw"
-                  className="object-contain p-2"
+                  sizes="(min-width: 768px) 13rem, 100vw"
+                  className="object-cover"
                 />
               </div>
             )}

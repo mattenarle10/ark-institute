@@ -49,17 +49,18 @@ export default function BlogSection({ posts }: BlogSectionProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-8 sm:mb-10"
+          className="mb-6 sm:mb-8"
         >
           <h2
-            className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-gray-900"
+            className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900"
             style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
             Latest Updates
           </h2>
+          <div className="h-1 w-16 bg-primary mt-3 rounded-full" />
         </motion.div>
 
-        {/* Blog List - Reusing blog-list card style */}
+        {/* Blog Cards */}
         <div
           className={`flex flex-col gap-4 sm:gap-5 ${
             postCount === 1
@@ -76,17 +77,17 @@ export default function BlogSection({ posts }: BlogSectionProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.18 }}
               transition={{ duration: 0.24, ease: "easeOut", delay: index * 0.03 }}
-              className="group relative overflow-hidden rounded-2xl border border-gray-200/80 bg-white/90 backdrop-blur-sm shadow-sm hover:shadow-md md:hover:-translate-y-0.5 transition-all"
+              className="group relative overflow-hidden rounded-2xl border border-gray-200/80 bg-white/90 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300"
             >
               <Link
                 href={`/blog/${post.slug}`}
-                className="flex flex-col sm:flex-row gap-4 sm:gap-6 p-5 sm:p-6"
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4 p-4 sm:p-5"
               >
                 <div className="flex-1 min-w-0">
                   <p className="text-xs sm:text-sm text-gray-500 mb-1.5">
                     {formatDate(post.published_at ?? post.created_at)}
                   </p>
-                  <h2 className="text-lg sm:text-xl font-semibold text-gray-900 group-hover:text-primary line-clamp-2">
+                  <h2 className="text-lg sm:text-xl font-semibold text-gray-900 group-hover:text-primary line-clamp-2 transition-colors">
                     {post.title}
                   </h2>
                   <p className="mt-2 text-sm text-gray-600 line-clamp-3">
@@ -112,7 +113,7 @@ export default function BlogSection({ posts }: BlogSectionProps) {
                 </div>
 
                 {post.cover_image_url && (
-                  <div className="relative w-full sm:w-44 h-32 sm:h-28 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
+                  <div className="relative w-full sm:w-52 h-36 sm:h-32 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0 sm:self-center">
                     {!imagesLoaded[post.id] && (
                       <div className="absolute inset-0 animate-pulse bg-gray-200" />
                     )}
@@ -121,8 +122,8 @@ export default function BlogSection({ posts }: BlogSectionProps) {
                       src={post.cover_image_url}
                       alt={post.title}
                       fill
-                      sizes="(min-width: 768px) 11rem, 100vw"
-                      className="object-contain p-2"
+                      sizes="(min-width: 768px) 13rem, 100vw"
+                      className="object-cover"
                       onLoad={() => handleImageLoad(post.id)}
                     />
                   </div>
@@ -138,21 +139,21 @@ export default function BlogSection({ posts }: BlogSectionProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-8 text-center"
+          className="mt-8 sm:mt-10 text-center"
         >
           <Link
             href="/blog"
-            className="inline-flex items-center text-sm sm:text-base font-medium text-primary hover:text-primary/80 transition-colors"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-semibold text-sm sm:text-base shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
           >
-            <span>See more posts</span>
+            <span>View all posts</span>
             <svg
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              className="ml-1.5 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
