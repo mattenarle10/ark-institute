@@ -9,6 +9,71 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger)
 }
 
+function setupLogoAnimation(
+  isMobile: boolean,
+  logoElement: HTMLDivElement | null
+) {
+  if (!logoElement) return
+
+  gsap.fromTo(
+    logoElement,
+    { opacity: 0, scale: isMobile ? 0.96 : 0.94, filter: "blur(8px)" },
+    {
+      opacity: 1,
+      scale: 1,
+      filter: "blur(0px)",
+      duration: 0.9,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: logoElement,
+        start: "top 85%",
+        toggleActions: "play none none none",
+      },
+    }
+  )
+
+  gsap.to(logoElement, {
+    y: isMobile ? -3 : -6,
+    duration: isMobile ? 4.5 : 4,
+    ease: "sine.inOut",
+    repeat: -1,
+    yoyo: true,
+  })
+}
+
+function setupGlowAnimation(
+  isMobile: boolean,
+  glowElement: HTMLDivElement | null
+) {
+  if (!glowElement) return
+
+  gsap.to(glowElement, {
+    opacity: isMobile ? 0.25 : 0.35,
+    duration: 3.5,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut",
+  })
+}
+
+function setupNoiseAnimation(
+  isMobile: boolean,
+  noiseElement: HTMLDivElement | null,
+  sectionElement: HTMLDivElement | null
+) {
+  if (!noiseElement || !sectionElement) return
+
+  gsap.to(noiseElement, {
+    y: isMobile ? -8 : -14,
+    scrollTrigger: {
+      trigger: sectionElement,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: 0.4,
+    },
+  })
+}
+
 export default function VisMis() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const underlineRefs = useRef<HTMLDivElement[]>([])
@@ -72,54 +137,9 @@ export default function VisMis() {
         typeof window !== "undefined" &&
         window.matchMedia("(max-width: 767px)").matches
 
-      if (logoRef.current) {
-        gsap.fromTo(
-          logoRef.current,
-          { opacity: 0, scale: isMobile ? 0.96 : 0.94, filter: "blur(8px)" },
-          {
-            opacity: 1,
-            scale: 1,
-            filter: "blur(0px)",
-            duration: 0.9,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: logoRef.current,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          }
-        )
-
-        gsap.to(logoRef.current, {
-          y: isMobile ? -3 : -6,
-          duration: isMobile ? 4.5 : 4,
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-        })
-      }
-
-      if (glowRef.current) {
-        gsap.to(glowRef.current, {
-          opacity: isMobile ? 0.25 : 0.35,
-          duration: 3.5,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        })
-      }
-
-      if (noiseRef.current) {
-        gsap.to(noiseRef.current, {
-          y: isMobile ? -8 : -14,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.4,
-          },
-        })
-      }
+      setupLogoAnimation(isMobile, logoRef.current)
+      setupGlowAnimation(isMobile, glowRef.current)
+      setupNoiseAnimation(isMobile, noiseRef.current, sectionRef.current)
     }, sectionRef)
     return () => ctx.revert()
   }, [])

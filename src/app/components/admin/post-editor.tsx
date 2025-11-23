@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef } from "react"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
 import BlogRichEditor from "./blog-rich-editor"
@@ -246,11 +247,13 @@ export default function PostEditor({ initialPost }: { initialPost?: Post }) {
               />
             </div>
             {post.coverImageUrl && (
-              <div className="mt-2">
-                <img
+              <div className="mt-2 h-24 w-40 relative">
+                <Image
                   src={post.coverImageUrl}
                   alt="Cover preview"
-                  className="h-24 w-40 object-cover rounded border border-gray-200"
+                  fill
+                  sizes="160px"
+                  className="object-cover rounded border border-gray-200"
                 />
               </div>
             )}

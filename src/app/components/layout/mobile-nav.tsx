@@ -5,7 +5,7 @@ import { gsap } from "gsap"
 import { Menu, X } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 type NavItem = { href: string; label: string }
 
@@ -38,7 +38,7 @@ export default function MobileNav({ navItems, onOpenChange }: MobileNavProps) {
     }
   }, [isMenuOpen, onOpenChange])
 
-  function closeMenu() {
+  const closeMenu = useCallback(() => {
     if (tlRef.current) {
       const tl = tlRef.current
       tl.eventCallback("onReverseComplete", () => setIsMenuOpen(false))
@@ -47,7 +47,7 @@ export default function MobileNav({ navItems, onOpenChange }: MobileNavProps) {
       return
     }
     setIsMenuOpen(false)
-  }
+  }, [])
 
   // Close menu on Escape and outside click
   useEffect(() => {

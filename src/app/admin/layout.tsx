@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useEffect, useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { supabase } from "@/lib/supabase"
 import type { Session } from "@supabase/supabase-js"
@@ -59,10 +60,13 @@ export default function AdminLayout({
       <nav className="bg-white shadow-sm border-b border-gray-200 px-4 py-3 sm:px-6 sm:py-4">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <Link href="/admin" className="flex items-center gap-2 sm:gap-3">
-            <img
+            <Image
               src="/logo/ark-transpa.png"
               alt="Ark Institute logo"
+              width={160}
+              height={48}
               className="h-6 w-auto sm:h-8"
+              priority
             />
             <div className="flex flex-col leading-tight">
               <span className="text-xs uppercase tracking-wide text-gray-400">

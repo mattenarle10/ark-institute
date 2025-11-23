@@ -1,18 +1,22 @@
 import { memo } from "react"
 
-type SvgProps = React.ComponentPropsWithoutRef<"svg">
+type SvgProps = React.ComponentPropsWithoutRef<"svg"> & {
+  title?: string
+}
 
-export const BanIcon = memo(({ className, ...props }: SvgProps) => {
-  return (
-    <svg
-      width="24"
-      height="24"
-      className={className}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+export const BanIcon = memo(
+  ({ className, title = "Clear formatting", ...props }: SvgProps) => {
+    return (
+      <svg
+        width="24"
+        height="24"
+        className={className}
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+      >
+        <title>{title}</title>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -21,6 +25,7 @@ export const BanIcon = memo(({ className, ...props }: SvgProps) => {
       />
     </svg>
   )
-})
+}
+)
 
 BanIcon.displayName = "BanIcon"

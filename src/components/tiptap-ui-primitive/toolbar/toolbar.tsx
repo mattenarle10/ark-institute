@@ -105,7 +105,6 @@ export const ToolbarGroup = forwardRef<HTMLDivElement, BaseProps>(
   ({ children, className, ...props }, ref) => (
     <div
       ref={ref}
-      role="group"
       className={cn("tiptap-toolbar-group", className)}
       {...props}
     >

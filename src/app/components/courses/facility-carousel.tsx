@@ -101,7 +101,7 @@ export default function FacilityCarousel({
       <Slider ref={sliderRef} {...settings} className="h-full">
         {images.map((image, idx) => (
           <div
-            key={`${facilityId}-slide-${idx}`}
+            key={`${facilityId}-slide-${image.src}`}
             className="relative h-64 sm:h-72 md:h-80"
           >
             <Image
@@ -149,10 +149,10 @@ export default function FacilityCarousel({
         ref={dotsRef}
         className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10"
       >
-        {images.map((_, idx) => (
+        {images.map((image, idx) => (
           <button
             type="button"
-            key={`${facilityId}-dot-${idx}`}
+            key={`${facilityId}-dot-${image.src}`}
             onClick={() => {
               sliderRef.current?.slickGoTo(idx)
               // Animate dot click
