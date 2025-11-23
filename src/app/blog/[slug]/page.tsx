@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { getPostBySlug } from "@/lib/posts"
+import Script from "next/script"
+import { getPostBySlug, getAllPublishedPosts } from "@/lib/posts"
 import Footer from "@/app/components/layout/footer"
 import NavSpacer from "@/app/components/layout/nav-spacer"
 import Navbar from "@/app/components/layout/navbar"
@@ -8,6 +9,14 @@ import BlogPost from "@/app/components/blog/blog-post"
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>
+}
+
+// Generate static params for all blog posts at build time
+export async function generateStaticParams() {
+  const posts = await getAllPublishedPosts()
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
 }
 
 const stripHtml = (html: string): string => {
@@ -60,14 +69,56 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://arkinstitutebc.com"
+  const postUrl = `${siteUrl}/blog/${post.slug}`
+  const publishedDate = post.published_at || post.created_at
+  const descriptionText = post.content ? stripHtml(post.content).slice(0, 160) : ""
+
+  // Article structured data for SEO
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: descriptionText,
+    image: post.cover_image_url || `${siteUrl}/logo/ark-transpa.png`,
+    datePublished: publishedDate,
+    dateModified: publishedDate,
+    author: {
+      "@type": "Organization",
+      name: "Ark Institute",
+      url: siteUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Ark Institute",
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/logo/ark-transpa.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": postUrl,
+    },
+  }
+
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden">
-      <Navbar />
-      <NavSpacer />
-      <main className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20">
-        <BlogPost post={post} />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <Script
+        id="article-jsonld"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+      >
+        {JSON.stringify(articleJsonLd)}
+      </Script>
+      <div className="min-h-screen bg-white overflow-x-hidden">
+        <Navbar />
+        <NavSpacer />
+        <main className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20">
+          <BlogPost post={post} />
+        </main>
+        <Footer />
+      </div>
+    </>
   )
 }

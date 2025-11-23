@@ -7,6 +7,7 @@ import Footer from "@/app/components/layout/footer"
 import Navbar from "@/app/components/layout/navbar"
 import { getFeaturedPosts } from "@/lib/posts"
 
+// Metadata is handled by root layout.tsx for homepage
 export default async function Home() {
   const featuredPosts = await getFeaturedPosts(3)
 
