@@ -1,5 +1,3 @@
-import { supabase } from "@/lib/supabase"
-
 export type Post = {
   id: string
   title: string
@@ -10,57 +8,57 @@ export type Post = {
   cover_image_url: string | null
 }
 
-const baseSelect =
-  "id, title, slug, content, published_at, created_at, cover_image_url"
+type ApiPost = {
+  id: string
+  title: string
+  slug: string
+  content: string | null
+  publishedAt: string | null
+  createdAt: string
+  coverImageUrl: string | null
+}
+
+const API_URL =
+  process.env.ARK_API_URL ||
+  process.env.NEXT_PUBLIC_ARK_API_URL ||
+  "https://api.arkinstitutebc.com"
+
+function toPost(post: ApiPost): Post {
+  return {
+    id: post.id,
+    title: post.title,
+    slug: post.slug,
+    content: post.content,
+    published_at: post.publishedAt,
+    created_at: post.createdAt,
+    cover_image_url: post.coverImageUrl,
+  }
+}
+
+async function fetchApi<T>(path: string): Promise<T | null> {
+  try {
+    const res = await fetch(`${API_URL}${path}`, {
+      next: { revalidate: 60 },
+    })
+    if (!res.ok) return null
+    return (await res.json()) as T
+  } catch (err) {
+    console.error("Error fetching Ark API posts", err)
+    return null
+  }
+}
 
 export async function getAllPublishedPosts(): Promise<Post[]> {
-  const { data, error } = await supabase
-    .from("posts")
-    .select(baseSelect)
-    .not("published_at", "is", null)
-    .order("published_at", { ascending: false })
-
-  if (error) {
-    console.error("Error fetching posts", error.message)
-    return []
-  }
-
-  return (data as Post[]) ?? []
+  const apiPosts = await fetchApi<ApiPost[]>("/api/content/posts")
+  return apiPosts?.map(toPost) ?? []
 }
 
 export async function getFeaturedPosts(limit = 3): Promise<Post[]> {
-  const { data, error } = await supabase
-    .from("posts")
-    .select(baseSelect)
-    .not("published_at", "is", null)
-    .order("published_at", { ascending: false })
-    .limit(limit)
-
-  if (error) {
-    console.error("Error fetching featured posts", error.message)
-    return []
-  }
-
-  return (data as Post[]) ?? []
+  const apiPosts = await fetchApi<ApiPost[]>("/api/content/posts")
+  return apiPosts?.slice(0, limit).map(toPost) ?? []
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const { data, error } = await supabase
-    .from("posts")
-    .select(baseSelect)
-    .eq("slug", slug)
-    .not("published_at", "is", null)
-    .single()
-
-  if (error) {
-    if (error.code === "PGRST116") {
-      // No rows returned
-      return null
-    }
-
-    console.error("Error fetching post by slug", error.message)
-    return null
-  }
-
-  return data as Post
+  const apiPost = await fetchApi<ApiPost>(`/api/content/posts/${slug}`)
+  return apiPost ? toPost(apiPost) : null
 }
