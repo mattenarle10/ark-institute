@@ -11,12 +11,6 @@ export default async function proxy(req: NextRequest) {
   const host = req.headers.get("host") || ""
   const [hostname] = host.split(":")
 
-  console.log("[proxy] request", {
-    host,
-    hostname,
-    pathname: url.pathname,
-  })
-
   const isAdminSubdomain =
     hostname === "admin.localhost" || hostname.startsWith("admin.")
 
