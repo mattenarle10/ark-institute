@@ -18,6 +18,12 @@ const formatDate = (iso: string | null) => {
   })
 }
 
+const formatSize = (bytes?: number) => {
+  if (!bytes) return ""
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+}
+
 export default function BlogPost({ post }: BlogPostProps) {
   const [isImageOpen, setIsImageOpen] = useState(false)
 
@@ -136,6 +142,51 @@ export default function BlogPost({ post }: BlogPostProps) {
           className="prose prose-base sm:prose-lg max-w-none text-gray-800 leading-relaxed"
           dangerouslySetInnerHTML={{ __html: post.content ?? "" }}
         />
+
+        {!!post.attachments?.length && (
+          <section className="mt-12 rounded-2xl border border-gray-200 bg-gray-50 p-5 sm:p-6">
+            <h2 className="text-base font-semibold text-gray-950">Attachments</h2>
+            <ul className="mt-4 space-y-2">
+              {post.attachments.map((attachment) => (
+                <li key={`${attachment.url}-${attachment.name}`}>
+                  <a
+                    href={attachment.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-800 shadow-sm transition hover:border-primary/30 hover:text-primary"
+                  >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <svg
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <path d="M14 2v6h6" />
+                        <path d="M16 13H8" />
+                        <path d="M16 17H8" />
+                      </svg>
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate font-medium">{attachment.name}</span>
+                      {formatSize(attachment.size) && (
+                        <span className="mt-0.5 block text-xs text-gray-500">
+                          {formatSize(attachment.size)}
+                        </span>
+                      )}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </article>
     </>
   )

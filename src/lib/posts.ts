@@ -6,6 +6,15 @@ export type Post = {
   published_at: string | null
   created_at: string
   cover_image_url: string | null
+  attachments: PostAttachment[] | null
+}
+
+export type PostAttachment = {
+  name: string
+  url: string
+  type?: string
+  size?: number
+  uploadedAt?: string
 }
 
 type ApiPost = {
@@ -16,6 +25,7 @@ type ApiPost = {
   publishedAt: string | null
   createdAt: string
   coverImageUrl: string | null
+  attachments: PostAttachment[] | null
 }
 
 const API_URL =
@@ -32,6 +42,7 @@ function toPost(post: ApiPost): Post {
     published_at: post.publishedAt,
     created_at: post.createdAt,
     cover_image_url: post.coverImageUrl,
+    attachments: post.attachments ?? null,
   }
 }
 
