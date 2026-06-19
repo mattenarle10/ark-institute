@@ -7,7 +7,7 @@ import FacilityCarousel from "./facility-carousel"
 const facilities = [
   {
     id: "bar-training",
-    title: "Food & Beverage Facility",
+    title: "Food and Beverage Services Facility",
     description:
       "Professional bar setup with industry-standard equipment for hands-on bartending practice.",
     images: [

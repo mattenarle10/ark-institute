@@ -32,7 +32,7 @@ export default function AccreditationCTA() {
               <p className="mt-3 text-base leading-relaxed text-gray-700">
                 This accreditation ensures that our programs meet the highest
                 standards of quality and relevance to industry needs, providing
-                our students with nationally recognized qualifications that
+                our learners with nationally recognized qualifications that
                 enhance their employability.
               </p>
               <div className="mt-6 flex justify-center md:justify-start">

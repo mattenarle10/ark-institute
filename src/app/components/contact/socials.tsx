@@ -55,7 +55,7 @@ export default function Socials(): ReactElement {
             Connect with us
           </h2>
           <p data-reveal className="mt-2 text-sm sm:text-base text-gray-600">
-            Follow us for updates, events, and student work.
+            Follow us for updates, events, and learner work.
           </p>
         </div>
 
