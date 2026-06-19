@@ -267,7 +267,7 @@ export default function VisMis() {
                 className="h-px w-16 bg-gradient-to-r from-accent to-accent/60 mt-3"
               ></div>
               <p className="mt-4 text-gray-700 text-base sm:text-lg leading-relaxed text-justify">
-                Ark Institute aims to equip students with the right values,
+                Ark Institute aims to equip learners with the right values,
                 practical skills, and knowledge through comprehensive
                 TESDA-accredited courses, fostering career readiness and
                 professional excellence in order to thrive in a dynamic world.

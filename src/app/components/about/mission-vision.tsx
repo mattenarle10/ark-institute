@@ -51,7 +51,7 @@ export default function MissionVision() {
               </h3>
             </div>
             <p className="text-sm sm:text-base leading-relaxed text-gray-700">
-              Ark Institute aims to equip students with the right values,
+              Ark Institute aims to equip learners with the right values,
               practical skills, and knowledge through comprehensive
               <span className="font-semibold text-primary">
                 {" "}
