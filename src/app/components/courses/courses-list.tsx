@@ -22,11 +22,13 @@ const registeredCourses = [
 ]
 
 const comingSoonCourses = [
-  { id: "events-management", title: "Events Management NC III" },
-  { id: "tourism-promotion", title: "Tourism Promotion Services NC II" },
-  { id: "customer-services", title: "Ships Catering Services NC I" },
-  { id: "barista", title: "Barista NC II" },
   { id: "bread-pastry", title: "Bread and Pastry Production NC II" },
+  { id: "tourism-promotion", title: "Tourism Promotion Services NC II" },
+  { id: "events-management", title: "Events Management Services NC III" },
+  { id: "ships-catering", title: "Ship's Catering Services NC I" },
+  { id: "smaw-nc-i", title: "SMAW NC I" },
+  { id: "smaw-nc-ii", title: "SMAW NC II" },
+  { id: "barista", title: "Barista NC II" },
 ]
 
 export default function CoursesList() {
