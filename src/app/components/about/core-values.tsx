@@ -9,7 +9,7 @@ export default function CoreValues() {
     {
       title: "Resilience",
       description:
-        "We cultivate the ability to adapt and thrive in the face of challenges, ensuring our students are prepared to overcome obstacles and succeed in their careers.",
+        "We cultivate the ability to adapt and thrive in the face of challenges, ensuring our learners are prepared to overcome obstacles and succeed in their careers.",
     },
     {
       title: "Innovation",
@@ -24,7 +24,7 @@ export default function CoreValues() {
     {
       title: "Excellence",
       description:
-        "We strive for the highest standards in education and training, ensuring our students achieve outstanding results and are well-prepared for professional success.",
+        "We strive for the highest standards in education and training, ensuring our learners achieve outstanding results and are well-prepared for professional success.",
     },
   ]
 
