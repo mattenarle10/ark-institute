@@ -7,7 +7,7 @@ import { useScrollReveal } from "../animations/useScrollReveal"
 const registeredCourses = [
   {
     id: "food-beverage",
-    title: "Food & Beverage NC II",
+    title: "Food and Beverage Services NC II",
     description:
       "Train in restaurant service operations, customer experience, and service standards for hospitality.",
     image: "/images/bartend-1.png", // provided image
