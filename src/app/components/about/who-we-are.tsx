@@ -24,12 +24,12 @@ export default function WhoWeAre() {
               <span className="font-semibold text-primary">
                 TESDA‑accredited
               </span>{" "}
-              courses tailored for students who aspire to excel in their chosen
+              courses tailored for learners who aspire to excel in their chosen
               fields and become workforce‑ready. Our comprehensive training
               programs are meticulously designed and evaluated by seasoned
-              instructors, ensuring that each student receives extensive,
+              instructors, ensuring that each learner receives extensive,
               hands‑on learning experiences. Our commitment to quality education
-              and skill development equips every student with the expertise,
+              and skill development equips every learner with the expertise,
               discipline, and confidence needed for a successful future.
             </p>
           </div>
